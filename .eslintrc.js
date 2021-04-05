@@ -3,7 +3,13 @@ module.exports = {
 		browser: true,
 		es2021: true,
 	},
-	extends: ['plugin:react/recommended', 'standard', 'prettier'],
+	extends: [
+		'plugin:react/recommended',
+		'standard',
+		'prettier',
+		'plugin:import/errors',
+		'plugin:import/warnings',
+	],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
@@ -30,6 +36,12 @@ module.exports = {
 	settings: {
 		react: {
 			version: 'detected',
+		},
+		'import/resolver': {
+			node: {
+				moduleDirectory: ['node_modules', 'src/'],
+				extensions: ['.js', '.jsx'],
+			},
 		},
 	},
 }
