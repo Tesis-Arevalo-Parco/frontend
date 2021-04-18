@@ -1,7 +1,10 @@
 @import '~antd/dist/antd.css';
+@import './globalConfigs.scss';
 
 // Pages
 
 @import 'pages/userDashboard';
+@import 'pages/login';
+@import 'pages/register';
 
 // Components

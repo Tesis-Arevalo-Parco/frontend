@@ -22,6 +22,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 0,
 		'react/prop-types': 'off',
 		'react/display-name': 0,
+		'no-console': 1,
 		'prettier/prettier': [
 			'error',
 			{

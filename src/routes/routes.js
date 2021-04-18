@@ -1,6 +1,8 @@
+import { paths } from 'constants/paths'
 import { RenderRoutes } from 'utils/routesUtils'
 import UserDashboard from 'pages/UserDashboard'
-import { paths } from 'constants/paths'
+import LogIn from 'pages/LogIn'
+import Register from 'pages/Register'
 
 export const MAIN_ROUTES = [
 	{
@@ -9,7 +11,7 @@ export const MAIN_ROUTES = [
 		exact: true,
 		type: 'public',
 		restricted: true,
-		component: () => <h1>Inicio de sesión</h1>,
+		component: LogIn,
 	},
 	{
 		path: paths.REGISTER,
@@ -17,7 +19,7 @@ export const MAIN_ROUTES = [
 		exact: true,
 		type: 'public',
 		restricted: true,
-		component: () => <h1>Registro</h1>,
+		component: Register,
 	},
 	{
 		path: paths.ROOT_APP,
