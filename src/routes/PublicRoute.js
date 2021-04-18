@@ -4,7 +4,6 @@ import { paths } from 'constants/paths'
 const isLogin = () => false
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
-	console.log(restricted)
 	return (
 		// restricted = false meaning public route
 		// restricted = true meaning restricted route
