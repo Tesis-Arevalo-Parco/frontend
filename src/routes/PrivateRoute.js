@@ -1,6 +1,6 @@
 import { Route, Redirect } from 'react-router-dom'
 import { paths } from 'constants/paths'
-const isLogin = () => false
+const isLogin = () => true
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	return (
