@@ -1,7 +1,6 @@
 import { Route, Redirect } from 'react-router-dom'
 import { paths } from 'constants/paths'
-
-const isLogin = () => false
+import { getJWT } from 'utils/localStorageUtils'
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
 	return (
@@ -10,7 +9,7 @@ const PublicRoute = ({ component: Component, restricted, ...rest }) => {
 		<Route
 			{...rest}
 			render={(props) =>
-				isLogin() && restricted ? (
+				getJWT() && restricted ? (
 					<Redirect to={paths.ROOT_APP} />
 				) : (
 					<Component {...props} routes={rest.routes} />
