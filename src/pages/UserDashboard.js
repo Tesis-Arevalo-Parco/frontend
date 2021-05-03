@@ -15,7 +15,7 @@ const UserDashboard = () => {
 	const { SubMenu } = Menu
 	const [collapsed, setCollapsed] = useState(false)
 	return (
-		<Layout style={{ minHeight: '100vh' }} className='user-dashboard'>
+		<Layout style={{ height: '100vh' }} className='user-dashboard'>
 			<Sider
 				collapsible
 				theme='light'
@@ -57,7 +57,7 @@ const UserDashboard = () => {
 							<Menu.Item key='setting:1'>Option 1</Menu.Item>
 							<Menu.Item key='setting:2'>Option 2</Menu.Item>
 							<Divider style={{ color: 'red', backgroundColor: 'red' }} />
-							<Menu.Item key='setting:2'>Option 2</Menu.Item>
+							<Menu.Item key='setting:3'>Option 2</Menu.Item>
 						</SubMenu>
 					</Menu>
 				</Header>

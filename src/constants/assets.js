@@ -1,4 +1,6 @@
-import MAIN_LOGO from 'images/logo.png'
+import LOGO_PRIMARY from 'images/logo-primary.png'
+import LOGIN_IMG from 'images/login-image.png'
 export default {
-	MAIN_LOGO,
+	LOGO_PRIMARY,
+	LOGIN_IMG,
 }

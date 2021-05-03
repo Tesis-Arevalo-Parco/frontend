@@ -1,5 +1,108 @@
-.login{
-    h1 {
-        background-color: $color-primary;
+.login-page {
+  .login-form {
+    max-width: 400px;
+    margin-top: 30px;
+    .logo-image {
+      padding-bottom: 50px;
     }
+    h1 {
+      color: $color-primary;
+      padding-bottom: 30px;
+      font-size: 2.2rem;
+    }
+    .main-form-item {
+      &.ant-form-item {
+        .ant-form-item-label
+          > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+          display: none;
+        }
+        .ant-form-item-control {
+          .ant-form-item-control-input {
+            .ant-form-item-control-input-content {
+              span {
+                padding: 5px;
+                border-radius: 10px;
+              }
+            }
+          }
+          .ant-form-item-explain {
+            &.ant-form-item-explain-error {
+              div {
+                float: left;
+              }
+            }
+          }
+        }
+      }
+    }
+    .login-form-forgot {
+      float: right;
+      color: $color-primary;
+    }
+    .login-form-button {
+      width: 100%;
+    }
+    .login-form-register {
+      float: left;
+      color: $color-dark;
+      span {
+        color: $color-primary;
+      }
+    }
+    .main-button-content {
+      &.ant-form-item {
+        .ant-form-item-control-input {
+          .ant-form-item-control-input-content {
+            .ant-btn {
+              background-color: $color-primary;
+              border-color: $color-primary;
+              border-radius: 10px;
+              height: 46px;
+              span {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .right-panel {
+    background-color: $color-light-alternative;
+    height: 100%;
+    min-height: 100vh;
+    padding: 10px;
+    .login-text-content {
+      max-width: 450px;
+      text-align: right;
+      .login-text-caption {
+        color: $color-dark-bold;
+        font-size: 2.5rem;
+        font-weight: bold;
+        line-height: normal;
+        margin-bottom: 0.5rem;
+        span {
+          display: block;
+        }
+      }
+      .login-text-final {
+        color: $color-dark-bold;
+        font-weight: bold;
+        line-height: normal;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .ant-divider {
+    &.ant-divider-horizontal {
+      margin: 16px 0;
+    }
+  }
+
+  .left-panel {
+    height: 100%;
+    padding: 10px;
+  }
 }
