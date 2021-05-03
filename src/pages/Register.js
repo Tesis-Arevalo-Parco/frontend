@@ -24,7 +24,6 @@ const Register = () => {
 			values.email,
 			values.password
 		)
-		console.log(response)
 		if (response.status === 200) {
 			openNotificationWithIcon('success')
 		} else {
