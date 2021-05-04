@@ -11,7 +11,7 @@ import {
 	Spin,
 	Image,
 } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { MailOutlined, LockOutlined } from '@ant-design/icons'
 
 import { login } from 'epics/accountEpics'
 import { paths } from 'constants/paths'
@@ -52,7 +52,15 @@ const LogIn = () => {
 
 	return (
 		<Row className='login-page'>
-			<Col align='middle' xs={24} xl={12} sm={12} className='left-panel'>
+			<Col
+				align='middle'
+				xs={24}
+				sm={24}
+				md={24}
+				lg={12}
+				xl={12}
+				className='left-panel'
+			>
 				<Spin spinning={spinner}>
 					<Form
 						name='normal_login'
@@ -81,7 +89,7 @@ const LogIn = () => {
 							]}
 						>
 							<Input
-								prefix={<UserOutlined className='form-login-icon' />}
+								prefix={<MailOutlined className='form-login-icon' />}
 								placeholder='Correo Electrónico'
 								type='email'
 							/>
@@ -126,7 +134,15 @@ const LogIn = () => {
 					</Form>
 				</Spin>
 			</Col>
-			<Col xs={24} xl={12} sm={12} className='right-panel' align='middle'>
+			<Col
+				xs={24}
+				sm={24}
+				md={24}
+				lg={12}
+				xl={12}
+				className='right-panel'
+				align='middle'
+			>
 				<Image src={images.LOGIN_IMG} preview={false} className='logo-image' />
 				<div className='login-text-content'>
 					<p className='login-text-caption'>

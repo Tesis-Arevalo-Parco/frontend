@@ -20,6 +20,12 @@ export const MESSAGES = {
 		description: 'Por favor inténtelo nuevamente.',
 		duration: 10,
 	},
+	EMAIL_IS_ALREADY_TAKEN: {
+		message: 'Registro fallido',
+		description:
+			'El correo electrónico ingresado ya ha sido tomado. Por favor ingrese otro correo.',
+		duration: 10,
+	},
 	API_ERROR: {
 		message: 'API ERROR',
 		description: 'Por favor inténtelo más tarde',

@@ -14,10 +14,12 @@ export const login = async (identifier, password) => {
 	}
 }
 
-export const register = async (username, email, password) => {
+export const register = async (name, lastname, email, password) => {
 	try {
 		const response = await axios.post(`${URL}/auth/local/register`, {
-			username,
+			username: email,
+			name,
+			lastname,
 			email,
 			password,
 		})
