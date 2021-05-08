@@ -19,7 +19,7 @@ export const login = async (identifier, password) => {
 
 export const register = async (name, lastname, email, password) => {
 	try {
-		const response = await axios.post(`${URL}/auth/local/register`, {
+		const response = await axios.post(`${apiUrl}/auth/local/register`, {
 			username: email,
 			name,
 			lastname,
