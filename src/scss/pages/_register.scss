@@ -3,12 +3,13 @@
     max-width: 450px;
     margin-top: 30px;
     .logo-image {
-      padding-bottom: 50px;
+      padding-bottom: 30px;
     }
     h1 {
       color: $color-primary;
       padding-bottom: 30px;
       font-size: 2.2rem;
+      font-weight: bold;
     }
     .main-form-item {
       &.ant-form-item {

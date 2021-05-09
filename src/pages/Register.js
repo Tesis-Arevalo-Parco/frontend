@@ -83,11 +83,12 @@ const Register = () => {
 						onFinish={onFinish}
 						layout='vertical'
 					>
-						<Row>
+						<Row justify='center'>
 							<Image
 								src={images.LOGO_PRIMARY}
 								preview={false}
 								className='logo-image'
+								width='150px'
 							/>
 						</Row>
 						<h1>¡Crea tu cuenta!</h1>
