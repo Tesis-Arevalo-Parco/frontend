@@ -1,6 +1,6 @@
 const validatePassword = (password) => {
 	const errorMessage = 'La contraseña debe tener al menos'
-	if (password.length < 6) {
+	if (password?.length < 6) {
 		return Promise.reject(new Error(`${errorMessage} 6 caracteres`))
 	} else if (!password.match(/[A-Z]/g)) {
 		return Promise.reject(new Error(`${errorMessage} una letra mayúscula`))

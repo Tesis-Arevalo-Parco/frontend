@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import {
 	Row,
@@ -27,11 +27,11 @@ const LogIn = () => {
 	const onFinish = async (values) => {
 		setSpinner(true)
 		const response = await login(values.username, values.password)
-		responseActions(response?.status, response)
 		setSpinner(false)
+		responseActions(response?.status, response)
 	}
 
-	const responseActions = (statusCode, response) => {
+	const responseActions = async (statusCode, response) => {
 		switch (statusCode) {
 			case CODE_HTTP_RESPONSE.SUCCESS_200:
 				notification.success(MESSAGES.LOGIN_SUCCESS)

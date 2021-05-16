@@ -1,4 +1,4 @@
-const saveUserAuth = async (jwt, user) => {
+const saveUserAuth = (jwt, user) => {
 	localStorage.setItem('jwt', jwt)
 	localStorage.setItem('user', JSON.stringify(user))
 }
@@ -11,4 +11,6 @@ const getUserData = () => {
 	return JSON.parse(localStorage.getItem('user'))
 }
 
-export { saveUserAuth, getJWT, getUserData }
+const cleanLocalStorage = () => localStorage.clear()
+
+export { saveUserAuth, getJWT, getUserData, cleanLocalStorage }

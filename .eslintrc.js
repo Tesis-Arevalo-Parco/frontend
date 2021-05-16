@@ -19,6 +19,7 @@ module.exports = {
 	},
 	plugins: ['react', 'prettier'],
 	rules: {
+		'no-unused-vars': 1,
 		'react/react-in-jsx-scope': 0,
 		'react/prop-types': 'off',
 		'react/display-name': 0,

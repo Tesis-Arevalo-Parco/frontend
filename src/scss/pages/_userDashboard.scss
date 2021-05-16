@@ -1,16 +1,8 @@
 .user-dashboard {
-  .logo {
-    height: 32px;
-    margin: 16px;
-  }
-
   .site-layout {
     .site-layout-background {
-      background: #fff;
+      background: $color-white;
       height: fit-content;
     }
-  }
-  .ant-layout-sider-trigger{
-      background-color: #4E73DF;
   }
 }

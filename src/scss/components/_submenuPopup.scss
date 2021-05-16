@@ -1,0 +1,51 @@
+.ant-menu-submenu-popup {
+  #submenu-assets\$Menu,
+  #submenu-threats\$Menu {
+    padding: 5px;
+    border-radius: 10px;
+    .ant-menu-item {
+      border-radius: 8px;
+      &.ant-menu-item-only-child {
+        &:hover {
+          color: $color-primary;
+          background-color: $color-hover-nav-bar;
+        }
+        &.ant-menu-item-selected {
+          background-color: $color-white;
+          color: $color-primary;
+          &:hover {
+            color: $color-primary;
+            background-color: $color-hover-nav-bar;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ant-popover-placement-bottom,
+.ant-popover-placement-bottomLeft,
+.ant-popover-placement-bottomRight {
+  min-width: 177px;
+  .ant-popover-inner {
+    border-radius: 10px;
+    .ant-popover-inner-content {
+      padding: 12px 10px;
+      .ant-btn {
+        &.ant-btn-text {
+          display: block;
+          width: 100%;
+          text-align: left;
+          &:hover {
+            background-color: $color-white;
+            color: $color-primary;
+          }
+        }
+      }
+      .ant-divider,
+      .ant-divider-horizontal {
+        margin: 10px 0;
+      }
+    }
+  }
+}

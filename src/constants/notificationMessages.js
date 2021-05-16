@@ -2,7 +2,7 @@ export const MESSAGES = {
 	LOGIN_SUCCESS: {
 		message: 'Bienvenido',
 		description: 'Has accedido a tu cuenta con éxito.',
-		duration: 10,
+		duration: 5,
 	},
 	LOGIN_FAILED: {
 		message: 'Inicio de sesión fallido',
@@ -13,7 +13,7 @@ export const MESSAGES = {
 		message: 'Registro exitoso',
 		description:
 			'A partir de este momento podrá acceder al sistema con su correo y contraseña.',
-		duration: 10,
+		duration: 5,
 	},
 	REGISTER_FAILED: {
 		message: 'Registro fallido',

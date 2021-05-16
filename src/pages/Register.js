@@ -35,8 +35,8 @@ const Register = () => {
 			values.email,
 			values.password
 		)
-		responseActions(response?.status, response)
 		setSpinner(false)
+		responseActions(response?.status, response)
 	}
 
 	const responseActions = (statusCode, response) => {

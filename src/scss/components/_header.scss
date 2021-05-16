@@ -1,0 +1,31 @@
+.header {
+  .ant-menu-item {
+    &.ant-menu-item-only-child {
+      &.ant-menu-item-selected {
+        border-bottom: none !important;
+      }
+    }
+  }
+
+  .ant-menu-item {
+    &.ant-menu-item-only-child {
+      border-bottom: none;
+      border-bottom-style: none;
+      &.ant-menu-item-active {
+        border-bottom: none;
+        border-bottom-style: none;
+      }
+    }
+  }
+
+  .ant-menu-horizontal > .ant-menu-item,
+  .ant-menu-horizontal > .ant-menu-submenu {
+    top: 0;
+  }
+
+  .ant-btn-text:hover,
+  .ant-btn-text:focus {
+    color: $color-primary;
+    background-color: $color-white;
+  }
+}
