@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import {
 	HomeFilled,
 	FlagFilled,
@@ -6,6 +7,7 @@ import {
 	FireFilled,
 } from '@ant-design/icons'
 import { Row, Layout, Menu } from 'antd'
+import { paths } from 'constants/paths'
 
 import images from 'constants/assets'
 const SideNavBar = () => {
@@ -25,22 +27,71 @@ const SideNavBar = () => {
 			</Row>
 			<Menu mode='inline' theme='light'>
 				<SubMenu key='submenu-assets' icon={<HomeFilled />} title='Activos'>
-					<Menu.Item key='1'>Identificar activos</Menu.Item>
-					<Menu.Item key='2' title='Registrar dependencias entre activos'>
-						Registrar dependencias entre activos
+					<Menu.Item key='1'>
+						<NavLink
+							to={paths.ASSETS_IDENTIFICATION}
+							activeClassName='selected-nav-link'
+						>
+							Identificar activos
+						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='3'>Lista de activos</Menu.Item>
-					<Menu.Item key='4'>Valorar activos</Menu.Item>
+					<Menu.Item key='2' title='Registrar dependencias entre activos'>
+						<NavLink
+							to={paths.ASSETS_REGISTER}
+							activeClassName='selected-nav-link'
+						>
+							Registrar dependencias entre activos
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='3'>
+						<NavLink to={paths.ASSETS_LIST} activeClassName='selected-nav-link'>
+							Lista de activos
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='4'>
+						<NavLink
+							to={paths.ASSETS_VALUATION}
+							activeClassName='selected-nav-link'
+						>
+							Valorar activos
+						</NavLink>
+					</Menu.Item>
 				</SubMenu>
 				<SubMenu key='submenu-threats' icon={<FireFilled />} title='Amenazas'>
-					<Menu.Item key='5'>Identificar amenazas</Menu.Item>
-					<Menu.Item key='6'>Valorar amenazas</Menu.Item>
+					<Menu.Item key='5'>
+						<NavLink
+							to={paths.THREAT_IDENTIFICATION}
+							activeClassName='selected-nav-link'
+						>
+							Identificar amenazas
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='6'>
+						<NavLink
+							to={paths.THREAT_VALUATION}
+							activeClassName='selected-nav-link'
+						>
+							Valorar amenazas
+						</NavLink>
+					</Menu.Item>
 				</SubMenu>
 				<Menu.Item key='7' icon={<FlagFilled />}>
-					Salvaguardas
+					<NavLink
+						to={paths.SAFEGUARDS}
+						activeClassName='selected-nav-link'
+						className='nav-link-router'
+					>
+						Salvaguardas
+					</NavLink>
 				</Menu.Item>
 				<Menu.Item key='8' icon={<PieChartFilled />}>
-					Estadísticas
+					<NavLink
+						className='nav-link-router'
+						activeClassName='selected-nav-link'
+						to={paths.STATICS}
+					>
+						Estadísticas
+					</NavLink>
 				</Menu.Item>
 			</Menu>
 		</Sider>

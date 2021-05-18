@@ -1,6 +1,8 @@
 import { Layout } from 'antd'
 import SideNavBar from 'components/SideNavBar'
 import Header from 'components/Header'
+import { APP_ROUTES } from 'routes/routes'
+import { RenderRoutes } from 'utils/routesUtils'
 
 const UserDashboard = () => {
 	const { Content } = Layout
@@ -11,7 +13,7 @@ const UserDashboard = () => {
 				<Header />
 				<Content style={{ margin: '16px' }}>
 					<div className='site-layout-background' style={{ padding: 24 }}>
-						Bill is a cat.
+						<RenderRoutes routes={APP_ROUTES} />
 					</div>
 				</Content>
 			</Layout>

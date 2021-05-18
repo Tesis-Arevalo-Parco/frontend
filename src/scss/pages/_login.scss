@@ -78,7 +78,7 @@
       max-width: 450px;
       text-align: right;
       .login-text-caption {
-        color: $color-dark-bold;
+        color: $color-white;
         font-size: 2.5rem;
         font-weight: bold;
         line-height: normal;
@@ -88,11 +88,15 @@
         }
       }
       .login-text-final {
-        color: $color-dark-bold;
+        color: $color-secondary-alt;
         font-weight: bold;
         line-height: normal;
         font-size: 1.5rem;
       }
+    }
+    .ant-image {
+      width: 100%;
+      height: auto;
     }
   }
 

@@ -6,8 +6,7 @@ import { RenderRoutes } from 'utils/routesUtils'
 import UserState from 'store/state/UserState'
 
 Sentry.init({
-	dsn:
-		'https://c3911fa1964541949f59686fe510d597@o673728.ingest.sentry.io/5768372',
+	dsn: process.env.REACT_SENTRY_API_KEY,
 	integrations: [new Integrations.BrowserTracing()],
 	tracesSampleRate: 1.0,
 })

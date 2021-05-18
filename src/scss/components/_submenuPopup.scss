@@ -18,6 +18,12 @@
             background-color: $color-hover-nav-bar;
           }
         }
+        a:hover {
+          color: $color-primary !important;
+        }
+        .selected-nav-link {
+          color: $color-primary !important;
+        }
       }
     }
   }

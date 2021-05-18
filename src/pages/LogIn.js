@@ -144,7 +144,11 @@ const LogIn = () => {
 				className='right-panel'
 				align='middle'
 			>
-				<Image src={images.LOGIN_IMG} preview={false} className='logo-image' />
+				<Image
+					src={images.LOGIN_IMG}
+					preview={false}
+					className='logo-image-login'
+				/>
 				<div className='login-text-content'>
 					<p className='login-text-caption'>
 						Analiza el riesgo de tu <span>casa inteligente</span>

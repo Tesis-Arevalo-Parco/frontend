@@ -231,7 +231,7 @@ const Register = () => {
 				<Image
 					src={images.REGISTER_IMG}
 					preview={false}
-					className='logo-image'
+					className='logo-image-register'
 				/>
 				<div className='register-text-content'>
 					<p className='register-text-caption'>

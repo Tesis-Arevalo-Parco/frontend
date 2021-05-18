@@ -28,6 +28,12 @@
     background-color: $color-primary;
     border-right-color: $color-primary;
     color: rgba(255, 255, 255, 0.8);
+    .nav-link-router {
+      color: rgba(255, 255, 255, 0.8);
+      &.selected-nav-link {
+        color: $color-white;
+      }
+    }
   }
 
   .ant-menu-item:hover,
@@ -36,6 +42,9 @@
   .ant-menu-submenu-active,
   .ant-menu-submenu-title:hover {
     color: $color-white;
+    .nav-link-router {
+      color: $color-white;
+    }
   }
 
   .ant-menu-submenu-expand-icon,
@@ -70,6 +79,9 @@
       .ant-menu-submenu-active,
       .ant-menu-submenu-title {
         color: $color-text-nav-black;
+        .selected-nav-link {
+          color: $color-primary;
+        }
       }
 
       .ant-menu-item:hover,
@@ -86,6 +98,9 @@
       .ant-menu-item {
         &.ant-menu-item-only-child {
           &.ant-menu-item-selected {
+            color: $color-primary !important;
+          }
+          a:hover {
             color: $color-primary !important;
           }
         }

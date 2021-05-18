@@ -1,5 +1,15 @@
 export const paths = {
-	LOGIN: '/',
+	ROOT_APP: '/',
+	LOGIN: '/login',
 	REGISTER: '/registro',
-	ROOT_APP: '/app',
+	SAFEGUARDS: '/salvaguardas',
+	THREATS: '/amenazas',
+	THREAT_IDENTIFICATION: '/amenazas/identificacion',
+	THREAT_VALUATION: '/amenazas/valoracion',
+	ASSETS: '/activos',
+	ASSETS_IDENTIFICATION: '/activos/identificacion',
+	ASSETS_VALUATION: '/activos/valoracion',
+	ASSETS_REGISTER: '/activos/register',
+	ASSETS_LIST: '/activos/lista',
+	STATICS: '/estadisticas',
 }
