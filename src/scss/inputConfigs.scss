@@ -1,0 +1,17 @@
+.ant-input:focus,
+.ant-input-focused {
+  border-color: $color-primary;
+}
+
+.ant-input:hover {
+  border-color: $color-primary;
+}
+
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+  border-color: $color-primary;
+}
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border-color: $color-primary;
+}

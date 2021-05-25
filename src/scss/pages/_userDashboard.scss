@@ -1,8 +1,14 @@
 .user-dashboard {
   .site-layout {
+    height: 100vh;
     .site-layout-background {
       background: $color-white;
-      height: fit-content;
+      height: calc(98vh - 80px);
+      max-height: calc(98vh - 80px);
+      padding: 16px;
     }
+  }
+  .main-content {
+    margin: 16px;
   }
 }

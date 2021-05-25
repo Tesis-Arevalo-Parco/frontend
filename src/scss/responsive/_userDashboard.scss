@@ -1,0 +1,14 @@
+@media only screen and (max-width: 425px) {
+  .user-dashboard {
+    .main-content {
+      margin: 8px;
+    }
+    .site-layout {
+      .site-layout-background {
+        height: calc(98vh - 70px);
+        max-height: calc(98vh - 70px);
+        padding: 1px;
+      }
+    }
+  }
+}

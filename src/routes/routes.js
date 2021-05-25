@@ -3,6 +3,7 @@ import { RenderRoutes } from 'utils/routesUtils'
 import UserDashboard from 'pages/UserDashboard'
 import LogIn from 'pages/LogIn'
 import Register from 'pages/Register'
+import AssetsIdentification from 'pages/assets/AssetsIdentification'
 
 export const MAIN_ROUTES = [
 	{
@@ -80,7 +81,7 @@ export const APP_ROUTES = [
 				key: 'ASSETS_IDENTIFICATION',
 				exact: true,
 				type: 'private',
-				component: () => <div>Identificacion de activos</div>,
+				component: AssetsIdentification,
 			},
 			{
 				path: paths.ASSETS_VALUATION,

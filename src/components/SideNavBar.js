@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
 	HomeFilled,
@@ -8,12 +8,18 @@ import {
 } from '@ant-design/icons'
 import { Row, Layout, Menu } from 'antd'
 import { paths } from 'constants/paths'
-
 import images from 'constants/assets'
+import { useMediaQuery } from 'utils/useMediaQuery'
+
 const SideNavBar = () => {
 	const { Sider } = Layout
 	const { SubMenu } = Menu
 	const [collapsed, setCollapsed] = useState(false)
+	const isPageWide = useMediaQuery('(max-width: 425px)')
+
+	useEffect(() => {
+		setCollapsed(isPageWide)
+	}, [isPageWide])
 
 	return (
 		<Sider

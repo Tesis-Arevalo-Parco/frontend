@@ -1,10 +1,14 @@
 .side-nav-bar {
   .ant-layout-sider {
     background-color: $color-primary;
+    height: 100vh;
+    max-height: 100vh;
   }
 
   .ant-layout-sider-children {
     background-color: $color-primary;
+    height: 100vh;
+    max-height: 100vh;
   }
 
   .ant-layout-sider-trigger {

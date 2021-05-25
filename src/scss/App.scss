@@ -6,8 +6,20 @@
 @import 'pages/userDashboard';
 @import 'pages/login';
 @import 'pages/register';
+@import 'pages/assetsIdentification';
 
 // Components
+
 @import 'components/sideNavBar';
 @import 'components/submenuPopup';
 @import 'components/header';
+@import 'components/projectsForm';
+
+// Responsive
+
+@import 'responsive/sideNavBar';
+@import 'responsive/userDashboard';
+
+// Configs
+
+@import './inputConfigs.scss'
