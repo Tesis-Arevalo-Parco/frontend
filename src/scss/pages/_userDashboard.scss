@@ -1,14 +1,33 @@
 .user-dashboard {
-  .site-layout {
-    height: 100vh;
-    .site-layout-background {
-      background: $color-white;
-      height: calc(98vh - 80px);
-      max-height: calc(98vh - 80px);
-      padding: 16px;
+  .ant-layout {
+    &.site-layout {
+      background: $color-light;
     }
   }
   .main-content {
-    margin: 16px;
+    margin: 1.5rem;
+  }
+  .fake-side-bar-lg {
+    width: 200px;
+    overflow: hidden;
+    flex: 0 0 200px;
+    max-width: 200px;
+    min-width: 200px;
+    transition: background-color 0.3s ease 0s, min-width 0.3s ease 0s,
+      max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  }
+  .fake-side-bar-sm {
+    .ant-layout {
+      &.site-layout {
+        background-color: $color-light;
+      }
+    }
+    width: 80px;
+    overflow: hidden;
+    flex: 0 0 80px;
+    max-width: 80px;
+    min-width: 80px;
+    transition: background-color 0.3s ease 0s, min-width 0.3s ease 0s,
+      max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
   }
 }

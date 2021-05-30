@@ -1,12 +1,17 @@
 import { useContext } from 'react'
-import { PageHeader, Button, Select, Divider } from 'antd'
+import { useLocation } from 'react-router-dom'
+import { PageHeader, Select, Typography, Row, Button } from 'antd'
+import { PlusCircleFilled } from '@ant-design/icons'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
+import { paths } from 'constants/paths'
 
 const DashBoardHeader = () => {
 	const { Option } = Select
 	const { projects } = useContext(ProjectsContext)
 	const { toggleProjectsForm } = useContext(ProjectsFormContext)
+	const location = useLocation()
+	const { Title } = Typography
 	function onChange(value) {
 		console.log(`selected ${value}`)
 	}
@@ -22,6 +27,33 @@ const DashBoardHeader = () => {
 	function onSearch(val) {
 		console.log('search:', val)
 	}
+
+	const getHeader = () => {
+		if (location.pathname.includes(paths.PROJECTS)) {
+			return (
+				<Row justify='space-between' align='middle'>
+					<span level={2} className='header-card-title'>
+						Proyectos
+					</span>
+					<Button
+						type='primary'
+						icon={<PlusCircleFilled />}
+						onClick={toggleProjectsForm}
+					>
+						Crear nuevo proyecto
+					</Button>
+				</Row>
+			)
+		}
+		return (
+			<PageHeader
+				title='Proyectos'
+				className='site-page-header'
+				subTitle={selectNode()}
+			></PageHeader>
+		)
+	}
+
 	const selectNode = () => {
 		return (
 			<Select
@@ -34,7 +66,7 @@ const DashBoardHeader = () => {
 				onBlur={onBlur}
 				onSearch={onSearch}
 				filterOption={(input, option) =>
-					option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+					option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
 				}
 			>
 				{projects.map((project) => {
@@ -47,21 +79,7 @@ const DashBoardHeader = () => {
 			</Select>
 		)
 	}
-	return (
-		<>
-			<PageHeader
-				title='Proyectos'
-				className='site-page-header'
-				subTitle={selectNode()}
-				extra={[
-					<Button key='toggleProjectsForm' onClick={toggleProjectsForm}>
-						Crear nuevo proyecto
-					</Button>,
-				]}
-			></PageHeader>
-			<Divider />
-		</>
-	)
+	return <div className='dashboard-header'>{getHeader()}</div>
 }
 
 export default DashBoardHeader

@@ -5,21 +5,26 @@ import {
 	FlagFilled,
 	PieChartFilled,
 	FireFilled,
+	SafetyCertificateFilled,
 } from '@ant-design/icons'
 import { Row, Layout, Menu } from 'antd'
 import { paths } from 'constants/paths'
 import images from 'constants/assets'
 import { useMediaQuery } from 'utils/useMediaQuery'
 
-const SideNavBar = () => {
+const SideNavBar = ({ setFakeSideNavbar }) => {
 	const { Sider } = Layout
 	const { SubMenu } = Menu
 	const [collapsed, setCollapsed] = useState(false)
-	const isPageWide = useMediaQuery('(max-width: 425px)')
+	const isPageWide = useMediaQuery('(max-width: 600px)')
 
 	useEffect(() => {
-		setCollapsed(isPageWide)
+		isPageWide && setCollapsed(isPageWide)
 	}, [isPageWide])
+
+	useEffect(() => {
+		setFakeSideNavbar(collapsed)
+	}, [collapsed])
 
 	return (
 		<Sider
@@ -97,6 +102,15 @@ const SideNavBar = () => {
 						to={paths.STATICS}
 					>
 						Estadísticas
+					</NavLink>
+				</Menu.Item>
+				<Menu.Item key='9' icon={<SafetyCertificateFilled />}>
+					<NavLink
+						className='nav-link-router'
+						activeClassName='selected-nav-link'
+						to={paths.PROJECTS}
+					>
+						Proyectos
 					</NavLink>
 				</Menu.Item>
 			</Menu>

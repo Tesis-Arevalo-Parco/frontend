@@ -1,5 +1,5 @@
-import { useEffect, useContext } from 'react'
-import { Layout } from 'antd'
+import { useEffect, useContext, useState } from 'react'
+import { Layout, Card } from 'antd'
 import SideNavBar from 'components/SideNavBar'
 import Header from 'components/Header'
 import { APP_ROUTES } from 'routes/routes'
@@ -9,24 +9,26 @@ import ProjectsForm from 'components/ProjectsForm'
 import DashBoardHeader from 'components/DashBoardHeader'
 
 const UserDashboard = () => {
-	const { Content } = Layout
 	const { getProjectsData } = useContext(ProjectsContext)
+	const [fakeSideNavbar, setFakeSideNavbar] = useState(false)
 
 	useEffect(() => {
 		getProjectsData()
 	}, [])
 
 	return (
-		<Layout style={{ height: '100vh' }} className='user-dashboard'>
-			<SideNavBar />
+		<Layout className='user-dashboard'>
+			{fakeSideNavbar ? (
+				<div className='fake-side-bar-sm'></div>
+			) : (
+				<div className='fake-side-bar-lg'></div>
+			)}
+			<SideNavBar setFakeSideNavbar={setFakeSideNavbar} />
 			<Layout className='site-layout'>
 				<Header />
-				<Content className='main-content'>
-					<div className='site-layout-background'>
-						<DashBoardHeader />
-						<RenderRoutes routes={APP_ROUTES} />
-					</div>
-				</Content>
+				<Card title={<DashBoardHeader />} className='main-content'>
+					<RenderRoutes routes={APP_ROUTES} />
+				</Card>
 				<ProjectsForm />
 			</Layout>
 		</Layout>

@@ -4,6 +4,7 @@ import UserDashboard from 'pages/UserDashboard'
 import LogIn from 'pages/LogIn'
 import Register from 'pages/Register'
 import AssetsIdentification from 'pages/assets/AssetsIdentification'
+import Projects from 'pages/Projects'
 
 export const MAIN_ROUTES = [
 	{
@@ -45,6 +46,13 @@ export const APP_ROUTES = [
 		exact: true,
 		type: 'private',
 		component: () => <div>estadísticas</div>,
+	},
+	{
+		path: paths.PROJECTS,
+		key: 'PROJECTS',
+		exact: true,
+		type: 'private',
+		component: Projects,
 	},
 	{
 		path: paths.THREATS,

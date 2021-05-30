@@ -34,7 +34,7 @@ const Header = () => {
 	}, [])
 
 	return (
-		<Header className='header' style={{ padding: 0 }}>
+		<Header className='header custom-shadow' style={{ padding: 0 }}>
 			<Menu theme='light' mode='horizontal'>
 				<Menu.Item
 					key='horizontal-button'

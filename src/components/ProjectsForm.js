@@ -29,7 +29,7 @@ const ProjectsForm = () => {
 				className='projects-main-form'
 				title='Nuevo Proyecto'
 				placement='right'
-				width='300px'
+				width='400px'
 				onClose={toggleProjectsForm}
 				visible={toggle}
 			>
