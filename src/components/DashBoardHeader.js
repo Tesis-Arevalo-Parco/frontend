@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import { PageHeader, Select, Typography, Row, Button } from 'antd'
+import { PageHeader, Select, Row, Button, Col } from 'antd'
 import { PlusCircleFilled } from '@ant-design/icons'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
@@ -9,9 +9,10 @@ import { paths } from 'constants/paths'
 const DashBoardHeader = () => {
 	const { Option } = Select
 	const { projects } = useContext(ProjectsContext)
-	const { toggleProjectsForm } = useContext(ProjectsFormContext)
+	const { toggleProjectsForm, setProjectsFormData } = useContext(
+		ProjectsFormContext
+	)
 	const location = useLocation()
-	const { Title } = Typography
 	function onChange(value) {
 		console.log(`selected ${value}`)
 	}
@@ -28,6 +29,11 @@ const DashBoardHeader = () => {
 		console.log('search:', val)
 	}
 
+	const onClickToggleFormProjects = () => {
+		setProjectsFormData('', '', '')
+		toggleProjectsForm()
+	}
+
 	const getHeader = () => {
 		if (location.pathname.includes(paths.PROJECTS)) {
 			return (
@@ -38,11 +44,31 @@ const DashBoardHeader = () => {
 					<Button
 						type='primary'
 						icon={<PlusCircleFilled />}
-						onClick={toggleProjectsForm}
+						onClick={onClickToggleFormProjects}
 					>
 						Crear nuevo proyecto
 					</Button>
 				</Row>
+			)
+		} else if (location.pathname.includes(paths.ASSETS_IDENTIFICATION)) {
+			return (
+				<Col>
+					<Row justify='space-between' align='middle'>
+						<span level={2} className='header-card-title'>
+							Identificación de Activos
+						</span>
+						<Button
+							type='primary'
+							icon={<PlusCircleFilled />}
+							onClick={onClickToggleFormProjects}
+						>
+							Crear nuevo proyecto
+						</Button>
+					</Row>
+					<Row justify='space-between' align='middle'>
+						{selectNode()}
+					</Row>
+				</Col>
 			)
 		}
 		return (

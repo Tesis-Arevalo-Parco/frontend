@@ -55,12 +55,6 @@ const Register = () => {
 					notification.error(MESSAGES.REGISTER_FAILED)
 				}
 				break
-			default:
-				notification.error({
-					...MESSAGES.API_ERROR,
-					message: `${MESSAGES.API_ERROR.message} ${statusCode || ''}`,
-				})
-				break
 		}
 	}
 

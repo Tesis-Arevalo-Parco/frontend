@@ -5,5 +5,10 @@ const projectsFormToggleAction = (data) => {
 		payload: data,
 	}
 }
-
-export { projectsFormToggleAction }
+const setProjectsFormDataAction = (id, name, description) => {
+	return {
+		action: projectFormActionTypes.PROJECTS_SET_FORM_DATA,
+		payload: { id, name, description },
+	}
+}
+export { projectsFormToggleAction, setProjectsFormDataAction }

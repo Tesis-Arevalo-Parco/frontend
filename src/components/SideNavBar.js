@@ -34,7 +34,7 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 			className='side-nav-bar'
 		>
 			<Row justify='center'>
-				<img className='logo' src={images.LOGO_WHITE} width='100px' />
+				<img className='logo' src={images.LOGO_WHITE} width='80px' />
 			</Row>
 			<Menu mode='inline' theme='light'>
 				<SubMenu key='submenu-assets' icon={<HomeFilled />} title='Activos'>

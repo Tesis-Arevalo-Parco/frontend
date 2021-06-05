@@ -24,3 +24,22 @@ export const saveProjects = async (name, description) => {
 		return error.response
 	}
 }
+
+export const deleteProject = async (id) => {
+	try {
+		await axios.delete(`${apiUrl}/projects/${id}`)
+	} catch (error) {
+		return error.response
+	}
+}
+
+export const updateProject = async (id, name, description) => {
+	try {
+		await axios.put(`${apiUrl}/projects/${id}`, {
+			name,
+			description,
+		})
+	} catch (error) {
+		return error.response
+	}
+}

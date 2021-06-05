@@ -1,9 +1,9 @@
-import TableProjectExpandable from 'components/TableProjectExpandable'
+import TableProjects from 'components/TableProjects'
 
 const Projects = () => {
 	return (
 		<div className='projects'>
-			<TableProjectExpandable />
+			<TableProjects />
 		</div>
 	)
 }

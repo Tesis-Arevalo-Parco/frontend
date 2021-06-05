@@ -21,11 +21,11 @@
 
 @import 'responsive/sideNavBar';
 @import 'responsive/userDashboard';
+@import 'responsive/table';
 
 // Configs
 
 @import 'configs/inputConfigs.scss';
-@import 'configs/tableConfigs.scss';
 @import 'configs/utilConfigs.scss';
 @import 'configs/cardConfigs.scss';
-
+@import 'configs/tablesConfigs.scss';

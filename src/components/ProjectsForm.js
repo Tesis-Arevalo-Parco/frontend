@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Form, Input, Button, Spin, Drawer } from 'antd'
-import { saveProjects } from 'epics/projectsEpics'
+import { saveProjects, updateProject } from 'epics/projectsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 
@@ -8,7 +8,9 @@ const ProjectsForm = () => {
 	const [form] = Form.useForm()
 	const [spinner, setSpinner] = useState(false)
 	const { getProjectsData } = useContext(ProjectsContext)
-	const { toggleProjectsForm, toggle } = useContext(ProjectsFormContext)
+	const { toggleProjectsForm, toggle, projectFormData } = useContext(
+		ProjectsFormContext
+	)
 
 	const onReset = () => {
 		form.resetFields()
@@ -16,18 +18,35 @@ const ProjectsForm = () => {
 
 	const onFinish = async (values) => {
 		setSpinner(true)
-		await saveProjects(values.name, values.description)
-		setSpinner(false)
-		toggleProjectsForm()
-		await getProjectsData()
-		onReset()
+		if (projectFormData.id) {
+			await updateProject(projectFormData.id, values.name, values.description)
+			setSpinner(false)
+			toggleProjectsForm()
+			await getProjectsData()
+			onReset()
+		} else {
+			await saveProjects(values.name, values.description)
+			setSpinner(false)
+			toggleProjectsForm()
+			await getProjectsData()
+			onReset()
+		}
 	}
+
+	useEffect(() => {
+		if (toggle) {
+			form.setFieldsValue({
+				name: projectFormData.name,
+				description: projectFormData.description,
+			})
+		}
+	}, [projectFormData])
 
 	return (
 		<>
 			<Drawer
 				className='projects-main-form'
-				title='Nuevo Proyecto'
+				title={projectFormData.name || 'Nuevo Proyecto'}
 				placement='right'
 				width='400px'
 				onClose={toggleProjectsForm}

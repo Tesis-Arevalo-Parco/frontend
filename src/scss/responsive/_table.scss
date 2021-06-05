@@ -1,7 +1,5 @@
-.ant-table {
-  display: block;
-
-  @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
+  .ant-table {
     &-thead > tr,
     &-tbody > tr {
       th,
@@ -24,6 +22,12 @@
         &:last-child {
           border-bottom: 1px solid #eee;
         }
+      }
+    }
+    colgroup {
+      col {
+        width: 100% !important;
+        min-width: 100% !important;
       }
     }
   }

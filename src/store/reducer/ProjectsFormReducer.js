@@ -8,6 +8,11 @@ export default (state, data) => {
 				...state,
 				toggle: payload,
 			}
+		case projectFormActionTypes.PROJECTS_SET_FORM_DATA:
+			return {
+				...state,
+				projectFormData: payload,
+			}
 		default:
 			break
 	}

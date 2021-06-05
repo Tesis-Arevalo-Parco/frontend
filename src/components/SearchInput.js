@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons'
 const SearchInput = ({ data, setFilteredData, searchName, placeholder }) => {
 	const onChangeInput = (e) => {
 		const filteredData = data.filter((value) =>
-			value[searchName].includes(e.target.value)
+			value[searchName].toLowerCase().includes(e.target.value.toLowerCase())
 		)
 		setFilteredData(filteredData)
 	}
