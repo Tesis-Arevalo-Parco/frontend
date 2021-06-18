@@ -1,12 +1,14 @@
 import { useEffect, useContext, useState } from 'react'
 import { Layout, Card } from 'antd'
+import { Route } from 'react-router-dom'
 import SideNavBar from 'components/SideNavBar'
 import Header from 'components/Header'
-import { APP_ROUTES } from 'routes/routes'
-import { RenderRoutes } from 'utils/routesUtils'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsForm from 'components/ProjectsForm'
 import DashBoardHeader from 'components/DashBoardHeader'
+import { paths } from 'constants/paths'
+import Projects from 'pages/Projects'
+import AssetsIdentification from 'pages/assets/AssetsIdentification'
 
 const UserDashboard = () => {
 	const { getProjectsData } = useContext(ProjectsContext)
@@ -27,7 +29,53 @@ const UserDashboard = () => {
 			<Layout className='site-layout'>
 				<Header />
 				<Card title={<DashBoardHeader />} className='main-content'>
-					<RenderRoutes routes={APP_ROUTES} />
+					<Route path={paths.ASSETS_IDENTIFICATION} exact={false}>
+						<Route
+							path={`${paths.ASSETS_IDENTIFICATION}/:topicId`}
+							component={() => <div>test</div>}
+						/>
+						<Route
+							path={paths.ASSETS_IDENTIFICATION}
+							component={AssetsIdentification}
+							exact
+						/>
+					</Route>
+					<Route
+						component={() => <div>Valoracion de activos</div>}
+						path={paths.ASSETS_VALUATION}
+						exact
+					/>
+					<Route
+						component={() => <div>Registro de activos</div>}
+						path={paths.ASSETS_REGISTER}
+						exact
+					/>
+					<Route
+						component={() => <div>Lista de activos</div>}
+						path={paths.ASSETS_LIST}
+						exact
+					/>
+					<Route
+						component={() => <div>Identificacion de Amenazas</div>}
+						path={paths.THREAT_IDENTIFICATION}
+						exact
+					/>
+					<Route
+						component={() => <div>Valoracion de Amenazas</div>}
+						path={paths.THREAT_VALUATION}
+						exact
+					/>
+					<Route
+						component={() => <div>Salvaguardas</div>}
+						path={paths.SAFEGUARDS}
+						exact
+					/>
+					<Route
+						component={() => <div>estadísticas</div>}
+						path={paths.STATICS}
+						exact
+					/>
+					<Route component={Projects} path={paths.PROJECTS} exact />
 				</Card>
 				<ProjectsForm />
 			</Layout>

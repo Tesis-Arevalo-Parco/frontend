@@ -141,4 +141,9 @@
   .ant-menu-submenu-selected {
     color: $color-white;
   }
+
+  .ant-menu-item-selected a,
+  .ant-menu-item-selected a:hover {
+    color: $color-text-nav-black;
+  }
 }

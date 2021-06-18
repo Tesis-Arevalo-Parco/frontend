@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { useLocation } from 'react-router-dom'
-import { PageHeader, Select, Row, Button, Col } from 'antd'
-import { PlusCircleFilled } from '@ant-design/icons'
+import { useLocation, Link } from 'react-router-dom'
+import { PageHeader, Select, Row, Button, Col, Space } from 'antd'
+import { PlusCircleFilled, UploadOutlined } from '@ant-design/icons'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { paths } from 'constants/paths'
@@ -13,20 +13,9 @@ const DashBoardHeader = () => {
 		ProjectsFormContext
 	)
 	const location = useLocation()
-	function onChange(value) {
+	const onChange = (value) => {
 		console.log(`selected ${value}`)
-	}
-
-	function onBlur() {
-		console.log('blur')
-	}
-
-	function onFocus() {
-		console.log('focus')
-	}
-
-	function onSearch(val) {
-		console.log('search:', val)
+		return <Link to={`${paths.ASSETS_IDENTIFICATION}/${value}`} />
 	}
 
 	const onClickToggleFormProjects = () => {
@@ -54,57 +43,49 @@ const DashBoardHeader = () => {
 			return (
 				<Col>
 					<Row justify='space-between' align='middle'>
-						<span level={2} className='header-card-title'>
-							Identificación de Activos
-						</span>
-						<Button
-							type='primary'
-							icon={<PlusCircleFilled />}
-							onClick={onClickToggleFormProjects}
-						>
-							Crear nuevo proyecto
-						</Button>
-					</Row>
-					<Row justify='space-between' align='middle'>
-						{selectNode()}
+						<Row justify='space-between' align='middle'>
+							<Space size='middle'>
+								<span level={2} className='header-card-title'>
+									Identificación de Activos
+								</span>
+								<Select
+									showSearch
+									style={{ width: 200, marginTop: '0.5rem' }}
+									placeholder='Seleccione un proyecto'
+									optionFilterProp='children'
+									onChange={onChange}
+									filterOption={(input, option) =>
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+									}
+								>
+									{projects.map((project) => {
+										return (
+											<Option key={project.id} value={project.name}>
+												{project.name}
+											</Option>
+										)
+									})}
+								</Select>
+							</Space>
+						</Row>
+						{projects.length ? (
+							<Button
+								type='primary'
+								icon={<UploadOutlined />}
+								onClick={() => null}
+							>
+								Cargar Activos
+							</Button>
+						) : null}
 					</Row>
 				</Col>
 			)
 		}
 		return (
-			<PageHeader
-				title='Proyectos'
-				className='site-page-header'
-				subTitle={selectNode()}
-			></PageHeader>
+			<PageHeader title='Proyectos' className='site-page-header'></PageHeader>
 		)
 	}
 
-	const selectNode = () => {
-		return (
-			<Select
-				showSearch
-				style={{ width: 200 }}
-				placeholder='Select a person'
-				optionFilterProp='children'
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				onSearch={onSearch}
-				filterOption={(input, option) =>
-					option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
-				}
-			>
-				{projects.map((project) => {
-					return (
-						<Option key={project.id} value={project.name}>
-							{project.name}
-						</Option>
-					)
-				})}
-			</Select>
-		)
-	}
 	return <div className='dashboard-header'>{getHeader()}</div>
 }
 

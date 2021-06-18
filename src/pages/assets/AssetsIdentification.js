@@ -1,23 +1,25 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Empty } from 'antd'
 import ProjectsContext from 'store/context/ProjectsContext'
-import ProjectsFormContext from 'store/context/ProjectsFormContext'
+import { paths } from 'constants/paths'
+import images from 'constants/assets'
 
 const AssetsIdentification = () => {
 	const { projects } = useContext(ProjectsContext)
-	const { toggleProjectsForm } = useContext(ProjectsFormContext)
 	return (
 		<div className='assets-identification'>
-			{projects.length ? (
-				projects.map((project) => <div key={project.id}>{project.name}</div>)
-			) : (
+			{!projects.length && (
 				<Empty
 					description='No se logró encontrar proyectos'
 					className='empty-project'
+					image={images.EMPTY_IMG}
 				>
-					<Button onClick={toggleProjectsForm}>
-						<p>Crear un nuevo proyecto</p>
-					</Button>
+					<Link to={paths.PROJECTS}>
+						<Button>
+							<p>Crear un nuevo proyecto</p>
+						</Button>
+					</Link>
 				</Empty>
 			)}
 		</div>
