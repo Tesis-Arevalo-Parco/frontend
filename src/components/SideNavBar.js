@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import {
 	HomeFilled,
 	FlagFilled,
@@ -15,6 +15,7 @@ import { useMediaQuery } from 'utils/useMediaQuery'
 const SideNavBar = ({ setFakeSideNavbar }) => {
 	const { Sider } = Layout
 	const { SubMenu } = Menu
+	const history = useHistory()
 	const [collapsed, setCollapsed] = useState(false)
 	const isPageWide = useMediaQuery('(max-width: 600px)')
 
@@ -34,7 +35,13 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 			className='side-nav-bar'
 		>
 			<Row justify='center'>
-				<img className='logo' src={images.LOGO_WHITE} width='80px' />
+				<img
+					className='logo'
+					src={images.LOGO_WHITE}
+					width='75px'
+					onClick={() => history.push(`${paths.ROOT_APP}`)}
+					style={{ cursor: 'pointer', marginBottom: '0.5rem' }}
+				/>
 			</Row>
 			<Menu mode='inline' theme='light'>
 				<SubMenu key='submenu-assets' icon={<HomeFilled />} title='Activos'>

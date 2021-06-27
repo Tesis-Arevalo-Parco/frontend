@@ -11,9 +11,11 @@ import images from 'constants/assets'
 import EmptyImage from 'components/EmptyImage'
 
 const TableProjects = () => {
-	const { toggleProjectsForm, toggle, setProjectsFormData } = useContext(
-		ProjectsFormContext
-	)
+	const {
+		setProjectsFormToggle,
+		toggleFormProject,
+		setProjectsFormData,
+	} = useContext(ProjectsFormContext)
 	const { projects, getProjectsData } = useContext(ProjectsContext)
 	const [localProjects, setLocalProjects] = useState([])
 	const history = useHistory()
@@ -31,15 +33,15 @@ const TableProjects = () => {
 		appendParams.append('selectedProject', id)
 		history.push({ search: appendParams.toString() })
 		setProjectsFormData(id, name, description)
-		toggleProjectsForm()
+		setProjectsFormToggle()
 	}
 
 	useEffect(() => {
-		if (getSelectedProject && !toggle) {
+		if (getSelectedProject && !toggleFormProject) {
 			params.delete('selectedProject')
 			history.push({ search: params.toString() })
 		}
-	}, [toggle])
+	}, [toggleFormProject])
 
 	const tableActions = (dataItem) => {
 		return (
@@ -113,7 +115,7 @@ const TableProjects = () => {
 							buttonText='Crear proyecto'
 							image={images.EMPTY_IMG}
 							description='No se logró encontrar proyectos'
-							onClick={toggleProjectsForm}
+							onClick={setProjectsFormToggle}
 						/>
 					),
 				}}

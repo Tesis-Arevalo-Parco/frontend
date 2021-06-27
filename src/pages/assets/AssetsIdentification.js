@@ -1,28 +1,28 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Empty } from 'antd'
-import ProjectsContext from 'store/context/ProjectsContext'
-import { paths } from 'constants/paths'
-import images from 'constants/assets'
+import { useEffect, useState } from 'react'
+import { Spin } from 'antd'
+import { useParams } from 'react-router-dom'
+import { getProjectById } from 'epics/projectsEpics'
+import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
+import TableAssetsIdentification from 'components/tables/TableAssetsIdentification'
 
 const AssetsIdentification = () => {
-	const { projects } = useContext(ProjectsContext)
+	const [assets, setAssets] = useState([])
+	const [spinner, setSpinner] = useState(false)
+	const { id } = useParams()
+	useEffect(async () => {
+		setSpinner(true)
+		const response = await getProjectById(id)
+		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
+			setAssets(response.data.assets)
+		}
+		setSpinner(false)
+	}, [id])
 	return (
-		<div className='assets-identification'>
-			{!projects.length && (
-				<Empty
-					description='No se logró encontrar proyectos'
-					className='empty-project'
-					image={images.EMPTY_IMG}
-				>
-					<Link to={paths.PROJECTS}>
-						<Button>
-							<p>Crear un nuevo proyecto</p>
-						</Button>
-					</Link>
-				</Empty>
-			)}
-		</div>
+		<Spin spinning={spinner}>
+			<div className='assets-identification'>
+				<TableAssetsIdentification assets={assets} />
+			</div>
+		</Spin>
 	)
 }
 

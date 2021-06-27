@@ -4,30 +4,46 @@ import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import {
 	projectsFormToggleAction,
 	setProjectsFormDataAction,
+	assetsFormToggleAction,
+	setAssetsFormDataAction,
 } from 'store/actions/projectsFormActions'
 
 const projectsFormState = (props) => {
 	const initialUserState = {
-		toggle: false,
+		toggleFormProject: false,
+		toggleFormAssets: false,
 		projectFormData: { id: '', name: '', description: '' },
+		assetsFormData: { id: '', identification: '', name: '', model: '' },
 	}
 	const [state, dispatch] = useReducer(ProjectsFormReducer, initialUserState)
 
-	const toggleProjectsForm = () => {
-		dispatch(projectsFormToggleAction(!state.toggle))
+	const setProjectsFormToggle = () => {
+		dispatch(projectsFormToggleAction(!state.toggleFormProject))
+	}
+
+	const setAssetsFormToggle = () => {
+		dispatch(assetsFormToggleAction(!state.toggleFormAssets))
 	}
 
 	const setProjectsFormData = (id, name, description) => {
 		dispatch(setProjectsFormDataAction(id, name, description))
 	}
 
+	const setAssetsFormData = (id, identification, name, model) => {
+		dispatch(setAssetsFormDataAction(id, identification, name, model))
+	}
+
 	return (
 		<ProjectsFormContext.Provider
 			value={{
-				toggle: state.toggle,
+				toggleFormAssets: state.toggleFormAssets,
+				toggleFormProject: state.toggleFormProject,
 				projectFormData: state.projectFormData,
-				toggleProjectsForm,
+				assetsFormData: state.assetsFormData,
+				setProjectsFormToggle,
 				setProjectsFormData,
+				setAssetsFormToggle,
+				setAssetsFormData,
 			}}
 		>
 			{props.children}

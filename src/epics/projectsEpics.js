@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { apiUrl } from 'utils/apiUrlUtils'
+import { API_URL } from 'constants/url'
 import { getUserData } from 'utils/localStorageUtils'
 
 export const getProjects = async () => {
 	try {
-		const response = await axios.get(`${apiUrl}/projects`)
+		const response = await axios.get(`${API_URL}/projects`)
 		return response
 	} catch (error) {
 		return error.response
@@ -14,7 +14,7 @@ export const getProjects = async () => {
 export const saveProjects = async (name, description) => {
 	const user = getUserData()
 	try {
-		const response = await axios.post(`${apiUrl}/projects`, {
+		const response = await axios.post(`${API_URL}/projects`, {
 			name,
 			description,
 			user: user.id,
@@ -27,7 +27,8 @@ export const saveProjects = async (name, description) => {
 
 export const deleteProject = async (id) => {
 	try {
-		await axios.delete(`${apiUrl}/projects/${id}`)
+		const response = await axios.delete(`${API_URL}/projects/${id}`)
+		return response
 	} catch (error) {
 		return error.response
 	}
@@ -35,10 +36,20 @@ export const deleteProject = async (id) => {
 
 export const updateProject = async (id, name, description) => {
 	try {
-		await axios.put(`${apiUrl}/projects/${id}`, {
+		const response = await axios.put(`${API_URL}/projects/${id}`, {
 			name,
 			description,
 		})
+		return response
+	} catch (error) {
+		return error.response
+	}
+}
+
+export const getProjectById = async (id) => {
+	try {
+		const response = await axios.get(`${API_URL}/projects/${id}`)
+		return response
 	} catch (error) {
 		return error.response
 	}

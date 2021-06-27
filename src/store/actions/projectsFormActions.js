@@ -11,4 +11,24 @@ const setProjectsFormDataAction = (id, name, description) => {
 		payload: { id, name, description },
 	}
 }
-export { projectsFormToggleAction, setProjectsFormDataAction }
+
+const setAssetsFormDataAction = (id, identification, name, model) => {
+	return {
+		action: projectFormActionTypes.ASSETS_SET_FORM_DATA,
+		payload: { id, identification, name, model },
+	}
+}
+
+const assetsFormToggleAction = (data) => {
+	return {
+		action: projectFormActionTypes.ASSETS_FORM_TOGGLE,
+		payload: data,
+	}
+}
+
+export {
+	projectsFormToggleAction,
+	setProjectsFormDataAction,
+	assetsFormToggleAction,
+	setAssetsFormDataAction,
+}

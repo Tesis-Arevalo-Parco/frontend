@@ -6,8 +6,9 @@
 @import 'pages/userDashboard';
 @import 'pages/login';
 @import 'pages/register';
-@import 'pages/assetsIdentification';
+@import 'pages/assets';
 @import 'pages/projects';
+@import 'pages/assetsIdentification';
 
 // Components
 
@@ -16,6 +17,7 @@
 @import 'components/header';
 @import 'components/projectsForm';
 @import 'components/dashboardHeader';
+@import 'components/assetsForms';
 
 // Responsive
 

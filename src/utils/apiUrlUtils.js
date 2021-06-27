@@ -5,11 +5,6 @@ import { STRAPI_ERRORS } from 'constants/commonStrapiErrors'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
 import { getErrorMessageId } from 'utils/apiResponseUtils'
 
-const apiUrl =
-	process.env.NODE_ENV === 'production'
-		? process.env.REACT_APP_PROD_API_URL
-		: process.env.REACT_APP_DEV_API_URL
-
 const requestInterceptorAxios = () => {
 	axios.interceptors.request.use(
 		(configuration) => {
@@ -58,4 +53,4 @@ const responseInterceptorAxios = () => {
 		}
 	)
 }
-export { apiUrl, requestInterceptorAxios, responseInterceptorAxios }
+export { requestInterceptorAxios, responseInterceptorAxios }

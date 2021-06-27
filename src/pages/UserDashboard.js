@@ -4,11 +4,13 @@ import { Route } from 'react-router-dom'
 import SideNavBar from 'components/SideNavBar'
 import Header from 'components/Header'
 import ProjectsContext from 'store/context/ProjectsContext'
-import ProjectsForm from 'components/ProjectsForm'
+import ProjectsForm from 'components/forms/ProjectsForm'
+import AssetsForm from 'components/forms/AssetsForm'
 import DashBoardHeader from 'components/DashBoardHeader'
 import { paths } from 'constants/paths'
 import Projects from 'pages/Projects'
 import AssetsIdentification from 'pages/assets/AssetsIdentification'
+import Assets from 'pages/assets/Assets'
 
 const UserDashboard = () => {
 	const { getProjectsData } = useContext(ProjectsContext)
@@ -31,24 +33,23 @@ const UserDashboard = () => {
 				<Card title={<DashBoardHeader />} className='main-content'>
 					<Route path={paths.ASSETS_IDENTIFICATION} exact={false}>
 						<Route
-							path={`${paths.ASSETS_IDENTIFICATION}/:topicId`}
-							component={() => <div>test</div>}
+							path={`${paths.ASSETS_IDENTIFICATION}/:id`}
+							component={AssetsIdentification}
 						/>
 						<Route
 							path={paths.ASSETS_IDENTIFICATION}
-							component={AssetsIdentification}
+							component={Assets}
 							exact
 						/>
 					</Route>
 					<Route
 						component={() => <div>Valoracion de activos</div>}
 						path={paths.ASSETS_VALUATION}
-						exact
 					/>
 					<Route
 						component={() => <div>Registro de activos</div>}
 						path={paths.ASSETS_REGISTER}
-						exact
+						exact={false}
 					/>
 					<Route
 						component={() => <div>Lista de activos</div>}
@@ -78,6 +79,7 @@ const UserDashboard = () => {
 					<Route component={Projects} path={paths.PROJECTS} exact />
 				</Card>
 				<ProjectsForm />
+				<AssetsForm />
 			</Layout>
 		</Layout>
 	)

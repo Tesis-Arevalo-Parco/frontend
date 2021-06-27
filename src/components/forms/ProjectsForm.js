@@ -8,9 +8,11 @@ const ProjectsForm = () => {
 	const [form] = Form.useForm()
 	const [spinner, setSpinner] = useState(false)
 	const { getProjectsData } = useContext(ProjectsContext)
-	const { toggleProjectsForm, toggle, projectFormData } = useContext(
-		ProjectsFormContext
-	)
+	const {
+		setProjectsFormToggle,
+		toggleFormProject,
+		projectFormData,
+	} = useContext(ProjectsFormContext)
 
 	const onReset = () => {
 		form.resetFields()
@@ -19,22 +21,29 @@ const ProjectsForm = () => {
 	const onFinish = async (values) => {
 		setSpinner(true)
 		if (projectFormData.id) {
-			await updateProject(projectFormData.id, values.name, values.description)
-			setSpinner(false)
-			toggleProjectsForm()
-			await getProjectsData()
-			onReset()
+			const response = await updateProject(
+				projectFormData.id,
+				values.name,
+				values.description
+			)
+			await setAfterSaveProjects(response)
 		} else {
-			await saveProjects(values.name, values.description)
-			setSpinner(false)
-			toggleProjectsForm()
-			await getProjectsData()
-			onReset()
+			const response = await saveProjects(values.name, values.description)
+			await setAfterSaveProjects(response)
 		}
 	}
 
+	const setAfterSaveProjects = async (response) => {
+		if (response) {
+			setProjectsFormToggle()
+			await getProjectsData()
+			onReset()
+		}
+		setSpinner(false)
+	}
+
 	useEffect(() => {
-		if (toggle) {
+		if (toggleFormProject) {
 			form.setFieldsValue({
 				name: projectFormData.name,
 				description: projectFormData.description,
@@ -49,8 +58,8 @@ const ProjectsForm = () => {
 				title={projectFormData.name || 'Nuevo Proyecto'}
 				placement='right'
 				width='400px'
-				onClose={toggleProjectsForm}
-				visible={toggle}
+				onClose={setProjectsFormToggle}
+				visible={toggleFormProject}
 			>
 				<Spin spinning={spinner}>
 					<Form

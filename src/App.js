@@ -5,6 +5,7 @@ import 'scss/App.scss'
 import UserState from 'store/state/UserState'
 import ProjectsState from 'store/state/ProjectsState'
 import ProjectsFormState from 'store/state/ProjectsFormState'
+import SpinnerState from 'store/state/SpinnerState'
 import PrivateRoute from 'routes/PrivateRoute'
 import PublicRoute from 'routes/PublicRoute'
 import { paths } from 'constants/paths'
@@ -21,30 +22,32 @@ Sentry.init({
 const App = () => {
 	return (
 		<UserState>
-			<ProjectsState>
-				<ProjectsFormState>
-					<Switch>
-						<PublicRoute
-							path={paths.LOGIN}
-							component={LogIn}
-							restricted={true}
-							exact={true}
-						/>
-						<PublicRoute
-							component={Register}
-							path={paths.REGISTER}
-							restricted={true}
-							exact={true}
-						/>
-						<PrivateRoute
-							component={UserDashboard}
-							path={paths.ROOT_APP}
-							restricted={true}
-							exact={false}
-						/>
-					</Switch>
-				</ProjectsFormState>
-			</ProjectsState>
+			<SpinnerState>
+				<ProjectsState>
+					<ProjectsFormState>
+						<Switch>
+							<PublicRoute
+								path={paths.LOGIN}
+								component={LogIn}
+								restricted={true}
+								exact={true}
+							/>
+							<PublicRoute
+								component={Register}
+								path={paths.REGISTER}
+								restricted={true}
+								exact={true}
+							/>
+							<PrivateRoute
+								component={UserDashboard}
+								path={paths.ROOT_APP}
+								restricted={true}
+								exact={false}
+							/>
+						</Switch>
+					</ProjectsFormState>
+				</ProjectsState>
+			</SpinnerState>
 		</UserState>
 	)
 }

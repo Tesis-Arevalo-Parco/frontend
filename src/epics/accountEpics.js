@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { apiUrl } from 'utils/apiUrlUtils'
+import { API_URL } from 'constants/url'
 
 export const login = async (identifier, password) => {
 	try {
-		const response = await axios.post(`${apiUrl}/auth/local`, {
+		const response = await axios.post(`${API_URL}/auth/local`, {
 			identifier,
 			password,
 		})
@@ -15,7 +15,7 @@ export const login = async (identifier, password) => {
 
 export const register = async (name, lastname, email, password) => {
 	try {
-		const response = await axios.post(`${apiUrl}/auth/local/register`, {
+		const response = await axios.post(`${API_URL}/auth/local/register`, {
 			username: email,
 			name,
 			lastname,

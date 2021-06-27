@@ -9,20 +9,21 @@ import { paths } from 'constants/paths'
 const DashBoardHeader = () => {
 	const { Option } = Select
 	const { projects } = useContext(ProjectsContext)
-	const { toggleProjectsForm, setProjectsFormData } = useContext(
-		ProjectsFormContext
-	)
+	const {
+		setProjectsFormToggle,
+		setProjectsFormData,
+		setAssetsFormToggle,
+	} = useContext(ProjectsFormContext)
 	const location = useLocation()
+
 	const onChange = (value) => {
 		console.log(`selected ${value}`)
-		return <Link to={`${paths.ASSETS_IDENTIFICATION}/${value}`} />
 	}
 
 	const onClickToggleFormProjects = () => {
 		setProjectsFormData('', '', '')
-		toggleProjectsForm()
+		setProjectsFormToggle()
 	}
-
 	const getHeader = () => {
 		if (location.pathname.includes(paths.PROJECTS)) {
 			return (
@@ -61,7 +62,12 @@ const DashBoardHeader = () => {
 									{projects.map((project) => {
 										return (
 											<Option key={project.id} value={project.name}>
-												{project.name}
+												<Link
+													to={`${paths.ASSETS_IDENTIFICATION}/${project.id}`}
+													style={{ display: 'block' }}
+												>
+													{project.name}
+												</Link>
 											</Option>
 										)
 									})}
@@ -69,13 +75,22 @@ const DashBoardHeader = () => {
 							</Space>
 						</Row>
 						{projects.length ? (
-							<Button
-								type='primary'
-								icon={<UploadOutlined />}
-								onClick={() => null}
-							>
-								Cargar Activos
-							</Button>
+							<Space size='middle'>
+								<Button
+									type='primary'
+									icon={<PlusCircleFilled />}
+									onClick={setAssetsFormToggle}
+								>
+									Ingresar Activo
+								</Button>
+								<Button
+									type='primary'
+									icon={<UploadOutlined />}
+									onClick={() => null}
+								>
+									Cargar Activos
+								</Button>
+							</Space>
 						) : null}
 					</Row>
 				</Col>

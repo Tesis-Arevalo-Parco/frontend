@@ -6,7 +6,12 @@ export default (state, data) => {
 		case projectFormActionTypes.PROJECTS_FORM_TOGGLE:
 			return {
 				...state,
-				toggle: payload,
+				toggleFormProject: payload,
+			}
+		case projectFormActionTypes.ASSETS_FORM_TOGGLE:
+			return {
+				...state,
+				toggleFormAssets: payload,
 			}
 		case projectFormActionTypes.PROJECTS_SET_FORM_DATA:
 			return {
