@@ -60,7 +60,7 @@ const DashBoardHeader = () => {
 						<Row justify='space-between' align='middle'>
 							<Space size='middle'>
 								<span level={2} className='header-card-title'>
-									Identificación de Activos {assetsParams}
+									Identificación de Activos
 								</span>
 								<Select
 									showSearch
