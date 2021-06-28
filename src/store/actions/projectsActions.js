@@ -6,4 +6,11 @@ const projectsGetDataAction = (data) => {
 	}
 }
 
-export { projectsGetDataAction }
+const assetsGetDataAction = (data) => {
+	return {
+		action: projectActionTypes.ASSETS_GET_DATA,
+		payload: data,
+	}
+}
+
+export { projectsGetDataAction, assetsGetDataAction }

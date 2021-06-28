@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useContext } from 'react'
 import { Spin } from 'antd'
 import { useParams } from 'react-router-dom'
-import { getProjectById } from 'epics/projectsEpics'
-import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
+import ProjectsContext from 'store/context/ProjectsContext'
 import TableAssetsIdentification from 'components/tables/TableAssetsIdentification'
+import ParamsContext from 'store/context/ParamsContext'
+import SpinnerContext from 'store/context/SpinnerContext'
 
 const AssetsIdentification = () => {
-	const [assets, setAssets] = useState([])
-	const [spinner, setSpinner] = useState(false)
+	const { setAssetsParams } = useContext(ParamsContext)
+	const { assets, getAssetsData } = useContext(ProjectsContext)
+	const { active, activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
+
 	useEffect(async () => {
-		setSpinner(true)
-		const response = await getProjectById(id)
-		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
-			setAssets(response.data.assets)
-		}
-		setSpinner(false)
+		activeSpinner(true)
+		setAssetsParams(id)
+		await getAssetsData(id)
+		activeSpinner(false)
 	}, [id])
+
 	return (
-		<Spin spinning={spinner}>
+		<Spin spinning={active}>
 			<div className='assets-identification'>
 				<TableAssetsIdentification assets={assets} />
 			</div>

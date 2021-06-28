@@ -1,29 +1,42 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { PageHeader, Select, Row, Button, Col, Space } from 'antd'
 import { PlusCircleFilled, UploadOutlined } from '@ant-design/icons'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { paths } from 'constants/paths'
+import ParamsContext from 'store/context/ParamsContext'
 
 const DashBoardHeader = () => {
 	const { Option } = Select
+	const [projectName, setProjectName] = useState('')
 	const { projects } = useContext(ProjectsContext)
+	const { assetsParams } = useContext(ParamsContext)
 	const {
 		setProjectsFormToggle,
 		setProjectsFormData,
 		setAssetsFormToggle,
+		setAssetsFormData,
 	} = useContext(ProjectsFormContext)
 	const location = useLocation()
-
-	const onChange = (value) => {
-		console.log(`selected ${value}`)
-	}
 
 	const onClickToggleFormProjects = () => {
 		setProjectsFormData('', '', '')
 		setProjectsFormToggle()
 	}
+
+	const onClickToggleFormAssets = () => {
+		setAssetsFormData('', '', '', '')
+		setAssetsFormToggle()
+	}
+
+	useEffect(() => {
+		const response = projects.find((project) => project.id === assetsParams)
+		if (response) {
+			setProjectName(response.name)
+		}
+	}, [projects])
+
 	const getHeader = () => {
 		if (location.pathname.includes(paths.PROJECTS)) {
 			return (
@@ -47,17 +60,17 @@ const DashBoardHeader = () => {
 						<Row justify='space-between' align='middle'>
 							<Space size='middle'>
 								<span level={2} className='header-card-title'>
-									Identificación de Activos
+									Identificación de Activos {assetsParams}
 								</span>
 								<Select
 									showSearch
 									style={{ width: 200, marginTop: '0.5rem' }}
 									placeholder='Seleccione un proyecto'
 									optionFilterProp='children'
-									onChange={onChange}
 									filterOption={(input, option) =>
 										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
 									}
+									value={projectName}
 								>
 									{projects.map((project) => {
 										return (
@@ -65,6 +78,7 @@ const DashBoardHeader = () => {
 												<Link
 													to={`${paths.ASSETS_IDENTIFICATION}/${project.id}`}
 													style={{ display: 'block' }}
+													onClick={() => setProjectName(project.name)}
 												>
 													{project.name}
 												</Link>
@@ -79,7 +93,7 @@ const DashBoardHeader = () => {
 								<Button
 									type='primary'
 									icon={<PlusCircleFilled />}
-									onClick={setAssetsFormToggle}
+									onClick={onClickToggleFormAssets}
 								>
 									Ingresar Activo
 								</Button>

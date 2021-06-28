@@ -1,13 +1,15 @@
 import { useState, useContext, useEffect } from 'react'
 import { Form, Input, Button, Spin, Drawer } from 'antd'
-import { saveProjects, updateProject } from 'epics/projectsEpics'
+import { saveAssets, updateAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
+import ParamsContext from 'store/context/ParamsContext'
 
 const AssetsForm = () => {
 	const [form] = Form.useForm()
+	const { assetsParams } = useContext(ParamsContext)
 	const [spinner, setSpinner] = useState(false)
-	const { getProjectsData } = useContext(ProjectsContext)
+	const { getAssetsData } = useContext(ProjectsContext)
 	const { setAssetsFormToggle, toggleFormAssets, assetsFormData } = useContext(
 		ProjectsFormContext
 	)
@@ -19,14 +21,21 @@ const AssetsForm = () => {
 	const onFinish = async (values) => {
 		setSpinner(true)
 		if (assetsFormData.id) {
-			const response = await updateProject(
+			const response = await updateAssets(
 				assetsFormData.id,
+				values.identification,
 				values.name,
-				values.description
+				values.model,
+				assetsParams
 			)
 			await setAfterSaveProjects(response)
 		} else {
-			const response = await saveProjects(values.name, values.description)
+			const response = await saveAssets(
+				values.identification,
+				values.name,
+				values.model,
+				assetsParams
+			)
 			await setAfterSaveProjects(response)
 		}
 	}
@@ -34,7 +43,7 @@ const AssetsForm = () => {
 	const setAfterSaveProjects = async (response) => {
 		if (response) {
 			setAssetsFormToggle()
-			await getProjectsData()
+			await getAssetsData(assetsParams)
 			onReset()
 		}
 		setSpinner(false)

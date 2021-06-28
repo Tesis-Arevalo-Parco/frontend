@@ -18,6 +18,11 @@ export default (state, data) => {
 				...state,
 				projectFormData: payload,
 			}
+		case projectFormActionTypes.ASSETS_SET_FORM_DATA:
+			return {
+				...state,
+				assetsFormData: payload,
+			}
 		default:
 			break
 	}

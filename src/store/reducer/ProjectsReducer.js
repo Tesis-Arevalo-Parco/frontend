@@ -8,6 +8,11 @@ export default (state, data) => {
 				...state,
 				projects: payload,
 			}
+		case projectActionTypes.ASSETS_GET_DATA:
+			return {
+				...state,
+				assets: payload,
+			}
 		default:
 			break
 	}
