@@ -26,9 +26,17 @@ const assetsFormToggleAction = (data) => {
 	}
 }
 
+const uploadToggleAction = (data) => {
+	return {
+		action: projectFormActionTypes.UPLOAD_TOGGLE,
+		payload: data,
+	}
+}
+
 export {
 	projectsFormToggleAction,
 	setProjectsFormDataAction,
 	assetsFormToggleAction,
 	setAssetsFormDataAction,
+	uploadToggleAction,
 }

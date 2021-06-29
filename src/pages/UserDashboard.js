@@ -11,6 +11,7 @@ import { paths } from 'constants/paths'
 import Projects from 'pages/Projects'
 import AssetsIdentification from 'pages/assets/AssetsIdentification'
 import Assets from 'pages/assets/Assets'
+import Uploader from 'components/Upload'
 
 const UserDashboard = () => {
 	const { getProjectsData } = useContext(ProjectsContext)
@@ -80,6 +81,7 @@ const UserDashboard = () => {
 				</Card>
 				<ProjectsForm />
 				<AssetsForm />
+				<Uploader />
 			</Layout>
 		</Layout>
 	)

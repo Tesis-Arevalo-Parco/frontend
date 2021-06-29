@@ -23,6 +23,11 @@ export default (state, data) => {
 				...state,
 				assetsFormData: payload,
 			}
+		case projectFormActionTypes.UPLOAD_TOGGLE:
+			return {
+				...state,
+				toggleUpload: payload,
+			}
 		default:
 			break
 	}

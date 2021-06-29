@@ -6,12 +6,14 @@ import {
 	setProjectsFormDataAction,
 	assetsFormToggleAction,
 	setAssetsFormDataAction,
+	uploadToggleAction,
 } from 'store/actions/projectsFormActions'
 
 const projectsFormState = (props) => {
 	const initialUserState = {
 		toggleFormProject: false,
 		toggleFormAssets: false,
+		toggleUpload: false,
 		projectFormData: { id: '', name: '', description: '' },
 		assetsFormData: { id: '', identification: '', name: '', model: '' },
 	}
@@ -23,6 +25,10 @@ const projectsFormState = (props) => {
 
 	const setAssetsFormToggle = () => {
 		dispatch(assetsFormToggleAction(!state.toggleFormAssets))
+	}
+
+	const setUploadToggle = (data) => {
+		dispatch(uploadToggleAction(data))
 	}
 
 	const setProjectsFormData = (id, name, description) => {
@@ -40,10 +46,12 @@ const projectsFormState = (props) => {
 				toggleFormProject: state.toggleFormProject,
 				projectFormData: state.projectFormData,
 				assetsFormData: state.assetsFormData,
+				toggleUpload: state.toggleUpload,
 				setProjectsFormToggle,
 				setProjectsFormData,
 				setAssetsFormToggle,
 				setAssetsFormData,
+				setUploadToggle,
 			}}
 		>
 			{props.children}

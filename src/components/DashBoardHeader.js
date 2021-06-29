@@ -17,6 +17,7 @@ const DashBoardHeader = () => {
 		setProjectsFormData,
 		setAssetsFormToggle,
 		setAssetsFormData,
+		setUploadToggle,
 	} = useContext(ProjectsFormContext)
 	const location = useLocation()
 
@@ -100,7 +101,7 @@ const DashBoardHeader = () => {
 								<Button
 									type='primary'
 									icon={<UploadOutlined />}
-									onClick={() => null}
+									onClick={() => setUploadToggle(true)}
 								>
 									Cargar Activos
 								</Button>
