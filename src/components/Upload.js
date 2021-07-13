@@ -1,86 +1,119 @@
 /* eslint-disable array-callback-return */
 import { useState, useContext } from 'react'
-import { Modal, Upload, message } from 'antd'
+import { Modal, Upload, Spin } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { ExcelRenderer } from 'react-excel-renderer'
+import ProjectsContext from 'store/context/ProjectsContext'
+import ParamsContext from 'store/context/ParamsContext'
+import { saveAssets } from 'epics/assetsEpics'
 
 const Uploader = () => {
 	const { Dragger } = Upload
 	const { setUploadToggle, toggleUpload } = useContext(ProjectsFormContext)
-	const props = {
-		name: 'file',
-		multiple: false,
-		beforeUpload: (file) => {
-			console.log('file', file)
-			ExcelRenderer(file, (err, resp) => {
-				if (err) {
-					console.log(err, 'err')
-				} else {
-					const newRows = []
-					console.log('hello', resp)
-					resp.rows.slice(1).map((row, index) => {
+	const { assetsParams } = useContext(ParamsContext)
+	const { getAssetsData } = useContext(ProjectsContext)
+	const [uploadedAssets, setUploadedAssets] = useState([])
+	const [spinner, setSpinner] = useState(false)
+
+	const handleOk = async () => {
+		setSpinner(true)
+		if (uploadedAssets.length) {
+			for (const asset of uploadedAssets) {
+				await saveAssets(
+					asset.identification,
+					asset.name,
+					asset.model,
+					assetsParams
+				)
+			}
+			await getAssetsData(assetsParams)
+		}
+		setUploadToggle(false)
+		setSpinner(false)
+	}
+
+	const handleCancel = () => {
+		setUploadToggle(false)
+	}
+
+	const beforeUploadAssets = (file) => {
+		if (!file) {
+			return false
+		}
+		if (
+			!(
+				file.type === 'application/vnd.ms-excel' ||
+				file.type ===
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+			)
+		) {
+			return false
+		}
+		ExcelRenderer(file, (error, response) => {
+			if (error) {
+				return false
+			} else {
+				const newRows = []
+				if (!response.rows.length) {
+					return false
+				}
+				const upperCasedTitle = response.rows[0].map((title) =>
+					title.toUpperCase()
+				)
+				if (
+					upperCasedTitle.includes('ID') &&
+					upperCasedTitle.includes('NOMBRE') &&
+					upperCasedTitle.includes('MODELO')
+				) {
+					const idIndex = upperCasedTitle.indexOf('ID')
+					const nameIndex = upperCasedTitle.indexOf('NOMBRE')
+					const modelIndex = upperCasedTitle.indexOf('MODELO')
+					response.rows.slice(1).map((row, index) => {
 						if (row && row.length) {
-							console.log(row, 'row')
 							newRows.push({
-								key: index,
-								name: row[0],
-								age: row[1],
-								gender: row[2],
+								identification: row[idIndex],
+								name: row[nameIndex],
+								model: row[modelIndex],
 							})
 						}
 					})
-					console.log('newRows', newRows)
-					if (newRows.length === 0) {
-						/* this.setState({
-							errorMessage: 'No data found in file!',
-						}) */
-						return false
-					} else {
-						/* this.setState({
-							cols: resp.cols,
-							rows: newRows,
-							errorMessage: null,
-						}) */
+					if (newRows.length) {
+						setUploadedAssets(newRows)
 					}
 				}
-			})
-			return false
-		},
-		onDrop(e) {
-			console.log('Dropped files', e.dataTransfer.files)
-		},
+			}
+		})
+		return false
 	}
-
-	const showModal = () => {}
-
-	const handleOk = () => {}
-
-	const handleCancel = () => {}
 
 	return (
 		<>
 			<Modal
-				title='Basic Modal'
+				className='modal'
+				title='Cargar Activos'
 				visible={toggleUpload}
 				onOk={handleOk}
-				onCancel={() => setUploadToggle(false)}
+				onCancel={handleCancel}
+				okText='Cargar'
+				cancelText='Cancelar'
+				destroyOnClose={true}
 			>
-				<Dragger
-					{...props}
-					accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel'
-				>
-					<p className='ant-upload-drag-icon'>
-						<InboxOutlined />
-					</p>
-					<p className='ant-upload-text'>
-						Click or drag file to this area to upload
-					</p>
-					<p className='ant-upload-hint'>
-						Support for a single or bulk upload. Strictly prohibit from
-						uploading company data or other band files
-					</p>
-				</Dragger>
+				<Spin spinning={spinner}>
+					<Dragger
+						multiple={false}
+						beforeUpload={beforeUploadAssets}
+						accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel'
+						maxCount={1}
+					>
+						<p className='ant-upload-drag-icon'>
+							<InboxOutlined />
+						</p>
+						<p className='ant-upload-hint'>
+							Haga clic o arrastre un archivo de excel a esta área para cargarlo
+						</p>
+					</Dragger>
+				</Spin>
 			</Modal>
 		</>
 	)

@@ -1,0 +1,41 @@
+.ant-modal {
+  .ant-modal-header {
+    .ant-modal-title {
+      color: $color-primary;
+    }
+  }
+
+  .ant-upload.ant-upload-drag:not(.ant-upload-disabled):hover {
+    border-color: $color-primary;
+    p.ant-upload-hint {
+      color: $color-primary;
+    }
+    .ant-upload-drag-icon {
+      svg {
+        fill: $color-primary;
+      }
+    }
+  }
+
+  .ant-upload-drag-icon {
+    svg {
+      fill: $color-dark;
+    }
+  }
+
+  .ant-upload.ant-upload-drag p.ant-upload-hint {
+    color: $color-dark;
+  }
+
+  .ant-btn-primary {
+    border-color: $color-primary;
+    background: $color-primary;
+    color: $color-white !important;
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}

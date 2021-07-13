@@ -1,12 +1,22 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Button, Empty } from 'antd'
 import ProjectsContext from 'store/context/ProjectsContext'
 import { paths } from 'constants/paths'
 import images from 'constants/assets'
+import ParamsContext from 'store/context/ParamsContext'
 
 const Assets = () => {
 	const { projects } = useContext(ProjectsContext)
+	const { assetsParams } = useContext(ParamsContext)
+	const history = useHistory()
+
+	useEffect(() => {
+		if (assetsParams) {
+			history.push(`${paths.ASSETS_IDENTIFICATION}/${assetsParams}`)
+		}
+	}, [])
+
 	return (
 		<div className='assets'>
 			{!projects.length ? (

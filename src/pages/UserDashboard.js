@@ -78,6 +78,11 @@ const UserDashboard = () => {
 						exact
 					/>
 					<Route component={Projects} path={paths.PROJECTS} exact />
+					<Route
+						component={() => <div>Root</div>}
+						path={paths.ROOT_APP}
+						exact
+					/>
 				</Card>
 				<ProjectsForm />
 				<AssetsForm />

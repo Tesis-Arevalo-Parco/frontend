@@ -1,17 +1,25 @@
 import { useReducer } from 'react'
 import ParamsReducer from 'store/reducer/ParamsReducer'
 import ParamsContext from 'store/context/ParamsContext'
-import { setAssetsDataAction } from 'store/actions/paramsActions'
+import {
+	setAssetsDataAction,
+	setProjectNameAction,
+} from 'store/actions/paramsActions'
 
 const paramsState = (props) => {
 	const initialAssetsState = {
 		assetsParams: '',
 		assetsName: '',
+		projectName: '',
 	}
 	const [state, dispatch] = useReducer(ParamsReducer, initialAssetsState)
 
 	const setAssetsParams = async (assetsParams) => {
 		dispatch(setAssetsDataAction(assetsParams))
+	}
+
+	const setProjectName = async (name) => {
+		dispatch(setProjectNameAction(name))
 	}
 
 	return (
@@ -20,6 +28,8 @@ const paramsState = (props) => {
 				assetsParams: state.assetsParams,
 				setAssetsParams,
 				assetsName: state.assetsName,
+				projectName: state.projectName,
+				setProjectName,
 			}}
 		>
 			{props.children}

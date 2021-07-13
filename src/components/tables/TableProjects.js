@@ -77,7 +77,7 @@ const TableProjects = () => {
 		}))
 
 	const columns = [
-		{ title: 'Nombre', dataIndex: 'name', key: 'name', width: '30%' },
+		{ title: 'Nombre', dataIndex: 'name', key: 'name', width: '40%' },
 		{
 			title: 'Descripción',
 			dataIndex: 'description',
@@ -89,7 +89,7 @@ const TableProjects = () => {
 			dataIndex: '',
 			key: 'action',
 			render: (_, record) => tableActions(record),
-			width: '20%',
+			width: '10%',
 		},
 	]
 

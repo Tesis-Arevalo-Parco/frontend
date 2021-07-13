@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { PageHeader, Select, Row, Button, Col, Space } from 'antd'
 import { PlusCircleFilled, UploadOutlined } from '@ant-design/icons'
@@ -9,9 +9,10 @@ import ParamsContext from 'store/context/ParamsContext'
 
 const DashBoardHeader = () => {
 	const { Option } = Select
-	const [projectName, setProjectName] = useState('')
 	const { projects } = useContext(ProjectsContext)
-	const { assetsParams } = useContext(ParamsContext)
+	const { assetsParams, projectName, setProjectName } = useContext(
+		ParamsContext
+	)
 	const {
 		setProjectsFormToggle,
 		setProjectsFormData,
@@ -111,9 +112,6 @@ const DashBoardHeader = () => {
 				</Col>
 			)
 		}
-		return (
-			<PageHeader title='Proyectos' className='site-page-header'></PageHeader>
-		)
 	}
 
 	return <div className='dashboard-header'>{getHeader()}</div>

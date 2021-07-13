@@ -8,6 +8,11 @@ export default (state, data) => {
 				...state,
 				assetsParams: payload,
 			}
+		case paramsActionTypes.SET_PROJECT_NAME:
+			return {
+				...state,
+				projectName: payload,
+			}
 		default:
 			break
 	}

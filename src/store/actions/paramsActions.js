@@ -6,4 +6,11 @@ const setAssetsDataAction = (data) => {
 	}
 }
 
-export { setAssetsDataAction }
+const setProjectNameAction = (data) => {
+	return {
+		action: paramsActionTypes.SET_PROJECT_NAME,
+		payload: data,
+	}
+}
+
+export { setAssetsDataAction, setProjectNameAction }
