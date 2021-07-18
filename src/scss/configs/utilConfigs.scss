@@ -1,0 +1,47 @@
+body {
+  background: $color-light;
+}
+.custom-shadow {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+.ant-popover {
+  .ant-popover-content {
+    .ant-popover-buttons {
+      .ant-btn-primary {
+        background-color: $color-primary;
+        border-color: $color-primary;
+      }
+      .ant-btn-sm:not(.ant-btn-primary) {
+        &.ant-btn:hover,
+        &.ant-btn:focus {
+          color: $color-primary;
+          border-color: $color-primary;
+        }
+      }
+    }
+  }
+}
+
+.table-button-actions {
+  .update-button:hover,
+  .update-button:focus {
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+  .delete-button:hover,
+  .delete-button:focus {
+    color: $color-danger;
+    border-color: $color-danger;
+  }
+}
+
+.ant-spin {
+  &.ant-spin-spinning {
+    .ant-spin-dot {
+      .ant-spin-dot-item {
+        background-color: $color-primary;
+      }
+    }
+  }
+}

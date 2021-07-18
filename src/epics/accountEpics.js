@@ -1,13 +1,9 @@
 import axios from 'axios'
-
-const apiUrl =
-	process.env.NODE_ENV === 'production'
-		? process.env.REACT_APP_PROD_API_URL
-		: process.env.REACT_APP_DEV_API_URL
+import { API_URL } from 'constants/url'
 
 export const login = async (identifier, password) => {
 	try {
-		const response = await axios.post(`${apiUrl}/auth/local`, {
+		const response = await axios.post(`${API_URL}/auth/local`, {
 			identifier,
 			password,
 		})
@@ -19,7 +15,7 @@ export const login = async (identifier, password) => {
 
 export const register = async (name, lastname, email, password) => {
 	try {
-		const response = await axios.post(`${apiUrl}/auth/local/register`, {
+		const response = await axios.post(`${API_URL}/auth/local/register`, {
 			username: email,
 			name,
 			lastname,

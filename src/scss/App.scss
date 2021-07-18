@@ -6,8 +6,30 @@
 @import 'pages/userDashboard';
 @import 'pages/login';
 @import 'pages/register';
+@import 'pages/assets';
+@import 'pages/projects';
+@import 'pages/assetsIdentification';
 
 // Components
+
 @import 'components/sideNavBar';
 @import 'components/submenuPopup';
 @import 'components/header';
+@import 'components/projectsForm';
+@import 'components/dashboardHeader';
+@import 'components/assetsForms';
+@import 'components/modal';
+
+// Responsive
+
+@import 'responsive/sideNavBar';
+@import 'responsive/userDashboard';
+@import 'responsive/table';
+
+// Configs
+
+@import 'configs/inputConfigs.scss';
+@import 'configs/utilConfigs.scss';
+@import 'configs/cardConfigs.scss';
+@import 'configs/tablesConfigs.scss';
+@import 'configs/selectConfigs.scss';

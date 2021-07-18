@@ -12,4 +12,5 @@ export const paths = {
 	ASSETS_REGISTER: '/activos/register',
 	ASSETS_LIST: '/activos/lista',
 	STATICS: '/estadisticas',
+	PROJECTS: '/proyectos',
 }

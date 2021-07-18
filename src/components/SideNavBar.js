@@ -1,19 +1,31 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, useHistory } from 'react-router-dom'
 import {
 	HomeFilled,
 	FlagFilled,
 	PieChartFilled,
 	FireFilled,
+	SafetyCertificateFilled,
 } from '@ant-design/icons'
 import { Row, Layout, Menu } from 'antd'
 import { paths } from 'constants/paths'
-
 import images from 'constants/assets'
-const SideNavBar = () => {
+import { useMediaQuery } from 'utils/useMediaQuery'
+
+const SideNavBar = ({ setFakeSideNavbar }) => {
 	const { Sider } = Layout
 	const { SubMenu } = Menu
+	const history = useHistory()
 	const [collapsed, setCollapsed] = useState(false)
+	const isPageWide = useMediaQuery('(max-width: 600px)')
+
+	useEffect(() => {
+		isPageWide && setCollapsed(isPageWide)
+	}, [isPageWide])
+
+	useEffect(() => {
+		setFakeSideNavbar(collapsed)
+	}, [collapsed])
 
 	return (
 		<Sider
@@ -23,11 +35,26 @@ const SideNavBar = () => {
 			className='side-nav-bar'
 		>
 			<Row justify='center'>
-				<img className='logo' src={images.LOGO_WHITE} width='100px' />
+				<img
+					className='logo'
+					src={images.LOGO_WHITE}
+					width='75px'
+					onClick={() => history.push(`${paths.ROOT_APP}`)}
+					style={{ cursor: 'pointer', marginBottom: '0.5rem' }}
+				/>
 			</Row>
 			<Menu mode='inline' theme='light'>
+				<Menu.Item key='1' icon={<SafetyCertificateFilled />}>
+					<NavLink
+						className='nav-link-router'
+						activeClassName='selected-nav-link'
+						to={paths.PROJECTS}
+					>
+						Proyectos
+					</NavLink>
+				</Menu.Item>
 				<SubMenu key='submenu-assets' icon={<HomeFilled />} title='Activos'>
-					<Menu.Item key='1'>
+					<Menu.Item key='2'>
 						<NavLink
 							to={paths.ASSETS_IDENTIFICATION}
 							activeClassName='selected-nav-link'
@@ -35,7 +62,7 @@ const SideNavBar = () => {
 							Identificar activos
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='2' title='Registrar dependencias entre activos'>
+					<Menu.Item key='3' title='Registrar dependencias entre activos'>
 						<NavLink
 							to={paths.ASSETS_REGISTER}
 							activeClassName='selected-nav-link'
@@ -43,12 +70,12 @@ const SideNavBar = () => {
 							Registrar dependencias entre activos
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='3'>
+					<Menu.Item key='4'>
 						<NavLink to={paths.ASSETS_LIST} activeClassName='selected-nav-link'>
 							Lista de activos
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='4'>
+					<Menu.Item key='5'>
 						<NavLink
 							to={paths.ASSETS_VALUATION}
 							activeClassName='selected-nav-link'
@@ -58,7 +85,7 @@ const SideNavBar = () => {
 					</Menu.Item>
 				</SubMenu>
 				<SubMenu key='submenu-threats' icon={<FireFilled />} title='Amenazas'>
-					<Menu.Item key='5'>
+					<Menu.Item key='6'>
 						<NavLink
 							to={paths.THREAT_IDENTIFICATION}
 							activeClassName='selected-nav-link'
@@ -66,7 +93,7 @@ const SideNavBar = () => {
 							Identificar amenazas
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='6'>
+					<Menu.Item key='7'>
 						<NavLink
 							to={paths.THREAT_VALUATION}
 							activeClassName='selected-nav-link'
@@ -75,7 +102,7 @@ const SideNavBar = () => {
 						</NavLink>
 					</Menu.Item>
 				</SubMenu>
-				<Menu.Item key='7' icon={<FlagFilled />}>
+				<Menu.Item key='8' icon={<FlagFilled />}>
 					<NavLink
 						to={paths.SAFEGUARDS}
 						activeClassName='selected-nav-link'
@@ -84,7 +111,7 @@ const SideNavBar = () => {
 						Salvaguardas
 					</NavLink>
 				</Menu.Item>
-				<Menu.Item key='8' icon={<PieChartFilled />}>
+				<Menu.Item key='9' icon={<PieChartFilled />}>
 					<NavLink
 						className='nav-link-router'
 						activeClassName='selected-nav-link'

@@ -1,0 +1,18 @@
+.ant-table {
+  .ant-table-thead {
+    .ant-table-cell {
+      font-weight: bold;
+    }
+  }
+  .ant-empty {
+    .ant-empty-description {
+      color: $color-dark;
+    }
+    .ant-empty-footer {
+      .ant-btn-primary {
+        background-color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+}

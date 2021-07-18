@@ -41,12 +41,6 @@ const LogIn = () => {
 			case CODE_HTTP_RESPONSE.ERROR_400:
 				notification.error(MESSAGES.LOGIN_FAILED)
 				break
-			default:
-				notification.error({
-					...MESSAGES.API_ERROR,
-					message: `${MESSAGES.API_ERROR.message} ${statusCode || ''}`,
-				})
-				break
 		}
 	}
 

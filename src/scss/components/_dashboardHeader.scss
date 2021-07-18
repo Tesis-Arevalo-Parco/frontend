@@ -1,0 +1,13 @@
+.dashboard-header {
+  h2.ant-typography,
+  .ant-typography h2 {
+    font-weight: normal;
+  }
+
+  .projects-header {
+    .ant-btn-primary {
+      background-color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}

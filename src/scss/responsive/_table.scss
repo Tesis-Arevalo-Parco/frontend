@@ -1,0 +1,34 @@
+@media screen and (max-width: 600px) {
+  .ant-table {
+    &-thead > tr,
+    &-tbody > tr {
+      th,
+      td {
+        &:first-of-type {
+          padding-top: 1rem;
+        }
+
+        &:last-of-type {
+          padding-bottom: 1rem;
+        }
+      }
+
+      > th,
+      > td {
+        display: block;
+        width: auto !important;
+        border: none;
+        padding: 0 1rem;
+        &:last-child {
+          border-bottom: 1px solid #eee;
+        }
+      }
+    }
+    colgroup {
+      col {
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+    }
+  }
+}
