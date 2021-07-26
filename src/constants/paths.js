@@ -9,7 +9,7 @@ export const paths = {
 	ASSETS: '/activos',
 	ASSETS_IDENTIFICATION: '/activos/identificacion',
 	ASSETS_VALUATION: '/activos/valoracion',
-	ASSETS_REGISTER: '/activos/register',
+	ASSETS_REGISTER: '/activos/dependencias',
 	ASSETS_LIST: '/activos/lista',
 	STATICS: '/estadisticas',
 	PROJECTS: '/proyectos',

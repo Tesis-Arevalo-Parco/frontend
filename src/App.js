@@ -13,6 +13,7 @@ import { paths } from 'constants/paths'
 import LogIn from 'pages/LogIn'
 import Register from 'pages/Register'
 import UserDashboard from 'pages/UserDashboard'
+import 'handsontable/dist/handsontable.full.css'
 
 Sentry.init({
 	dsn: process.env.REACT_SENTRY_API_KEY,

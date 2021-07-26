@@ -11,6 +11,8 @@ import { paths } from 'constants/paths'
 import Projects from 'pages/Projects'
 import AssetsIdentification from 'pages/assets/AssetsIdentification'
 import Assets from 'pages/assets/Assets'
+import Dependencies from 'pages/assets/Dependencies'
+import RegisterDependencies from 'pages/assets/RegisterDependencies'
 import Uploader from 'components/Upload'
 
 const UserDashboard = () => {
@@ -43,14 +45,20 @@ const UserDashboard = () => {
 							exact
 						/>
 					</Route>
+					<Route path={paths.ASSETS_REGISTER} exact={false}>
+						<Route
+							path={`${paths.ASSETS_REGISTER}/:id`}
+							component={RegisterDependencies}
+						/>
+						<Route
+							path={paths.ASSETS_REGISTER}
+							component={Dependencies}
+							exact
+						/>
+					</Route>
 					<Route
 						component={() => <div>Valoracion de activos</div>}
 						path={paths.ASSETS_VALUATION}
-					/>
-					<Route
-						component={() => <div>Registro de activos</div>}
-						path={paths.ASSETS_REGISTER}
-						exact={false}
 					/>
 					<Route
 						component={() => <div>Lista de activos</div>}
