@@ -13,6 +13,21 @@ export default (state, data) => {
 				...state,
 				assets: payload,
 			}
+		case projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCIES:
+			return {
+				...state,
+				assetsDependencies: payload,
+			}
+		case projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCY_ID:
+			return {
+				...state,
+				assetsDependencyId: payload,
+			}
+		case projectActionTypes.PROJECT_SET_ASSETS_NEW_DEPENDENCIES:
+			return {
+				...state,
+				assetsNewDependencies: payload,
+			}
 		default:
 			break
 	}

@@ -9,10 +9,13 @@ import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { deleteAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ParamsContext from 'store/context/ParamsContext'
+import { updateDependencies } from 'epics/dependenciesEpics'
 
 const TableAssetsIdentification = ({ assets }) => {
 	const [localAssets, setLocalAssets] = useState([])
-	const { getAssetsData } = useContext(ProjectsContext)
+	const { getAssetsData, assetsDependencies, assetsDependencyId } = useContext(
+		ProjectsContext
+	)
 	const { assetsParams } = useContext(ParamsContext)
 	const { setAssetsFormToggle, setAssetsFormData } = useContext(
 		ProjectsFormContext
@@ -26,6 +29,22 @@ const TableAssetsIdentification = ({ assets }) => {
 	const deleteAssetsById = async (id) => {
 		await deleteAssets(id)
 		await getAssetsData(assetsParams)
+		await deleteAssetDependencies(id)
+	}
+
+	const deleteAssetDependencies = async (id) => {
+		if (assetsDependencies.length) {
+			const newDependency = []
+			assetsDependencies.forEach((dependency) => {
+				if (
+					dependency.firstAsset.id !== id &&
+					dependency.secondAsset.id !== id
+				) {
+					newDependency.push(dependency)
+				}
+			})
+			await updateDependencies(assetsDependencyId, newDependency, assetsParams)
+		}
 	}
 
 	const tableActions = (dataItem) => {

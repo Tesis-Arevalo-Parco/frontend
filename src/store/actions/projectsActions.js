@@ -13,4 +13,30 @@ const assetsGetDataAction = (data) => {
 	}
 }
 
-export { projectsGetDataAction, assetsGetDataAction }
+const setAssetsDependenciesAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCIES,
+		payload: data,
+	}
+}
+const setAssetsDependencyIdAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCY_ID,
+		payload: data,
+	}
+}
+
+const setAssetsNewDependenciesAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_ASSETS_NEW_DEPENDENCIES,
+		payload: data,
+	}
+}
+
+export {
+	projectsGetDataAction,
+	assetsGetDataAction,
+	setAssetsDependenciesAction,
+	setAssetsDependencyIdAction,
+	setAssetsNewDependenciesAction,
+}

@@ -1,13 +1,16 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
 import { HotTable } from '@handsontable/react'
+import ProjectsContext from 'store/context/ProjectsContext'
+let listOfDependencies = []
 
-const TableRegisterDependencies = ({ assets }) => {
+const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 	const [localAssets, setLocalAssets] = useState([])
 	const [data, setData] = useState([])
+	const { setAssetsNewDependencies } = useContext(ProjectsContext)
 	const hotTableRef = useRef(null)
-	const listOfDependencies = []
 
 	useEffect(() => {
+		listOfDependencies = []
 		setLocalAssets(assets.map((asset) => asset.name))
 		const test = createData(assets.length)
 		setData(test)
@@ -22,22 +25,30 @@ const TableRegisterDependencies = ({ assets }) => {
 			},
 		})
 	}, [assets])
+
 	const settings = {
 		licenseKey: 'non-commercial-and-evaluation',
 	}
 
 	const afterChangeCell = (changes) => {
 		changes?.forEach(([row, col, oldValue, newValue]) => {
-			console.log(row, col, oldValue, newValue)
 			if (!isNaN(+newValue) && oldValue !== newValue && newValue !== '') {
-				console.log(Math.abs(+newValue))
-				console.log(assets[row])
-				console.log(assets[col])
 				listOfDependencies.push({
 					firstAsset: assets[row],
 					secondAsset: assets[col],
+					value: Math.abs(+newValue),
 				})
-				console.log(listOfDependencies)
+				setAssetsNewDependencies(listOfDependencies)
+			}
+			if (oldValue !== '' && newValue === '') {
+				const index = listOfDependencies.findIndex(
+					(dependency) =>
+						dependency.firstAsset.id === assets[row].id &&
+						dependency.secondAsset.id === assets[col].id
+				)
+				if (index !== -1) {
+					listOfDependencies.splice(index, 1)
+				}
 			}
 		})
 	}
@@ -51,6 +62,26 @@ const TableRegisterDependencies = ({ assets }) => {
 		}
 		return mat
 	}
+
+	useEffect(() => {
+		if (assetsDependencies.length) {
+			assetsDependencies.forEach((dependency) => {
+				const row = assets.findIndex(
+					(asset) => asset.id === dependency.firstAsset.id
+				)
+				const column = assets.findIndex(
+					(asset) => asset.id === dependency.secondAsset.id
+				)
+				if (row !== -1 && column !== -1) {
+					hotTableRef.current.hotInstance.setDataAtCell(
+						row,
+						column,
+						dependency.value
+					)
+				}
+			})
+		}
+	}, [assetsDependencies])
 
 	return (
 		<HotTable

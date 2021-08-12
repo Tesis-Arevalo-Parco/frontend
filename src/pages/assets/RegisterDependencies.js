@@ -8,7 +8,9 @@ import SpinnerContext from 'store/context/SpinnerContext'
 
 const AssetsIdentification = () => {
 	const { setAssetsParams } = useContext(ParamsContext)
-	const { assets, getAssetsData } = useContext(ProjectsContext)
+	const { assets, getAssetsData, assetsDependencies } = useContext(
+		ProjectsContext
+	)
 	const { active, activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
 
@@ -22,7 +24,10 @@ const AssetsIdentification = () => {
 	return (
 		<Spin spinning={active}>
 			<div className='assets-dependencies'>
-				<TableRegisterDependencies assets={assets} />
+				<TableRegisterDependencies
+					assets={assets}
+					assetsDependencies={assetsDependencies}
+				/>
 			</div>
 		</Spin>
 	)
