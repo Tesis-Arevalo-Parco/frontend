@@ -17,7 +17,6 @@ const DashBoardHeader = () => {
 	const { Option } = Select
 	const {
 		projects,
-		assetsDependencies,
 		assetsDependencyId,
 		assetsNewDependencies,
 		getAssetsData,
