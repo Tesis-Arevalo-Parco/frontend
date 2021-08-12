@@ -17,7 +17,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 		hotTableRef.current.hotInstance.updateSettings({
 			cells(row, col) {
 				const cellProperties = {}
-				if (row === col) {
+				if (row === col || row > col) {
 					cellProperties.readOnly = true
 					cellProperties.className = 'read-only-table-dependencies'
 				}
