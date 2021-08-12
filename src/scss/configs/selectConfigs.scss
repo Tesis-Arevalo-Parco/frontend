@@ -27,3 +27,49 @@
 .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   background-color: $color-hover-nav-bar;
 }
+
+.ant-select-item {
+  &.ant-select-item-option {
+    padding-bottom: 0;
+    padding-top: 0;
+    display: block;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.ant-select-item {
+  &.ant-select-item-option {
+    &.ant-select-item-option-active {
+      &.ant-select-item-option-selected {
+        padding-bottom: 0;
+        padding-top: 0;
+        display: block;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+.ant-select-item-option-content {
+  height: 32px;
+  display: block;
+  align-content: center;
+  align-items: center;
+}
+.ant-select-item-option-content {
+  a {
+    padding-top: 5px;
+    height: 32px;
+    display: block;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.ant-select-dropdown {
+  padding: 0;
+}
