@@ -4,6 +4,7 @@ import { saveAssets, updateAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import ParamsContext from 'store/context/ParamsContext'
+import CheckBoxTree from 'components/CheckBoxTree'
 
 const AssetsForm = () => {
 	const [form] = Form.useForm()
@@ -127,6 +128,7 @@ const AssetsForm = () => {
 							</Button>
 						</Form.Item>
 					</Form>
+					<CheckBoxTree />
 				</Spin>
 			</Drawer>
 		</>
