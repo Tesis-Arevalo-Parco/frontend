@@ -61,3 +61,12 @@ export const deleteAssets = async (id) => {
 		return error.response
 	}
 }
+
+export const getAssetsCatalog = async () => {
+	try {
+		const response = await axios.get(`${API_URL}/catalogo-de-clases-de-activos`)
+		return response
+	} catch (error) {
+		return error.response
+	}
+}

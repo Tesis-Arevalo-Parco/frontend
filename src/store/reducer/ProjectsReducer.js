@@ -28,6 +28,11 @@ export default (state, data) => {
 				...state,
 				assetsNewDependencies: payload,
 			}
+		case projectActionTypes.PROJECT_SET_ASSETS_CLASS_CATALOG:
+			return {
+				...state,
+				assetsClassCatalog: payload,
+			}
 		default:
 			break
 	}
