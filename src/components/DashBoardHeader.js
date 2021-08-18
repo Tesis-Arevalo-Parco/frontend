@@ -41,7 +41,7 @@ const DashBoardHeader = () => {
 	}
 
 	const onClickToggleFormAssets = () => {
-		setAssetsFormData('', '', '', '')
+		setAssetsFormData('', '', '', '', [])
 		setAssetsFormToggle()
 	}
 
