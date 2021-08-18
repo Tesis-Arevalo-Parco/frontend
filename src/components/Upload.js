@@ -24,7 +24,8 @@ const Uploader = () => {
 					asset.identification,
 					asset.name,
 					asset.model,
-					assetsParams
+					assetsParams,
+					[]
 				)
 			}
 			await getAssetsData(assetsParams)

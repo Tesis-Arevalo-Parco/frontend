@@ -10,13 +10,20 @@ export const getAssets = async () => {
 	}
 }
 
-export const saveAssets = async (identification, name, model, project) => {
+export const saveAssets = async (
+	identification,
+	name,
+	model,
+	project,
+	classType
+) => {
 	try {
 		const response = await axios.post(`${API_URL}/assets`, {
 			identification,
 			name,
 			model,
 			project,
+			classType,
 		})
 		return response
 	} catch (error) {
@@ -29,7 +36,8 @@ export const updateAssets = async (
 	identification,
 	name,
 	model,
-	project
+	project,
+	classType
 ) => {
 	try {
 		const response = await axios.put(`${API_URL}/assets/${id}`, {
@@ -37,6 +45,7 @@ export const updateAssets = async (
 			name,
 			model,
 			project,
+			classType,
 		})
 		return response
 	} catch (error) {
@@ -47,6 +56,15 @@ export const updateAssets = async (
 export const deleteAssets = async (id) => {
 	try {
 		const response = await axios.delete(`${API_URL}/assets/${id}`)
+		return response
+	} catch (error) {
+		return error.response
+	}
+}
+
+export const getAssetsCatalog = async () => {
+	try {
+		const response = await axios.get(`${API_URL}/catalogo-de-clases-de-activos`)
 		return response
 	} catch (error) {
 		return error.response

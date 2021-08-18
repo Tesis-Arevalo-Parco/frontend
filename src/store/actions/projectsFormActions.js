@@ -12,10 +12,16 @@ const setProjectsFormDataAction = (id, name, description) => {
 	}
 }
 
-const setAssetsFormDataAction = (id, identification, name, model) => {
+const setAssetsFormDataAction = (
+	id,
+	identification,
+	name,
+	model,
+	classType
+) => {
 	return {
 		action: projectFormActionTypes.ASSETS_SET_FORM_DATA,
-		payload: { id, identification, name, model },
+		payload: { id, identification, name, model, classType },
 	}
 }
 

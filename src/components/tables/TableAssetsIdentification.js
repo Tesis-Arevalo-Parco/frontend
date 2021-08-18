@@ -21,8 +21,8 @@ const TableAssetsIdentification = ({ assets }) => {
 		ProjectsFormContext
 	)
 
-	const updateAssets = (id, identification, name, model) => {
-		setAssetsFormData(id, identification, name, model)
+	const updateAssets = (id, identification, name, model, classType) => {
+		setAssetsFormData(id, identification, name, model, classType)
 		setAssetsFormToggle()
 	}
 
@@ -57,7 +57,8 @@ const TableAssetsIdentification = ({ assets }) => {
 							dataItem.key,
 							dataItem.identification,
 							dataItem.name,
-							dataItem.model
+							dataItem.model,
+							dataItem.classType
 						)
 					}
 					icon={<EditOutlined />}
@@ -84,6 +85,7 @@ const TableAssetsIdentification = ({ assets }) => {
 			identification: asset.identification,
 			name: asset.name,
 			model: asset.model,
+			classType: asset.classType,
 		}))
 
 	const columns = [

@@ -15,7 +15,13 @@ const projectsFormState = (props) => {
 		toggleFormAssets: false,
 		toggleUpload: false,
 		projectFormData: { id: '', name: '', description: '' },
-		assetsFormData: { id: '', identification: '', name: '', model: '' },
+		assetsFormData: {
+			id: '',
+			identification: '',
+			name: '',
+			model: '',
+			classType: [],
+		},
 	}
 	const [state, dispatch] = useReducer(ProjectsFormReducer, initialUserState)
 
@@ -35,8 +41,16 @@ const projectsFormState = (props) => {
 		dispatch(setProjectsFormDataAction(id, name, description))
 	}
 
-	const setAssetsFormData = (id, identification, name, model) => {
-		dispatch(setAssetsFormDataAction(id, identification, name, model))
+	const setAssetsFormData = (
+		id,
+		identification,
+		name,
+		model,
+		assetsFormData
+	) => {
+		dispatch(
+			setAssetsFormDataAction(id, identification, name, model, assetsFormData)
+		)
 	}
 
 	return (

@@ -33,10 +33,18 @@ const setAssetsNewDependenciesAction = (data) => {
 	}
 }
 
+const setAssetsClassCatalogAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_ASSETS_CLASS_CATALOG,
+		payload: data,
+	}
+}
+
 export {
 	projectsGetDataAction,
 	assetsGetDataAction,
 	setAssetsDependenciesAction,
 	setAssetsDependencyIdAction,
 	setAssetsNewDependenciesAction,
+	setAssetsClassCatalogAction,
 }

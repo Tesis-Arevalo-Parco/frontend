@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { Form, Input, Button, Spin, Drawer } from 'antd'
+import { Form, Input, Button, Spin, Drawer, Tree } from 'antd'
 import { saveAssets, updateAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
@@ -9,7 +9,10 @@ const AssetsForm = () => {
 	const [form] = Form.useForm()
 	const { assetsParams } = useContext(ParamsContext)
 	const [spinner, setSpinner] = useState(false)
-	const { getAssetsData } = useContext(ProjectsContext)
+	const [isTreeEmpty, setIsTreeEmpty] = useState(false)
+	const [tree, setTree] = useState([])
+	const [treeData, setTreeData] = useState([])
+	const { getAssetsData, assetsClassCatalog } = useContext(ProjectsContext)
 	const { setAssetsFormToggle, toggleFormAssets, assetsFormData } = useContext(
 		ProjectsFormContext
 	)
@@ -19,6 +22,10 @@ const AssetsForm = () => {
 	}
 
 	const onFinish = async (values) => {
+		if (tree.length === 0) {
+			setIsTreeEmpty(true)
+			return
+		}
 		setSpinner(true)
 		if (assetsFormData.id) {
 			const response = await updateAssets(
@@ -26,7 +33,8 @@ const AssetsForm = () => {
 				values.identification,
 				values.name,
 				values.model,
-				assetsParams
+				assetsParams,
+				tree
 			)
 			await setAfterSaveProjects(response)
 		} else {
@@ -34,7 +42,8 @@ const AssetsForm = () => {
 				values.identification,
 				values.name,
 				values.model,
-				assetsParams
+				assetsParams,
+				tree
 			)
 			await setAfterSaveProjects(response)
 		}
@@ -49,6 +58,11 @@ const AssetsForm = () => {
 		setSpinner(false)
 	}
 
+	const onCheck = (checkedKeys) => {
+		setIsTreeEmpty(false)
+		setTree(checkedKeys)
+	}
+
 	useEffect(() => {
 		if (toggleFormAssets) {
 			form.setFieldsValue({
@@ -56,8 +70,15 @@ const AssetsForm = () => {
 				name: assetsFormData.name,
 				model: assetsFormData.model,
 			})
+			setTree(assetsFormData.classType)
 		}
 	}, [assetsFormData])
+
+	useEffect(() => {
+		if (assetsClassCatalog.length !== 0) {
+			setTreeData(assetsClassCatalog[0].classTypes)
+		}
+	}, [assetsClassCatalog])
 
 	return (
 		<>
@@ -116,6 +137,19 @@ const AssetsForm = () => {
 						>
 							<Input type='text' placeholder='Modelo del activo' />
 						</Form.Item>
+						<div className='ant-col ant-form-item-label'>Clase de activo</div>
+						{isTreeEmpty && (
+							<div className='ant-form-item-explain ant-form-item-explain-error'>
+								<div role='alert'>¡Ingrese la clase del activo!</div>
+							</div>
+						)}
+						<Tree
+							checkable
+							onCheck={onCheck}
+							treeData={treeData}
+							defaultCheckedKeys={assetsFormData.classType}
+							checkedKeys={tree}
+						/>
 						<Form.Item className='main-button-content'>
 							<Button
 								type='primary'
