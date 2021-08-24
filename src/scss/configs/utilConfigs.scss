@@ -45,3 +45,61 @@ body {
     }
   }
 }
+
+.ant-empty .ant-empty-footer .ant-btn-primary {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.ant-tree-checkbox-checked .ant-tree-checkbox-inner {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.ant-tree-checkbox-wrapper:hover .ant-tree-checkbox-inner,
+.ant-tree-checkbox:hover .ant-tree-checkbox-inner,
+.ant-tree-checkbox-input:focus + .ant-tree-checkbox-inner {
+  border-color: $color-primary;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: $color-primary;
+}
+
+.ant-radio-inner::after {
+  background-color: $color-primary;
+}
+
+.ant-radio-wrapper:hover .ant-radio,
+.ant-radio:hover .ant-radio-inner,
+.ant-radio-input:focus + .ant-radio-inner {
+  border-color: $color-primary;
+}
+
+.ant-slider-handle {
+  border: solid 2px $color-primary;
+}
+
+.ant-slider-handle:focus {
+  border-color: $color-primary;
+}
+
+.ant-slider-track {
+  background-color: $color-primary;
+}
+
+.ant-slider:hover .ant-slider-track {
+  background-color: $color-primary;
+}
+
+.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
+  border-color: $color-primary;
+}
+
+.ant-slider-dot-active {
+  border-color: $color-primary;
+}
+
+.ant-slider-handle.ant-tooltip-open {
+  border-color: $color-primary;
+}

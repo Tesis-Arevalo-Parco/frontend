@@ -149,6 +149,7 @@ const AssetsForm = () => {
 							treeData={treeData}
 							defaultCheckedKeys={assetsFormData.classType}
 							checkedKeys={tree}
+							style={{ marginBottom: '12px' }}
 						/>
 						<Form.Item className='main-button-content'>
 							<Button

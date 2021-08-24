@@ -70,11 +70,11 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 							Registrar dependencias entre activos
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key='4'>
+					{/* <Menu.Item key='4'>
 						<NavLink to={paths.ASSETS_LIST} activeClassName='selected-nav-link'>
 							Lista de activos
 						</NavLink>
-					</Menu.Item>
+					</Menu.Item> */}
 					<Menu.Item key='5'>
 						<NavLink
 							to={paths.ASSETS_VALUATION}
