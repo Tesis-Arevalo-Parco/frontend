@@ -14,6 +14,7 @@ import AssetsValueModal from 'components/AssetsValueModal'
 const TableAssetsValue = ({ assets }) => {
 	const [localAssets, setLocalAssets] = useState([])
 	const [toggleModal, setToggleModal] = useState(false)
+	const [dataModal, setDataModal] = useState({})
 	const { getAssetsData, assetsDependencies, assetsDependencyId } = useContext(
 		ProjectsContext
 	)
@@ -31,6 +32,11 @@ const TableAssetsValue = ({ assets }) => {
 
 	const updateAssets = (id, name, key) => {
 		console.log(id, name, key)
+		setDataModal({
+			id,
+			name,
+			key,
+		})
 		setToggleModal(true)
 		/* setAssetsFormData(id, identification, name, model, classType)
 		setAssetsFormToggle() */
@@ -149,6 +155,7 @@ const TableAssetsValue = ({ assets }) => {
 			<AssetsValueModal
 				toggleModal={toggleModal}
 				setToggleModal={setToggleModal}
+				dataModal={dataModal}
 			/>
 		</div>
 	)
