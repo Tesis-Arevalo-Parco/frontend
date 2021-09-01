@@ -1,8 +1,26 @@
-import { useState, useReducer } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 import { Modal, Radio, Slider, Space, Tree, Typography } from 'antd'
+import { DATA_ASSETS_VALUE } from 'constants/constants'
+import { updateAssetsValue } from 'epics/assetsEpics'
 
 const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 	const { Text } = Typography
+	const [tree, setTree] = useState([])
+	const [sliderValue, setSliderValue] = useState(1)
+	const [radioOption, setRadioOption] = useState(1)
+	const [treeValue, setTreeValue] = useState(1)
+	const marks = {
+		1: 'Despreciable',
+		2: 'Bajo',
+		3: 'Bajo (+)',
+		4: 'Medio (-)',
+		5: 'Medio',
+		6: 'Alto (-)',
+		7: 'Alto',
+		8: 'Alto (+)',
+		9: 'Nivel 9',
+		10: 'Nivel 10',
+	}
 	const initialState = {
 		radioFirstValue: false,
 		radioSecondValue: true,
@@ -36,46 +54,87 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		return state
 	}, initialState)
 
-	const [radioOption, setRadioOption] = useState(1)
-	const marks = {
-		1: 'Despreciable',
-		2: 'Bajo',
-		3: 'Bajo (+)',
-		4: 'Medio (-)',
-		5: 'Medio',
-		6: 'Alto (-)',
-		7: 'Alto',
-		8: 'Alto (+)',
-		9: 'Nivel 9',
-		10: 'Nivel 10',
-	}
-
 	const handleCancel = () => {
 		setToggleModal(false)
 		setRadioOption(1)
 		dispatch({ type: 'FIRST_RADIO' })
 	}
 
-	const onChange = (e) => {
-		setRadioOption(e.target.value)
-		if (e.target.value === 1) {
+	const dispatchRadio = (value) => {
+		if (value === 1) {
 			dispatch({ type: 'FIRST_RADIO' })
-		} else if (e.target.value === 2) {
+		} else if (value === 2) {
 			dispatch({ type: 'SECOND_RADIO' })
-		} else if (e.target.value === 3) {
+		} else if (value === 3) {
 			dispatch({ type: 'THIRD_RADIO' })
 		}
 	}
 
-	const onCheck = (checkedKeys, test) => {
-		console.log(checkedKeys)
-		console.log(test)
+	const onChange = (e) => {
+		setRadioOption(e.target.value)
+		dispatchRadio(e.target.value)
 	}
+
+	const handleOk = () => {
+		if (radioOption === 1) {
+			saveAssetsValue(null, radioOption)
+		} else if (radioOption === 2) {
+			saveAssetsValue(sliderValue, radioOption)
+		} else if (radioOption === 3) {
+			saveAssetsValue(treeValue, radioOption)
+		}
+	}
+
+	const saveAssetsValue = async (value, option) => {
+		let data = {}
+		if (option === 3) {
+			data = {
+				key: dataModal.key,
+				value,
+				option,
+				tree,
+			}
+		} else if (option === 2) {
+			data = {
+				key: dataModal.key,
+				value,
+				option,
+			}
+		}
+		if (dataModal.key === DATA_ASSETS_VALUE.availability.value) {
+			await updateAssetsValue(dataModal.id, data, null, null, null, null)
+		} else if (dataModal.key === DATA_ASSETS_VALUE.integrity.value) {
+			await updateAssetsValue(dataModal.id, null, data, null, null, null)
+		} else if (dataModal.key === DATA_ASSETS_VALUE.confidentiality.value) {
+			await updateAssetsValue(dataModal.id, null, null, data, null, null)
+		} else if (dataModal.key === DATA_ASSETS_VALUE.authenticity.value) {
+			await updateAssetsValue(dataModal.id, null, null, null, data, null)
+		} else if (dataModal.key === DATA_ASSETS_VALUE.traceability.value) {
+			await updateAssetsValue(dataModal.id, null, null, null, null, data)
+		}
+	}
+
+	const onChangeSlider = (value) => {
+		setSliderValue(value)
+	}
+
+	const onCheck = (checkedKeys, info) => {
+		setTree([info?.node?.key])
+		setTreeValue(+info?.node?.value)
+	}
+
+	useEffect(() => {
+		if (dataModal?.data?.option) {
+			setRadioOption(dataModal?.data?.option)
+			dispatchRadio(dataModal?.data?.option)
+		}
+	}, [dataModal])
 
 	const treeData = [
 		{
 			title: '[pi] Información de carácter personal',
 			key: 'pi',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -141,6 +200,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[lpo] Obligaciones legales',
 			key: 'lpo',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -177,6 +237,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[si] Seguridad',
 			key: 'si',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -213,6 +274,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[cei] Intereses comerciales o económicos',
 			key: 'cei',
+			disableCheckbox: true,
 			children: [
 				{
 					title: '9.cei.a de enorme interés para la competencia',
@@ -326,6 +388,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[da] Interrupción del servicio',
 			key: 'da',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -380,6 +443,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[po] Orden público',
 			key: 'po',
+			disableCheckbox: true,
 			children: [
 				{
 					title: '9.po alteración seria del orden público',
@@ -407,6 +471,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[olm] Operaciones',
 			key: 'olm',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -449,6 +514,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[adm] Administración y gestión',
 			key: 'adm',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -485,6 +551,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[lg] Pérdida de confianza (reputación)',
 			key: 'lg',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -551,6 +618,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[crm] Persecución de delitos',
 			key: 'crm',
+			disableCheckbox: true,
 			children: [
 				{
 					title:
@@ -569,6 +637,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[rto] Tiempo de recuperación del servicio',
 			key: 'rto',
+			disableCheckbox: true,
 			children: [
 				{
 					title: '7.rto RTO < 4 horas',
@@ -595,6 +664,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[lbl.nat] Información clasificada (nacional)',
 			key: 'lbl.nat',
+			disableCheckbox: true,
 			children: [
 				{
 					title: '10.lbl Secreto',
@@ -651,6 +721,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		{
 			title: '[lbl.ue] Información clasificada (Unión Europea)',
 			key: 'lbl.ue',
+			disableCheckbox: true,
 			children: [
 				{
 					title: '10.ue TRES SECRET UE',
@@ -700,11 +771,11 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		<>
 			<Modal
 				className='modal-assets-value'
-				title='Valorar Activo'
+				title={`Valorar Activo - ${dataModal.name} - ${
+					DATA_ASSETS_VALUE[dataModal.key]?.label
+				}`.toUpperCase()}
 				visible={toggleModal}
-				/* 		
 				onOk={handleOk}
-				onCancel={handleCancel} */
 				onCancel={handleCancel}
 				okText='Guardar'
 				cancelText='Cancelar'
@@ -729,6 +800,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 							max={10}
 							className='slider-values'
 							disabled={stateRadio.radioSecondValue}
+							onChange={onChangeSlider}
 						/>
 						<Radio value={3} />
 						<Tree
@@ -736,8 +808,8 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 							onCheck={onCheck}
 							treeData={treeData}
 							disabled={stateRadio.radioThirdValue}
+							checkedKeys={tree}
 							// defaultCheckedKeys={assetsFormData.classType}
-							// checkedKeys={tree}
 							// style={{ marginBottom: '12px' }}
 						/>
 					</Space>

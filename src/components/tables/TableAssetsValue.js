@@ -1,41 +1,28 @@
 import { useState, useEffect, useContext } from 'react'
-import { Table, Button, Space, Popconfirm, Slider } from 'antd'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { POPCONFIRM_MESSAGES } from 'constants/popconfirmMessages'
+import { Table, Button, Space } from 'antd'
 import images from 'constants/assets'
 import EmptyImage from 'components/EmptyImage'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
-import { deleteAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ParamsContext from 'store/context/ParamsContext'
 import { updateDependencies } from 'epics/dependenciesEpics'
 import AssetsValueModal from 'components/AssetsValueModal'
+import { DATA_ASSETS_VALUE } from 'constants/constants'
 
 const TableAssetsValue = ({ assets }) => {
 	const [localAssets, setLocalAssets] = useState([])
 	const [toggleModal, setToggleModal] = useState(false)
 	const [dataModal, setDataModal] = useState({})
-	const { getAssetsData, assetsDependencies, assetsDependencyId } = useContext(
-		ProjectsContext
-	)
+	const { assetsDependencies, assetsDependencyId } = useContext(ProjectsContext)
 	const { assetsParams } = useContext(ParamsContext)
-	const { setAssetsFormToggle, setAssetsFormData } = useContext(
-		ProjectsFormContext
-	)
-	const dataAssetsValue = {
-		availability: 'availability',
-		integrity: 'integrity',
-		confidentiality: 'confidentiality',
-		authenticity: 'authenticity',
-		traceability: 'traceability',
-	}
+	const { setAssetsFormToggle } = useContext(ProjectsFormContext)
 
-	const updateAssets = (id, name, key) => {
-		console.log(id, name, key)
+	const onClickAssets = (id, name, key, data) => {
 		setDataModal({
 			id,
 			name,
 			key,
+			data,
 		})
 		setToggleModal(true)
 		/* setAssetsFormData(id, identification, name, model, classType)
@@ -64,27 +51,55 @@ const TableAssetsValue = ({ assets }) => {
 	}
 
 	const tableActions = (dataItem, key) => {
+		const data = getDataAssetValue(dataItem, key)
 		return (
 			<Space className='table-button-actions'>
 				<Button
 					key='edit'
-					onClick={() => updateAssets(dataItem.key, dataItem.name, key)}
+					onClick={() => onClickAssets(dataItem.key, dataItem.name, key, data)}
 					className='update-button'
 				>
-					&nbsp;
+					{data?.value ?? ' '}
 				</Button>
 			</Space>
 		)
 	}
+
+	const getDataAssetValue = (dataItem, key) => {
+		let data = {}
+		if (
+			DATA_ASSETS_VALUE[key]?.value === DATA_ASSETS_VALUE.availability.value
+		) {
+			data = dataItem?.availability
+		} else if (
+			DATA_ASSETS_VALUE[key]?.value === DATA_ASSETS_VALUE.integrity.value
+		) {
+			data = dataItem?.integrity
+		} else if (
+			DATA_ASSETS_VALUE[key]?.value === DATA_ASSETS_VALUE.confidentiality.value
+		) {
+			data = dataItem?.confidentiality
+		} else if (
+			DATA_ASSETS_VALUE[key]?.value === DATA_ASSETS_VALUE.authenticity.value
+		) {
+			data = dataItem?.authenticity
+		} else if (
+			DATA_ASSETS_VALUE[key]?.value === DATA_ASSETS_VALUE.traceability.value
+		) {
+			data = dataItem?.traceability
+		}
+		return data
+	}
+
 	const filterAssets = (assets) =>
 		assets.map((asset) => ({
 			key: asset.id,
 			name: asset.name,
-			availability: '',
-			integrity: '',
-			confidentiality: '',
-			authenticity: '',
-			traceability: '',
+			availability: asset?.availability ?? '',
+			integrity: asset?.integrity ?? '',
+			confidentiality: asset?.confidentiality ?? '',
+			authenticity: asset?.authenticity ?? '',
+			traceability: asset?.traceability ?? '',
 		}))
 
 	const columns = [
@@ -94,39 +109,43 @@ const TableAssetsValue = ({ assets }) => {
 			key: 'name',
 		},
 		{
-			title: '[D] Disponibilidad',
-			dataIndex: dataAssetsValue.availability,
-			key: dataAssetsValue.availability,
-			render: (_, record) => tableActions(record, dataAssetsValue.availability),
-			align: 'center',
-		},
-		{
-			title: '[I] Integridad',
-			dataIndex: dataAssetsValue.integrity,
-			key: dataAssetsValue.integrity,
-			render: (_, record) => tableActions(record, dataAssetsValue.integrity),
-			align: 'center',
-		},
-		{
-			title: '[C] Confidencialidad',
-			dataIndex: dataAssetsValue.confidentiality,
-			key: dataAssetsValue.confidentiality,
+			title: DATA_ASSETS_VALUE.availability.label,
+			dataIndex: DATA_ASSETS_VALUE.availability.value,
+			key: DATA_ASSETS_VALUE.availability.value,
 			render: (_, record) =>
-				tableActions(record, dataAssetsValue.confidentiality),
+				tableActions(record, DATA_ASSETS_VALUE.availability.value),
 			align: 'center',
 		},
 		{
-			title: '[A] Autenticidad',
-			dataIndex: dataAssetsValue.authenticity,
-			key: dataAssetsValue.authenticity,
-			render: (_, record) => tableActions(record, dataAssetsValue.authenticity),
+			title: DATA_ASSETS_VALUE.integrity.label,
+			dataIndex: DATA_ASSETS_VALUE.integrity.value,
+			key: DATA_ASSETS_VALUE.integrity.value,
+			render: (_, record) =>
+				tableActions(record, DATA_ASSETS_VALUE.integrity.value),
 			align: 'center',
 		},
 		{
-			title: '[T] Trazabilidad',
-			dataIndex: dataAssetsValue.traceability,
-			key: dataAssetsValue.traceability,
-			render: (_, record) => tableActions(record, dataAssetsValue.traceability),
+			title: DATA_ASSETS_VALUE.confidentiality.label,
+			dataIndex: DATA_ASSETS_VALUE.confidentiality.value,
+			key: DATA_ASSETS_VALUE.confidentiality.value,
+			render: (_, record) =>
+				tableActions(record, DATA_ASSETS_VALUE.confidentiality.value),
+			align: 'center',
+		},
+		{
+			title: DATA_ASSETS_VALUE.authenticity.label,
+			dataIndex: DATA_ASSETS_VALUE.authenticity.value,
+			key: DATA_ASSETS_VALUE.authenticity.value,
+			render: (_, record) =>
+				tableActions(record, DATA_ASSETS_VALUE.authenticity.value),
+			align: 'center',
+		},
+		{
+			title: DATA_ASSETS_VALUE.traceability.label,
+			dataIndex: DATA_ASSETS_VALUE.traceability.value,
+			key: DATA_ASSETS_VALUE.traceability.value,
+			render: (_, record) =>
+				tableActions(record, DATA_ASSETS_VALUE.traceability.value),
 			align: 'center',
 		},
 	]
