@@ -1,6 +1,11 @@
 import { useEffect, useState, useRef, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { HotTable } from '@handsontable/react'
+import { Button, Empty } from 'antd'
 import ProjectsContext from 'store/context/ProjectsContext'
+import images from 'constants/assets'
+import { paths } from 'constants/paths'
+
 let listOfDependencies = []
 
 const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
@@ -14,7 +19,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 		setLocalAssets(assets.map((asset) => asset.name))
 		const test = createData(assets.length)
 		setData(test)
-		hotTableRef.current.hotInstance.updateSettings({
+		hotTableRef.current?.hotInstance.updateSettings({
 			cells(row, col) {
 				const cellProperties = {}
 				if (row === col || row > col) {
@@ -73,7 +78,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 					(asset) => asset.id === dependency.secondAsset.id
 				)
 				if (row !== -1 && column !== -1) {
-					hotTableRef.current.hotInstance.setDataAtCell(
+					hotTableRef.current?.hotInstance.setDataAtCell(
 						row,
 						column,
 						dependency.value
@@ -83,7 +88,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 		}
 	}, [assetsDependencies])
 
-	return (
+	return localAssets.length ? (
 		<HotTable
 			className='table-register-dependencies'
 			ref={hotTableRef}
@@ -102,6 +107,18 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 			settings={settings}
 			afterChange={afterChangeCell}
 		/>
+	) : (
+		<Empty
+			description='No se logró encontrar activos'
+			className='empty-project'
+			image={images.EMPTY_IMG}
+		>
+			<Link to={paths.ASSETS_IDENTIFICATION}>
+				<Button type='primary'>
+					<p>Crear activos</p>
+				</Button>
+			</Link>
+		</Empty>
 	)
 }
 

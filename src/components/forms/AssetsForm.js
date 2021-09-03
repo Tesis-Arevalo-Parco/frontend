@@ -75,8 +75,8 @@ const AssetsForm = () => {
 	}, [assetsFormData])
 
 	useEffect(() => {
-		if (assetsClassCatalog.length !== 0) {
-			setTreeData(assetsClassCatalog[0].classTypes)
+		if (assetsClassCatalog?.length !== 0 && assetsClassCatalog) {
+			setTreeData(assetsClassCatalog)
 		}
 	}, [assetsClassCatalog])
 
@@ -149,6 +149,7 @@ const AssetsForm = () => {
 							treeData={treeData}
 							defaultCheckedKeys={assetsFormData.classType}
 							checkedKeys={tree}
+							style={{ marginBottom: '12px' }}
 						/>
 						<Form.Item className='main-button-content'>
 							<Button

@@ -33,6 +33,11 @@ export default (state, data) => {
 				...state,
 				assetsClassCatalog: payload,
 			}
+		case projectActionTypes.PROJECT_SET_ASSETS_VALUATION_CATALOG:
+			return {
+				...state,
+				assetsValuationCatalog: payload,
+			}
 		default:
 			break
 	}

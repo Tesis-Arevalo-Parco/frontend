@@ -126,7 +126,7 @@ const TableAssetsIdentification = ({ assets }) => {
 				data={assets}
 				setFilteredData={setLocalAssets}
 				searchName='name'
-				placeholder='Buscar proyecto'
+				placeholder='Buscar Activo'
 			/>
 			<Table
 				columns={columns}
@@ -135,9 +135,9 @@ const TableAssetsIdentification = ({ assets }) => {
 				locale={{
 					emptyText: (
 						<EmptyImage
-							buttonText='Crear proyecto'
+							buttonText='Crear activo'
 							image={images.EMPTY_IMG}
-							description='No se logró encontrar proyectos'
+							description='No se logró encontrar activos'
 							onClick={setAssetsFormToggle}
 						/>
 					),
