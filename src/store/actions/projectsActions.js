@@ -40,6 +40,13 @@ const setAssetsClassCatalogAction = (data) => {
 	}
 }
 
+const setAssetsValuationCatalogAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_ASSETS_VALUATION_CATALOG,
+		payload: data,
+	}
+}
+
 export {
 	projectsGetDataAction,
 	assetsGetDataAction,
@@ -47,4 +54,5 @@ export {
 	setAssetsDependencyIdAction,
 	setAssetsNewDependenciesAction,
 	setAssetsClassCatalogAction,
+	setAssetsValuationCatalogAction,
 }

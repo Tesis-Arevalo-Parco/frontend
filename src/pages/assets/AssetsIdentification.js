@@ -8,9 +8,7 @@ import SpinnerContext from 'store/context/SpinnerContext'
 
 const AssetsIdentification = () => {
 	const { setAssetsParams } = useContext(ParamsContext)
-	const { assets, getAssetsData, getAssetsClassCatalog } = useContext(
-		ProjectsContext
-	)
+	const { assets, getAssetsData } = useContext(ProjectsContext)
 	const { active, activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
 
@@ -18,7 +16,6 @@ const AssetsIdentification = () => {
 		activeSpinner(true)
 		setAssetsParams(id)
 		await getAssetsData(id)
-		await getAssetsClassCatalog()
 		activeSpinner(false)
 	}, [id])
 

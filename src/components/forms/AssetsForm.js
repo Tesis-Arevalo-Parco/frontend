@@ -75,8 +75,8 @@ const AssetsForm = () => {
 	}, [assetsFormData])
 
 	useEffect(() => {
-		if (assetsClassCatalog.length !== 0) {
-			setTreeData(assetsClassCatalog[0].classTypes)
+		if (assetsClassCatalog?.length !== 0 && assetsClassCatalog) {
+			setTreeData(assetsClassCatalog)
 		}
 	}, [assetsClassCatalog])
 

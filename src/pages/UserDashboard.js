@@ -18,12 +18,13 @@ import RegisterDependencies from 'pages/assets/RegisterDependencies'
 import Uploader from 'components/Upload'
 
 const UserDashboard = () => {
-	const { getProjectsData } = useContext(ProjectsContext)
+	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
 	const [fakeSideNavbar, setFakeSideNavbar] = useState(false)
 	const location = useLocation()
 
 	useEffect(() => {
 		getProjectsData()
+		getAssetsClassCatalog()
 	}, [])
 
 	return (

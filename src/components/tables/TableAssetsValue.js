@@ -3,9 +3,6 @@ import { Table, Button, Space } from 'antd'
 import images from 'constants/assets'
 import EmptyImage from 'components/EmptyImage'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
-import ProjectsContext from 'store/context/ProjectsContext'
-import ParamsContext from 'store/context/ParamsContext'
-import { updateDependencies } from 'epics/dependenciesEpics'
 import AssetsValueModal from 'components/AssetsValueModal'
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 
@@ -13,8 +10,6 @@ const TableAssetsValue = ({ assets }) => {
 	const [localAssets, setLocalAssets] = useState([])
 	const [toggleModal, setToggleModal] = useState(false)
 	const [dataModal, setDataModal] = useState({})
-	const { assetsDependencies, assetsDependencyId } = useContext(ProjectsContext)
-	const { assetsParams } = useContext(ParamsContext)
 	const { setAssetsFormToggle } = useContext(ProjectsFormContext)
 
 	const onClickAssets = (id, name, key, data) => {
@@ -25,29 +20,6 @@ const TableAssetsValue = ({ assets }) => {
 			data,
 		})
 		setToggleModal(true)
-		/* setAssetsFormData(id, identification, name, model, classType)
-		setAssetsFormToggle() */
-	}
-
-	const deleteAssetsById = async (id) => {
-		/* await deleteAssets(id)
-		await getAssetsData(assetsParams)
-		await deleteAssetDependencies(id) */
-	}
-
-	const deleteAssetDependencies = async (id) => {
-		if (assetsDependencies.length) {
-			const newDependency = []
-			assetsDependencies.forEach((dependency) => {
-				if (
-					dependency.firstAsset.id !== id &&
-					dependency.secondAsset.id !== id
-				) {
-					newDependency.push(dependency)
-				}
-			})
-			await updateDependencies(assetsDependencyId, newDependency, assetsParams)
-		}
 	}
 
 	const tableActions = (dataItem, key) => {
