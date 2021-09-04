@@ -84,7 +84,6 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 	}
 
 	const handleOk = async () => {
-		setSpinner(true)
 		if (radioOption === 1) {
 			saveAssetsValue(null, radioOption)
 		} else if (radioOption === 2) {
@@ -92,12 +91,10 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		} else if (radioOption === 3) {
 			saveAssetsValue(treeValue, radioOption)
 		}
-		await getAssetsData(assetsParams)
-		setSpinner(false)
-		handleCancel()
 	}
 
 	const saveAssetsValue = async (value, option) => {
+		setSpinner(true)
 		let data = {}
 		if (option === 3) {
 			data = {
@@ -124,6 +121,9 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		} else if (dataModal.key === DATA_ASSETS_VALUE.traceability.value) {
 			await updateAssetsValue(dataModal.id, null, null, null, null, data)
 		}
+		setSpinner(false)
+		handleCancel()
+		await getAssetsData(assetsParams)
 	}
 
 	const onChangeSlider = (value) => {
