@@ -12,6 +12,8 @@ const AssetsForm = () => {
 	const [isTreeEmpty, setIsTreeEmpty] = useState(false)
 	const [tree, setTree] = useState([])
 	const [treeData, setTreeData] = useState([])
+	const [valueData, setValueData] = useState([])
+	const [parentValueData, setParentValueData] = useState([])
 	const { getAssetsData, assetsClassCatalog } = useContext(ProjectsContext)
 	const { setAssetsFormToggle, toggleFormAssets, assetsFormData } = useContext(
 		ProjectsFormContext
@@ -34,7 +36,7 @@ const AssetsForm = () => {
 				values.name,
 				values.model,
 				assetsParams,
-				tree
+				{ valueData, tree, parentValueData }
 			)
 			await setAfterSaveProjects(response)
 		} else {
@@ -43,7 +45,7 @@ const AssetsForm = () => {
 				values.name,
 				values.model,
 				assetsParams,
-				tree
+				{ valueData, tree }
 			)
 			await setAfterSaveProjects(response)
 		}
@@ -58,7 +60,14 @@ const AssetsForm = () => {
 		setSpinner(false)
 	}
 
-	const onCheck = (checkedKeys) => {
+	const onCheck = (checkedKeys, values) => {
+		const checkedValues = values?.checkedNodes?.map((value) => value.value)
+		const checkedParentValues = values?.checkedNodes
+			?.map((value) => value?.parentValue)
+			.filter((parent) => parent !== undefined)
+		const uniqueParentValues = [...new Set(checkedParentValues)]
+		setParentValueData(uniqueParentValues)
+		setValueData(checkedValues)
 		setIsTreeEmpty(false)
 		setTree(checkedKeys)
 	}
@@ -70,7 +79,7 @@ const AssetsForm = () => {
 				name: assetsFormData.name,
 				model: assetsFormData.model,
 			})
-			setTree(assetsFormData.classType)
+			setTree(assetsFormData?.classType?.tree)
 		}
 	}, [assetsFormData])
 
@@ -147,7 +156,7 @@ const AssetsForm = () => {
 							checkable
 							onCheck={onCheck}
 							treeData={treeData}
-							defaultCheckedKeys={assetsFormData.classType}
+							defaultCheckedKeys={assetsFormData?.classType?.tree}
 							checkedKeys={tree}
 							style={{ marginBottom: '12px' }}
 						/>

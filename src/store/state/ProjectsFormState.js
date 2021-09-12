@@ -20,7 +20,7 @@ const projectsFormState = (props) => {
 			identification: '',
 			name: '',
 			model: '',
-			classType: [],
+			classType: {},
 		},
 	}
 	const [state, dispatch] = useReducer(ProjectsFormReducer, initialUserState)

@@ -3,7 +3,7 @@ import { Table, Button, Space } from 'antd'
 import images from 'constants/assets'
 import EmptyImage from 'components/EmptyImage'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
-import AssetsValueModal from 'components/AssetsValueModal'
+import AssetsValueModal from 'components/modals/AssetsValueModal'
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 
 const TableAssetsValue = ({ assets }) => {

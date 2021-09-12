@@ -11,6 +11,7 @@ import {
 	setAssetsNewDependenciesAction,
 	setAssetsClassCatalogAction,
 	setAssetsValuationCatalogAction,
+	setThreatCatalogAction,
 } from 'store/actions/projectsActions'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
 import SpinnerContext from 'store/context/SpinnerContext'
@@ -25,6 +26,7 @@ const projectsState = (props) => {
 		assetsNewDependencies: [],
 		assetsClassCatalog: [],
 		assetsValuationCatalog: [],
+		threatCatalog: [],
 	}
 	const [state, dispatch] = useReducer(ProjectsReducer, initialProjectsState)
 
@@ -63,10 +65,16 @@ const projectsState = (props) => {
 				const assetsValuationCatalog = response?.data?.find(
 					(catalog) => catalog.catalogId === 'asset-valuation-catalog'
 				)
-				setAssetsClassCatalog(assetsClassCatalog?.catalog ?? [])
+				const threatCatalog = response?.data?.find(
+					(catalog) => catalog.catalogId === 'threat-catalog'
+				)
+				setAssetsClassCatalog(assetsClassCatalog?.catalog || [])
 				setAssetsValuationCatalog(assetsValuationCatalog?.catalog || [])
+				setThreatCatalog(threatCatalog?.catalog || [])
 			} else {
 				setAssetsClassCatalog([])
+				setAssetsValuationCatalog([])
+				setThreatCatalog([])
 			}
 		}
 	}
@@ -81,6 +89,9 @@ const projectsState = (props) => {
 
 	const setAssetsValuationCatalog = async (catalog) => {
 		dispatch(setAssetsValuationCatalogAction(catalog))
+	}
+	const setThreatCatalog = async (catalog) => {
+		dispatch(setThreatCatalogAction(catalog))
 	}
 
 	const setAssetsDependencyId = async (dependencyId) => {
@@ -100,6 +111,7 @@ const projectsState = (props) => {
 				assetsNewDependencies: state.assetsNewDependencies,
 				assetsClassCatalog: state.assetsClassCatalog,
 				assetsValuationCatalog: state.assetsValuationCatalog,
+				threatCatalog: state.threatCatalog,
 				getProjectsData,
 				getAssetsData,
 				setAssetsDependencies,
