@@ -25,11 +25,14 @@ const CollapseThreats = ({ assets }) => {
 	}
 
 	const findVulnerability = (vulnerability, key) =>
-		vulnerability.find((item) => item.key === key)
+		vulnerability?.find((item) => item?.key === key)
 
 	const vulnerabilityData = (data) => {
-		const dataVulnerability = findVulnerability(data?.vulnerability, data?.key)
 		if (data?.vulnerability) {
+			const dataVulnerability = findVulnerability(
+				data?.vulnerability,
+				data?.key
+			)
 			return <div>{dataVulnerability?.value}</div>
 		}
 	}
@@ -61,7 +64,14 @@ const CollapseThreats = ({ assets }) => {
 			vulnerability: vulnerabilities,
 			assetId: id,
 		}))
-		return <Table columns={columns} bordered={true} dataSource={filterData} />
+		return (
+			<Table
+				className='table-threats'
+				columns={columns}
+				bordered={true}
+				dataSource={filterData}
+			/>
+		)
 	}
 
 	return (

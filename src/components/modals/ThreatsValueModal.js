@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Modal, Form, Input, Spin } from 'antd'
 import { updateAssetsVulnerability } from 'epics/assetsEpics'
+import ProjectsContext from 'store/context/ProjectsContext'
+import ParamsContext from 'store/context/ParamsContext'
 
 const ThreatsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 	const [form] = Form.useForm()
 	const [comment, setComment] = useState('')
 	const [vulnerability, setVulnerability] = useState('')
 	const [spinner, setSpinner] = useState(false)
+	const { getAssetsData } = useContext(ProjectsContext)
+	const { assetsParams } = useContext(ParamsContext)
 
 	const handleCancel = () => {
 		setToggleModal(false)
@@ -39,6 +43,7 @@ const ThreatsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		await updateAssetsVulnerability(dataModal?.assetId, vulnerabilities)
 		setSpinner(false)
 		handleCancel()
+		await getAssetsData(assetsParams)
 	}
 
 	const findVulnerability = () =>
