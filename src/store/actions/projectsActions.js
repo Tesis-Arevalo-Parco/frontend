@@ -47,6 +47,13 @@ const setAssetsValuationCatalogAction = (data) => {
 	}
 }
 
+const setThreatCatalogAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_THREAT_CATALOG,
+		payload: data,
+	}
+}
+
 export {
 	projectsGetDataAction,
 	assetsGetDataAction,
@@ -55,4 +62,5 @@ export {
 	setAssetsNewDependenciesAction,
 	setAssetsClassCatalogAction,
 	setAssetsValuationCatalogAction,
+	setThreatCatalogAction,
 }

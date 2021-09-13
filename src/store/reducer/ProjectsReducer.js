@@ -38,6 +38,11 @@ export default (state, data) => {
 				...state,
 				assetsValuationCatalog: payload,
 			}
+		case projectActionTypes.PROJECT_SET_THREAT_CATALOG:
+			return {
+				...state,
+				threatCatalog: payload,
+			}
 		default:
 			break
 	}
