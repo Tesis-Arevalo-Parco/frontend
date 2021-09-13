@@ -37,7 +37,8 @@ export const updateAssets = async (
 	name,
 	model,
 	project,
-	classType
+	classType,
+	threats
 ) => {
 	try {
 		const response = await axios.put(`${API_URL}/assets/${id}`, {
@@ -46,6 +47,18 @@ export const updateAssets = async (
 			model,
 			project,
 			classType,
+			threats,
+		})
+		return response
+	} catch (error) {
+		return error.response
+	}
+}
+
+export const updateAssetsVulnerability = async (id, vulnerabilities) => {
+	try {
+		const response = await axios.put(`${API_URL}/assets/${id}`, {
+			vulnerabilities,
 		})
 		return response
 	} catch (error) {

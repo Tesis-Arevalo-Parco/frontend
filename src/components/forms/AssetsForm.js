@@ -14,7 +14,10 @@ const AssetsForm = () => {
 	const [treeData, setTreeData] = useState([])
 	const [valueData, setValueData] = useState([])
 	const [parentValueData, setParentValueData] = useState([])
-	const { getAssetsData, assetsClassCatalog } = useContext(ProjectsContext)
+	const [threatValues, setThreatValues] = useState([])
+	const { getAssetsData, assetsClassCatalog, threatCatalog } = useContext(
+		ProjectsContext
+	)
 	const { setAssetsFormToggle, toggleFormAssets, assetsFormData } = useContext(
 		ProjectsFormContext
 	)
@@ -36,7 +39,8 @@ const AssetsForm = () => {
 				values.name,
 				values.model,
 				assetsParams,
-				{ valueData, tree, parentValueData }
+				{ valueData, tree, parentValueData },
+				threatValues
 			)
 			await setAfterSaveProjects(response)
 		} else {
@@ -45,7 +49,8 @@ const AssetsForm = () => {
 				values.name,
 				values.model,
 				assetsParams,
-				{ valueData, tree }
+				{ valueData, tree },
+				threatValues
 			)
 			await setAfterSaveProjects(response)
 		}
@@ -60,12 +65,57 @@ const AssetsForm = () => {
 		setSpinner(false)
 	}
 
+	function searchTreeNode(threatCatalog, value) {
+		const stack = [...threatCatalog]
+		const result = []
+		let node
+		let parentNode
+		while (stack.length > 0) {
+			node = stack.pop()
+			if (node.value.toUpperCase() === value.toUpperCase()) {
+				result.push({
+					parent: parentNode,
+					children: node,
+				})
+			} else if (node.children && node.children.length) {
+				parentNode = node
+				for (let iterator = 0; iterator < node.children.length; iterator += 1) {
+					stack.push(node.children[iterator])
+				}
+			}
+		}
+		return result
+	}
+
+	const getThreats = (assetValues) => {
+		if (assetValues?.length) {
+			const threats = assetValues
+				.map((value) => {
+					const searchData = searchTreeNode(threatCatalog, value)
+					if (searchData?.length) {
+						return searchData.map((item) => ({
+							key: item.parent.key,
+							title: item.parent.title,
+						}))
+					}
+					return searchData
+				})
+				.flat()
+			const threatValues = Array.from(
+				new Set(threats.map((a) => a.key))
+			).map((key) => threats.find((a) => a.key === key))
+			return threatValues
+		}
+	}
+
 	const onCheck = (checkedKeys, values) => {
 		const checkedValues = values?.checkedNodes?.map((value) => value.value)
 		const checkedParentValues = values?.checkedNodes
 			?.map((value) => value?.parentValue)
 			.filter((parent) => parent !== undefined)
 		const uniqueParentValues = [...new Set(checkedParentValues)]
+		const threats = getThreats(uniqueParentValues)
+		setThreatValues(threats || [])
 		setParentValueData(uniqueParentValues)
 		setValueData(checkedValues)
 		setIsTreeEmpty(false)
