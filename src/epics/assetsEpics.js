@@ -15,7 +15,8 @@ export const saveAssets = async (
 	name,
 	model,
 	project,
-	classType
+	classType,
+	threats
 ) => {
 	try {
 		const response = await axios.post(`${API_URL}/assets`, {
@@ -24,6 +25,7 @@ export const saveAssets = async (
 			model,
 			project,
 			classType,
+			threats,
 		})
 		return response
 	} catch (error) {
@@ -48,17 +50,6 @@ export const updateAssets = async (
 			project,
 			classType,
 			threats,
-		})
-		return response
-	} catch (error) {
-		return error.response
-	}
-}
-
-export const updateAssetsVulnerability = async (id, vulnerabilities) => {
-	try {
-		const response = await axios.put(`${API_URL}/assets/${id}`, {
-			vulnerabilities,
 		})
 		return response
 	} catch (error) {

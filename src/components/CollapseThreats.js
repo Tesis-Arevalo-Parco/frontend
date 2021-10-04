@@ -62,7 +62,7 @@ const CollapseThreats = ({ assets }) => {
 			key: threatData?.key,
 			name: threatData?.title,
 			vulnerability: vulnerabilities,
-			assetId: id,
+			threatId: id,
 		}))
 		return (
 			<Table
@@ -82,7 +82,11 @@ const CollapseThreats = ({ assets }) => {
 						header={`${data?.name} / ${data?.model} / ${data?.identification}`}
 						key={key}
 					>
-						{buildThreatTable(data?.threats, data?.id, data?.vulnerabilities)}
+						{buildThreatTable(
+							data?.threat?.threats,
+							data?.threat?.id,
+							data?.threat?.vulnerabilities
+						)}
 					</Panel>
 				))}
 			</Collapse>
