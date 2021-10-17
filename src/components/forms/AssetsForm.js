@@ -96,6 +96,7 @@ const AssetsForm = () => {
 						return searchData.map((item) => ({
 							key: item.parent.key,
 							title: item.parent.title,
+							dimensions: item.parent?.dimensions,
 						}))
 					}
 					return searchData

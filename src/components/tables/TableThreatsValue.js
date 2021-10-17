@@ -1,20 +1,26 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useContext } from 'react'
+import { Collapse, Table, Form, InputNumber, Spin, Button, Space } from 'antd'
+
 import {
-	Collapse,
-	Table,
-	Form,
-	InputNumber,
-	Typography,
-	Popconfirm,
-} from 'antd'
+	EditOutlined,
+	SaveOutlined,
+	CloseCircleOutlined,
+} from '@ant-design/icons'
 
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 import { updateThreatValue } from 'epics/threatsEpics'
+import ProjectsContext from 'store/context/ProjectsContext'
+import ParamsContext from 'store/context/ParamsContext'
+import SpinnerContext from 'store/context/SpinnerContext'
 
 const TableThreatsValue = ({ assets }) => {
 	const { Panel } = Collapse
 	const [form] = Form.useForm()
+	const { getAssetsData } = useContext(ProjectsContext)
+	const { assetsParams } = useContext(ParamsContext)
 	const [editingKey, setEditingKey] = useState('')
+	const { active } = useContext(SpinnerContext)
+	const [localAssets, setLocalAssets] = useState([])
 	const isEditing = (record) => record.key === editingKey
 
 	const edit = (record) => {
@@ -29,42 +35,100 @@ const TableThreatsValue = ({ assets }) => {
 		setEditingKey(record?.key)
 	}
 
-	const cancel = () => {
+	const cancelEdit = () => {
 		setEditingKey('')
 	}
 
+	useEffect(() => {
+		if (assets?.length) {
+			setLocalAssets(assets)
+		}
+	}, [assets])
+
 	const save = async (record) => {
-		console.log('key', record)
-		const rowss = await form.validateFields()
-		console.log('rowss', rowss)
 		try {
 			const row = await form.validateFields()
 			const data = {
-				authenticity: { keyValue: record.key, value: row?.authenticity || '' },
-				availability: { keyValue: record.key, value: row?.availability || '' },
+				authenticity: { keyValue: record.key, value: row?.authenticity ?? '' },
+				availability: { keyValue: record.key, value: row?.availability ?? '' },
 				confidentiality: {
 					keyValue: record.key,
-					value: row?.confidentiality || '',
+					value: row?.confidentiality ?? '',
 				},
-				integrity: { keyValue: record.key, value: row?.integrity || '' },
-				probability: { keyValue: record.key, value: row?.probability || '' },
-				traceability: { keyValue: record.key, value: row?.traceability || '' },
+				integrity: { keyValue: record.key, value: row?.integrity ?? '' },
+				probability: { keyValue: record.key, value: row?.probability ?? '' },
+				traceability: { keyValue: record.key, value: row?.traceability ?? '' },
 			}
-			// updateThreatValue(record.threatId, data)
-			console.log(data)
-			/* 	const newData = [...data]
-			const index = newData.findIndex((item) => key === item.key)
+			const findThreat = [...localAssets].find(
+				(asset) => asset?.threat?.id === record.threatId
+			)
 
-			if (index > -1) {
-				const item = newData[index]
-				newData.splice(index, 1, { ...item, ...row })
-				setData(newData)
-				setEditingKey('')
-			} else {
-				newData.push(row)
-				setData(newData)
-				setEditingKey('')
-			} */
+			if (findThreat) {
+				const threatData = findThreat?.threat
+				const authenticityIndex = threatData?.authenticity?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.authenticity.keyValue
+				)
+				const availabilityIndex = threatData?.availability?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.availability.keyValue
+				)
+				const confidentialityIndex = threatData?.confidentiality?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.confidentiality.keyValue
+				)
+				const integrityIndex = threatData?.integrity?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.integrity.keyValue
+				)
+				const probabilityIndex = threatData?.probability?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.probability.keyValue
+				)
+				const traceabilityIndex = threatData?.traceability?.findIndex(
+					(dataValue) => dataValue?.keyValue === data.traceability.keyValue
+				)
+
+				if (authenticityIndex !== -1) {
+					threatData?.authenticity?.splice(authenticityIndex, 1)
+					threatData?.authenticity?.push(data.authenticity)
+				} else {
+					threatData?.authenticity?.push(data.authenticity)
+				}
+
+				if (availabilityIndex !== -1) {
+					threatData?.availability?.splice(availabilityIndex, 1)
+					threatData?.availability?.push(data.availability)
+				} else {
+					threatData?.availability?.push(data.availability)
+				}
+
+				if (confidentialityIndex !== -1) {
+					threatData?.confidentiality?.splice(confidentialityIndex, 1)
+					threatData?.confidentiality?.push(data.confidentiality)
+				} else {
+					threatData?.confidentiality?.push(data.confidentiality)
+				}
+
+				if (integrityIndex !== -1) {
+					threatData?.integrity?.splice(integrityIndex, 1)
+					threatData?.integrity?.push(data.integrity)
+				} else {
+					threatData?.integrity?.push(data.integrity)
+				}
+
+				if (probabilityIndex !== -1) {
+					threatData?.probability?.splice(probabilityIndex, 1)
+					threatData?.probability?.push(data.probability)
+				} else {
+					threatData?.probability?.push(data.probability)
+				}
+
+				if (traceabilityIndex !== -1) {
+					threatData?.traceability?.splice(traceabilityIndex, 1)
+					threatData?.traceability?.push(data.traceability)
+				} else {
+					threatData?.traceability?.push(data.traceability)
+				}
+				cancelEdit()
+				await updateThreatValue(record.threatId, threatData)
+				await getAssetsData(assetsParams)
+			}
 		} catch (errInfo) {
 			// eslint-disable-next-line no-console
 			console.error('Validate Failed:', errInfo)
@@ -166,27 +230,29 @@ const TableThreatsValue = ({ assets }) => {
 			render: (_, record) => {
 				const editable = isEditing(record)
 				return editable ? (
-					<span>
-						<a
-							href='javascript:;'
+					<Space className='table-button-actions'>
+						<Button
+							key='save'
 							onClick={() => save(record)}
-							style={{
-								marginRight: 8,
-							}}
-						>
-							Guardar
-						</a>
-						<Popconfirm title='Sure to cancel?' onConfirm={cancel}>
-							<a>Cancelar</a>
-						</Popconfirm>
-					</span>
+							icon={<SaveOutlined />}
+							className='update-button'
+						/>
+
+						<Button
+							onClick={cancelEdit}
+							key='cancel'
+							icon={<CloseCircleOutlined />}
+							className='delete-button'
+						/>
+					</Space>
 				) : (
-					<Typography.Link
+					<Button
+						key='edit'
 						disabled={editingKey !== ''}
 						onClick={() => edit(record)}
-					>
-						Editar
-					</Typography.Link>
+						icon={<EditOutlined />}
+						className='update-button'
+					/>
 				)
 			},
 		},
@@ -202,6 +268,9 @@ const TableThreatsValue = ({ assets }) => {
 		children,
 		...restProps
 	}) => {
+		const includesDimensions = record?.dimensions?.includes(dataIndex)
+		const isDisable =
+			!includesDimensions && dataIndex !== DATA_ASSETS_VALUE.probability.value
 		return (
 			<td {...restProps}>
 				{editing ? (
@@ -211,7 +280,7 @@ const TableThreatsValue = ({ assets }) => {
 							margin: 0,
 						}}
 					>
-						<InputNumber />
+						<InputNumber disabled={isDisable} />
 					</Form.Item>
 				) : (
 					children
@@ -261,25 +330,27 @@ const TableThreatsValue = ({ assets }) => {
 			),
 			vulnerability: threat?.vulnerabilities,
 			threatId: threat?.id,
+			dimensions: threatData?.dimensions,
 		}))
-
 		return (
 			<Form form={form} component={false}>
-				<Table
-					components={{
-						body: {
-							cell: EditableCell,
-						},
-					}}
-					className='table-threats'
-					rowClassName='editable-row'
-					columns={columns}
-					bordered
-					dataSource={filterData}
-					pagination={{
-						onChange: cancel,
-					}}
-				/>
+				<Spin spinning={active}>
+					<Table
+						components={{
+							body: {
+								cell: EditableCell,
+							},
+						}}
+						className='table-threats'
+						rowClassName='editable-row'
+						columns={columns}
+						bordered
+						dataSource={filterData}
+						pagination={{
+							onChange: cancelEdit,
+						}}
+					/>
+				</Spin>
 			</Form>
 		)
 	}
