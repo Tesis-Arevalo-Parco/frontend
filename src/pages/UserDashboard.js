@@ -18,6 +18,8 @@ import RegisterDependencies from 'pages/assets/RegisterDependencies'
 import Uploader from 'components/modals/Upload'
 import Threads from 'pages/threads/Threads'
 import ThreadsIdentifications from 'pages/threads/ThreadsIdentifications'
+import ThreadsValue from 'pages/threads/ThreadsValue'
+import ThreatValueTable from 'pages/threads/ThreatValueTable'
 
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
@@ -85,11 +87,17 @@ const UserDashboard = () => {
 								exact
 							/>
 						</Route>
-						<Route
-							component={() => <div>Valoracion de Amenazas</div>}
-							path={paths.THREAT_VALUATION}
-							exact
-						/>
+						<Route path={paths.THREAT_VALUATION} exact={false}>
+							<Route
+								path={`${paths.THREAT_VALUATION}/:id`}
+								component={ThreatValueTable}
+							/>
+							<Route
+								component={ThreadsValue}
+								path={paths.THREAT_VALUATION}
+								exact
+							/>
+						</Route>
 						<Route
 							component={() => <div>Salvaguardas</div>}
 							path={paths.SAFEGUARDS}

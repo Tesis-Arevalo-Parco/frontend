@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { Modal, Form, Input, Spin } from 'antd'
-import { updateAssetsVulnerability } from 'epics/assetsEpics'
+import { updateThreatVulnerability } from 'epics/threatsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ParamsContext from 'store/context/ParamsContext'
 
@@ -40,7 +40,7 @@ const ThreatsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		} else {
 			vulnerabilities.push(data)
 		}
-		await updateAssetsVulnerability(dataModal?.assetId, vulnerabilities)
+		await updateThreatVulnerability(dataModal?.threatId, vulnerabilities)
 		setSpinner(false)
 		handleCancel()
 		await getAssetsData(assetsParams)
