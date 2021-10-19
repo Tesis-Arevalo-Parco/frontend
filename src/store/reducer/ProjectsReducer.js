@@ -13,6 +13,11 @@ export default (state, data) => {
 				...state,
 				assets: payload,
 			}
+		case projectActionTypes.SAFEGUARDS_GET_DATA:
+			return {
+				...state,
+				safeguards: payload,
+			}
 		case projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCIES:
 			return {
 				...state,
@@ -42,6 +47,11 @@ export default (state, data) => {
 			return {
 				...state,
 				threatCatalog: payload,
+			}
+		case projectActionTypes.PROJECT_SET_SAFEGUARDS_CATALOG:
+			return {
+				...state,
+				safeguardsCatalog: payload,
 			}
 		default:
 			break

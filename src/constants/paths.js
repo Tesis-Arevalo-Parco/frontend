@@ -3,6 +3,8 @@ export const paths = {
 	LOGIN: '/login',
 	REGISTER: '/registro',
 	SAFEGUARDS: '/salvaguardas',
+	SAFEGUARDS_IDENTIFICATION: '/salvaguardas/identificacion',
+	SAFEGUARDS_VALUATION: '/salvaguardas/valoracion',
 	THREATS: '/amenazas',
 	THREAT_IDENTIFICATION: '/amenazas/identificacion',
 	THREAT_VALUATION: '/amenazas/valoracion',

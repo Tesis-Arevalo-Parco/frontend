@@ -79,6 +79,7 @@ const TableAssetsIdentification = ({ assets }) => {
 			</Space>
 		)
 	}
+
 	const filterAssets = (assets) =>
 		assets.map((asset) => ({
 			key: asset.id,

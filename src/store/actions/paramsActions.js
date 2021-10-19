@@ -6,6 +6,13 @@ const setAssetsDataAction = (data) => {
 	}
 }
 
+const setSafeguardsDataAction = (data) => {
+	return {
+		action: paramsActionTypes.PARAMS_SAFEGUARDS_SET_DATA,
+		payload: data,
+	}
+}
+
 const setProjectNameAction = (data) => {
 	return {
 		action: paramsActionTypes.SET_PROJECT_NAME,
@@ -13,4 +20,4 @@ const setProjectNameAction = (data) => {
 	}
 }
 
-export { setAssetsDataAction, setProjectNameAction }
+export { setAssetsDataAction, setProjectNameAction, setSafeguardsDataAction }

@@ -18,6 +18,11 @@ import RegisterDependencies from 'pages/assets/RegisterDependencies'
 import Uploader from 'components/modals/Upload'
 import Threads from 'pages/threads/Threads'
 import ThreadsIdentifications from 'pages/threads/ThreadsIdentifications'
+import Root from './Root'
+import Safeguards from './safeguards/Safeguards'
+import SafeguardsIdentification from './safeguards/SafeguardsIdentification'
+import SafeguardsForm from 'components/forms/SafeguardsForm'
+import SafeguardsUpdateForm from 'components/forms/SafeguardsFormUpdate'
 
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
@@ -39,71 +44,77 @@ const UserDashboard = () => {
 			<SideNavBar setFakeSideNavbar={setFakeSideNavbar} />
 			<Layout className='site-layout'>
 				<Header />
-				{location.pathname !== paths.ROOT_APP ? (
-					<Card title={<DashBoardHeader />} className='main-content'>
-						<Route path={paths.ASSETS_IDENTIFICATION} exact={false}>
-							<Route
-								path={`${paths.ASSETS_IDENTIFICATION}/:id`}
-								component={AssetsIdentification}
-							/>
-							<Route
-								path={paths.ASSETS_IDENTIFICATION}
-								component={Assets}
-								exact
-							/>
-						</Route>
-						<Route path={paths.ASSETS_REGISTER} exact={false}>
-							<Route
-								path={`${paths.ASSETS_REGISTER}/:id`}
-								component={RegisterDependencies}
-							/>
-							<Route
-								path={paths.ASSETS_REGISTER}
-								component={Dependencies}
-								exact
-							/>
-						</Route>
-						<Route path={paths.ASSETS_VALUATION} exact={false}>
-							<Route
-								path={`${paths.ASSETS_VALUATION}/:id`}
-								component={AssetsValueTable}
-							/>
-							<Route
-								path={paths.ASSETS_VALUATION}
-								component={AssetsValue}
-								exact
-							/>
-						</Route>
-						<Route path={paths.THREAT_IDENTIFICATION} exact={false}>
-							<Route
-								path={`${paths.THREAT_IDENTIFICATION}/:id`}
-								component={ThreadsIdentifications}
-							/>
-							<Route
-								path={paths.THREAT_IDENTIFICATION}
-								component={Threads}
-								exact
-							/>
-						</Route>
+				<Card title={<DashBoardHeader />} className='main-content'>
+					<Route path={paths.ASSETS_IDENTIFICATION} exact={false}>
 						<Route
-							component={() => <div>Valoracion de Amenazas</div>}
-							path={paths.THREAT_VALUATION}
-							exact
+							path={`${paths.ASSETS_IDENTIFICATION}/:id`}
+							component={AssetsIdentification}
 						/>
 						<Route
-							component={() => <div>Salvaguardas</div>}
-							path={paths.SAFEGUARDS}
+							path={paths.ASSETS_IDENTIFICATION}
+							component={Assets}
 							exact
+						/>
+					</Route>
+					<Route path={paths.ASSETS_REGISTER} exact={false}>
+						<Route
+							path={`${paths.ASSETS_REGISTER}/:id`}
+							component={RegisterDependencies}
 						/>
 						<Route
-							component={() => <div>estadísticas</div>}
-							path={paths.STATICS}
+							path={paths.ASSETS_REGISTER}
+							component={Dependencies}
 							exact
 						/>
-						<Route component={Projects} path={paths.PROJECTS} exact />
-					</Card>
-				) : null}
-				<Route component={() => <div>Root</div>} path={paths.ROOT_APP} exact />
+					</Route>
+					<Route path={paths.ASSETS_VALUATION} exact={false}>
+						<Route
+							path={`${paths.ASSETS_VALUATION}/:id`}
+							component={AssetsValueTable}
+						/>
+						<Route
+							path={paths.ASSETS_VALUATION}
+							component={AssetsValue}
+							exact
+						/>
+					</Route>
+					<Route path={paths.THREAT_IDENTIFICATION} exact={false}>
+						<Route
+							path={`${paths.THREAT_IDENTIFICATION}/:id`}
+							component={ThreadsIdentifications}
+						/>
+						<Route
+							path={paths.THREAT_IDENTIFICATION}
+							component={Threads}
+							exact
+						/>
+					</Route>
+					<Route
+						component={() => <div>Valoracion de Amenazas</div>}
+						path={paths.THREAT_VALUATION}
+						exact
+					/>
+					<Route path={paths.SAFEGUARDS_IDENTIFICATION} exact={false}>
+						<Route
+							path={`${paths.SAFEGUARDS_IDENTIFICATION}/:id`}
+							component={SafeguardsIdentification}
+						/>
+						<Route
+							path={paths.SAFEGUARDS_IDENTIFICATION}
+							component={Safeguards}
+							exact
+						/>
+					</Route>
+					<Route
+						component={() => <div>estadísticas</div>}
+						path={paths.STATICS}
+						exact
+					/>
+					<Route component={Projects} path={paths.PROJECTS} exact />
+					<Route component={Root} path={paths.ROOT_APP} exact />
+				</Card>
+				<SafeguardsForm />
+				<SafeguardsUpdateForm />
 				<ProjectsForm />
 				<AssetsForm />
 				<Uploader />

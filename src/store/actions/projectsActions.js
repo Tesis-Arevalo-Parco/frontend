@@ -13,6 +13,13 @@ const assetsGetDataAction = (data) => {
 	}
 }
 
+const safeguardsGetDataAction = (data) => {
+	return {
+		action: projectActionTypes.SAFEGUARDS_GET_DATA,
+		payload: data,
+	}
+}
+
 const setAssetsDependenciesAction = (data) => {
 	return {
 		action: projectActionTypes.PROJECT_SET_ASSETS_DEPENDENCIES,
@@ -54,13 +61,22 @@ const setThreatCatalogAction = (data) => {
 	}
 }
 
+const setSafeguardsCatalogAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_SAFEGUARDS_CATALOG,
+		payload: data,
+	}
+}
+
 export {
 	projectsGetDataAction,
 	assetsGetDataAction,
+	safeguardsGetDataAction,
 	setAssetsDependenciesAction,
 	setAssetsDependencyIdAction,
 	setAssetsNewDependenciesAction,
 	setAssetsClassCatalogAction,
 	setAssetsValuationCatalogAction,
 	setThreatCatalogAction,
+	setSafeguardsCatalogAction,
 }

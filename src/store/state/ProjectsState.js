@@ -6,12 +6,14 @@ import { getAssetsCatalog } from 'epics/assetsEpics'
 import {
 	projectsGetDataAction,
 	assetsGetDataAction,
+	safeguardsGetDataAction,
 	setAssetsDependenciesAction,
 	setAssetsDependencyIdAction,
 	setAssetsNewDependenciesAction,
 	setAssetsClassCatalogAction,
 	setAssetsValuationCatalogAction,
 	setThreatCatalogAction,
+	setSafeguardsCatalogAction,
 } from 'store/actions/projectsActions'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
 import SpinnerContext from 'store/context/SpinnerContext'
@@ -21,12 +23,14 @@ const projectsState = (props) => {
 	const initialProjectsState = {
 		projects: [],
 		assets: [],
+		safeguards: [],
 		assetsDependencies: [],
 		assetsDependencyId: '',
 		assetsNewDependencies: [],
 		assetsClassCatalog: [],
 		assetsValuationCatalog: [],
 		threatCatalog: [],
+		safeguardsCatalog: [],
 	}
 	const [state, dispatch] = useReducer(ProjectsReducer, initialProjectsState)
 
@@ -55,6 +59,15 @@ const projectsState = (props) => {
 		activeSpinner(false)
 	}
 
+	const getSafeguardsData = async (id) => {
+		activeSpinner(true)
+		const response = await getProjectById(id)
+		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
+			dispatch(safeguardsGetDataAction(response.data?.safeguards))
+		}
+		activeSpinner(false)
+	}
+
 	const getAssetsClassCatalog = async () => {
 		const response = await getAssetsCatalog()
 		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
@@ -68,13 +81,18 @@ const projectsState = (props) => {
 				const threatCatalog = response?.data?.find(
 					(catalog) => catalog.catalogId === 'threat-catalog'
 				)
+				const safeguardsCatalog = response?.data?.find(
+					(catalog) => catalog.catalogId === 'safeguard-catalog'
+				)
 				setAssetsClassCatalog(assetsClassCatalog?.catalog || [])
 				setAssetsValuationCatalog(assetsValuationCatalog?.catalog || [])
 				setThreatCatalog(threatCatalog?.catalog || [])
+				setSafeguardsCatalog(safeguardsCatalog?.catalog || [])
 			} else {
 				setAssetsClassCatalog([])
 				setAssetsValuationCatalog([])
 				setThreatCatalog([])
+				setSafeguardsCatalog([])
 			}
 		}
 	}
@@ -94,6 +112,10 @@ const projectsState = (props) => {
 		dispatch(setThreatCatalogAction(catalog))
 	}
 
+	const setSafeguardsCatalog = async (catalog) => {
+		dispatch(setSafeguardsCatalogAction(catalog))
+	}
+
 	const setAssetsDependencyId = async (dependencyId) => {
 		dispatch(setAssetsDependencyIdAction(dependencyId))
 	}
@@ -106,14 +128,17 @@ const projectsState = (props) => {
 			value={{
 				projects: state.projects,
 				assets: state.assets,
+				safeguards: state.safeguards,
 				assetsDependencies: state.assetsDependencies,
 				assetsDependencyId: state.assetsDependencyId,
 				assetsNewDependencies: state.assetsNewDependencies,
 				assetsClassCatalog: state.assetsClassCatalog,
 				assetsValuationCatalog: state.assetsValuationCatalog,
 				threatCatalog: state.threatCatalog,
+				safeguardsCatalog: state.safeguardsCatalog,
 				getProjectsData,
 				getAssetsData,
+				getSafeguardsData,
 				setAssetsDependencies,
 				setAssetsDependencyId,
 				setAssetsNewDependencies,
