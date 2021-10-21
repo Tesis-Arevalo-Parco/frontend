@@ -33,7 +33,7 @@ const projectsFormState = (props) => {
 			safeguard_code: '',
 			safeguard_name: '',
 			safeguard_type: '',
-			treath_list: {},
+			treath_list: [],
 			safeguard_description: '',
 		},
 	}
@@ -83,7 +83,7 @@ const projectsFormState = (props) => {
 		safeguard_code,
 		safeguard_name,
 		safeguard_type,
-		// treath_list,
+		treath_list,
 		safeguardsFormData,
 		safeguard_description
 	) => {
@@ -93,8 +93,7 @@ const projectsFormState = (props) => {
 				safeguard_code,
 				safeguard_name,
 				safeguard_type,
-				safeguard_type,
-				// treath_list,
+				treath_list,
 				safeguardsFormData,
 				safeguard_description
 			)

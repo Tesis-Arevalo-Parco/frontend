@@ -44,7 +44,6 @@ const AssetsForm = () => {
 			)
 			await setAfterSaveProjects(response)
 		} else {
-			console.log(assetsParams)
 			const response = await saveAssets(
 				values.identification,
 				values.name,

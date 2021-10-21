@@ -4,7 +4,7 @@ import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { optionsTypes } from 'constants/safeguards'
 import { updateSafeguards } from 'epics/safeguardsEpics'
 import ParamsContext from 'store/context/ParamsContext'
-import { objectExpression } from '@babel/types'
+import ProjectsContext from 'store/context/ProjectsContext'
 
 const SafeguardsUpdateForm = () => {
 	const [form] = Form.useForm()
@@ -19,20 +19,35 @@ const SafeguardsUpdateForm = () => {
 	const { safeguardsParams } = useContext(ParamsContext)
 	const [spinner, setSpinner] = useState(false)
 	const [treathList, setTreathList] = useState([])
+	const { getSafeguardsData } = useContext(ProjectsContext)
 
 	const onFinish = async (values) => {
 		setSpinner(true)
 		if (safeguardsFormData.id) {
 			const response = await updateSafeguards(
+				safeguardsFormData.id,
 				values.safeguard_code,
 				values.safeguard_name,
 				values.safeguard_type,
-				safeguardsParams,
 				treathList,
-				values.safeguard_description
+				values.safeguard_description,
+				safeguardsParams
 			)
-			// await setAfterSaveProjects(response)
+			await setAfterSaveProjects(response)
 		}
+	}
+
+	const setAfterSaveProjects = async (response) => {
+		if (response) {
+			setSafeguardsFormChildrenToggle()
+			await getSafeguardsData(safeguardsParams)
+			onReset()
+		}
+		setSpinner(false)
+	}
+
+	const onReset = () => {
+		form.resetFields()
 	}
 
 	// Select Type
@@ -66,18 +81,18 @@ const SafeguardsUpdateForm = () => {
 		setTreathList(treath)
 	}
 
-	const convertToArrayTreath = (objeto) => {
-		const treathList = []
-		objeto.map((item) => treathList.push(item.treath_name))
-		return treathList
-	}
 	useEffect(() => {
 		if (toggleFormChildrenSafeguards) {
+			const treath = []
+			safeguardsFormData.treath_list.map((item) =>
+				treath.push(item.treath_name)
+			)
+			console.log(treath)
 			form.setFieldsValue({
 				safeguard_code: safeguardsFormData.safeguard_code,
 				safeguard_name: safeguardsFormData.safeguard_name,
 				safeguard_type: safeguardsFormData.safeguard_type,
-				treath_list: safeguardsFormData.treath_list,
+				treath_list: treath,
 				safeguard_description: safeguardsFormData.safeguard_description,
 			})
 		}
@@ -140,7 +155,7 @@ const SafeguardsUpdateForm = () => {
 							<Select
 								showSearch
 								style={{ width: 200 }}
-								placeholder='Seleccione una salvaguarda'
+								placeholder='Seleccione el tipo de salvaguarda'
 								optionFilterProp='children'
 								onChange={onChange}
 								onFocus={onFocus}

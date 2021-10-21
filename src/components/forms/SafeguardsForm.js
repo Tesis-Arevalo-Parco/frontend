@@ -9,9 +9,10 @@ import {
 	Space,
 	Table,
 	Select,
+	Typography,
 } from 'antd'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
-import { saveSafeguards, updateSafeguards } from 'epics/safeguardsEpics'
+import { saveSafeguards } from 'epics/safeguardsEpics'
 import ParamsContext from 'store/context/ParamsContext'
 import ProjectsContext from 'store/context/ProjectsContext'
 import { RightCircleOutlined } from '@ant-design/icons'
@@ -24,8 +25,6 @@ const SafeguardsForm = () => {
 	const { safeguardsParams } = useContext(ParamsContext)
 	const { getSafeguardsData, safeguardsCatalog } = useContext(ProjectsContext)
 
-	const [isTreeEmpty, setIsTreeEmpty] = useState(false)
-	const [tree, setTree] = useState([])
 	const [treeData, setTreeData] = useState([])
 	const [safeguardCode, setSafeguardCode] = useState([])
 	const [safeguardName, setSafeguardName] = useState([])
@@ -37,9 +36,13 @@ const SafeguardsForm = () => {
 		safeguardsFormData,
 	} = useContext(ProjectsFormContext)
 	const { Option } = Select
+	const { Text } = Typography
 
 	const onReset = () => {
 		form.resetFields()
+		setSafeguardCode('')
+		setSafeguardName('')
+		setTreathList([])
 	}
 
 	const showChildrenDrawer = () => {
@@ -52,27 +55,15 @@ const SafeguardsForm = () => {
 
 	const onFinish = async (values) => {
 		setSpinner(true)
-		if (safeguardsFormData.id) {
-			const response = await updateSafeguards(
-				safeguardCode,
-				safeguardName,
-				values.safeguard_type,
-				safeguardsParams,
-				treathList,
-				values.safeguard_description
-			)
-			await setAfterSaveProjects(response)
-		} else {
-			const response = await saveSafeguards(
-				safeguardCode,
-				safeguardName,
-				values.safeguard_type,
-				safeguardsParams,
-				treathList,
-				values.safeguard_description
-			)
-			await setAfterSaveProjects(response)
-		}
+		const response = await saveSafeguards(
+			safeguardCode,
+			safeguardName,
+			values.safeguard_type,
+			safeguardsParams,
+			treathList,
+			values.safeguard_description
+		)
+		await setAfterSaveProjects(response)
 	}
 
 	const handleChange = (values) => {
@@ -88,6 +79,7 @@ const SafeguardsForm = () => {
 
 	const setAfterSaveProjects = async (response) => {
 		if (response) {
+			onChildrenDrawerClose()
 			setSafeguardsFormToggle()
 			await getSafeguardsData(safeguardsParams)
 			onReset()
@@ -118,8 +110,11 @@ const SafeguardsForm = () => {
 	]
 
 	const optionsSelect = [
+		{ key: '[S]', value: 'FS' },
 		{ key: '[F]', value: 'F Fuego' },
 		{ key: '[W]', value: 'W Humedad' },
+		{ key: '[A]', value: 'A Agua' },
+		{ key: '[D]', value: 'Desastres Naturales' },
 	]
 
 	const onChange = (value) => {
@@ -143,14 +138,6 @@ const SafeguardsForm = () => {
 		)
 	}
 
-	const onFocus = () => {
-		console.log('focus')
-	}
-
-	const onSearch = (val) => {
-		console.log('search:', val)
-	}
-
 	const filterSafeguards = (safeguards) =>
 		safeguards.map((safeguard) => ({
 			key: safeguard.key,
@@ -163,7 +150,6 @@ const SafeguardsForm = () => {
 			form.setFieldsValue({
 				treath_list: safeguardsFormData.treath_list,
 			})
-			setTree(safeguardsFormData?.classType?.tree)
 		}
 	}, [safeguardsFormData])
 
@@ -177,12 +163,15 @@ const SafeguardsForm = () => {
 		<>
 			<Drawer
 				className='assets-main-form'
-				title={safeguardsFormData.safeguard_name || 'Nueva Salvaguarda'}
+				title={'Nueva Salvaguarda'}
 				placement='right'
 				width='700px'
 				onClose={setSafeguardsFormToggle}
 				visible={toggleFormSafeguards}
 			>
+				<Text>
+					En esta lista de salvaguardas, elije que salvaguarda deseas aplicar?
+				</Text>
 				{treeData.map((safeguard) => (
 					<Card
 						key={`code_${safeguard.value}`}
@@ -199,8 +188,8 @@ const SafeguardsForm = () => {
 				))}
 
 				<Drawer
-					title='Two-level Drawer'
-					width={500}
+					title={safeguardName}
+					width={600}
 					closable={false}
 					onClose={onChildrenDrawerClose}
 					visible={childrenDrawer}
@@ -226,12 +215,10 @@ const SafeguardsForm = () => {
 							>
 								<Select
 									showSearch
-									style={{ width: 200 }}
+									style={{ width: '70%' }}
 									placeholder='Select a person'
 									optionFilterProp='children'
 									onChange={onChange}
-									onFocus={onFocus}
-									onSearch={onSearch}
 									filterOption={(input, option) =>
 										option.children
 											.toLowerCase()
@@ -247,7 +234,6 @@ const SafeguardsForm = () => {
 							</Form.Item>
 							<Form.Item
 								label='Lista de amenazas'
-								name='treath_list'
 								className='main-form-item'
 								rules={[
 									{
@@ -258,7 +244,7 @@ const SafeguardsForm = () => {
 							>
 								<Select
 									mode='multiple'
-									style={{ width: '100%' }}
+									style={{ width: '70%' }}
 									placeholder='Seleccione las amenazas'
 									onChange={handleChange}
 									options={optionsSelect}
