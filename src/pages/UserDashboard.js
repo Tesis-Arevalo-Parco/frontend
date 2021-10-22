@@ -23,6 +23,8 @@ import Safeguards from './safeguards/Safeguards'
 import SafeguardsIdentification from './safeguards/SafeguardsIdentification'
 import SafeguardsForm from 'components/forms/SafeguardsForm'
 import SafeguardsUpdateForm from 'components/forms/SafeguardsFormUpdate'
+import ThreadsValue from 'pages/threads/ThreadsValue'
+import ThreatValueTable from 'pages/threads/ThreatValueTable'
 
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
@@ -89,11 +91,17 @@ const UserDashboard = () => {
 							exact
 						/>
 					</Route>
-					<Route
-						component={() => <div>Valoracion de Amenazas</div>}
-						path={paths.THREAT_VALUATION}
-						exact
-					/>
+					<Route path={paths.THREAT_VALUATION} exact={false}>
+						<Route
+							path={`${paths.THREAT_VALUATION}/:id`}
+							component={ThreatValueTable}
+						/>
+						<Route
+							component={ThreadsValue}
+							path={paths.THREAT_VALUATION}
+							exact
+						/>
+					</Route>
 					<Route path={paths.SAFEGUARDS_IDENTIFICATION} exact={false}>
 						<Route
 							path={`${paths.SAFEGUARDS_IDENTIFICATION}/:id`}

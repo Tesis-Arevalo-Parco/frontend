@@ -25,6 +25,7 @@ const Uploader = () => {
 					asset.name,
 					asset.model,
 					assetsParams,
+					[],
 					[]
 				)
 			}

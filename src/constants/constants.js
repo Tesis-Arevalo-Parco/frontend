@@ -7,4 +7,5 @@ export const DATA_ASSETS_VALUE = {
 	confidentiality: { value: 'confidentiality', label: '[C] Confidencialidad' },
 	authenticity: { value: 'authenticity', label: '[A] Autenticidad' },
 	traceability: { value: 'traceability', label: '[T] Trazabilidad' },
+	probability: { value: 'probability', label: '[P] Probabilidad' },
 }
