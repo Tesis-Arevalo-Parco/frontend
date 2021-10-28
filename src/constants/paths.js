@@ -2,6 +2,8 @@ export const paths = {
 	ROOT_APP: '/',
 	LOGIN: '/login',
 	REGISTER: '/registro',
+	FORGOT_PASSWORD: '/olvido-contrasena',
+	RESET_PASSWORD: '/restablecer-contrasena',
 	SAFEGUARDS: '/salvaguardas',
 	THREATS: '/amenazas',
 	THREAT_IDENTIFICATION: '/amenazas/identificacion',
