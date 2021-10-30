@@ -7,39 +7,37 @@ import {
 	Input,
 	Button,
 	Divider,
-	notification,
 	Spin,
 	Image,
+	notification,
 } from 'antd'
-import { MailOutlined, LockOutlined } from '@ant-design/icons'
-
-import { login } from 'epics/accountEpics'
+import images from 'constants/assets'
+import { MailOutlined } from '@ant-design/icons'
 import { paths } from 'constants/paths'
+import { forgotPassword } from 'epics/accountEpics'
 import { MESSAGES } from 'constants/notificationMessages'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
-import { saveUserAuth } from 'utils/localStorageUtils'
-import images from 'constants/assets'
 
-const LogIn = () => {
+const ForgottenPassword = () => {
 	const [spinner, setSpinner] = useState(false)
 	const router = useHistory()
 
 	const onFinish = async (values) => {
 		setSpinner(true)
-		const response = await login(values.username, values.password)
+		const response = await forgotPassword(values.username)
 		setSpinner(false)
+		console.log(response)
 		responseActions(response?.status, response)
 	}
 
 	const responseActions = async (statusCode, response) => {
 		switch (statusCode) {
 			case CODE_HTTP_RESPONSE.SUCCESS_200:
-				notification.success(MESSAGES.LOGIN_SUCCESS)
-				saveUserAuth(response.data.jwt, response.data.user)
-				router.push(paths.ROOT_APP)
+				notification.success(MESSAGES.FORGOT_PASSWORD_SUCCESS)
+				router.push(paths.LOGIN)
 				break
 			case CODE_HTTP_RESPONSE.ERROR_400:
-				notification.error(MESSAGES.LOGIN_FAILED)
+				notification.error(MESSAGES.FORGOT_PASSWORD_FAILED)
 				break
 		}
 	}
@@ -57,7 +55,7 @@ const LogIn = () => {
 			>
 				<Spin spinning={spinner}>
 					<Form
-						name='normal_login'
+						name='forgotten_password_form'
 						className='login-form'
 						initialValues={{ remember: true }}
 						onFinish={onFinish}
@@ -71,7 +69,11 @@ const LogIn = () => {
 								width='150px'
 							/>
 						</Row>
-						<h1>¡Bienvenido!</h1>
+						<h1>¿Olvidaste tu contraseña?</h1>
+						<h3>
+							¡No hay problema! solo ingrese tu correo electrónico y te
+							enviaremos un enlace para restablecer la contraseña
+						</h3>
 						<Form.Item
 							label='Correo Electrónico'
 							name='username'
@@ -89,41 +91,19 @@ const LogIn = () => {
 								type='email'
 							/>
 						</Form.Item>
-						<Form.Item
-							label='Contraseña'
-							name='password'
-							className='main-form-item item-password-content'
-							rules={[
-								{
-									required: true,
-									message: '¡Ingrese su contraseña!',
-								},
-							]}
-						>
-							<Input.Password
-								prefix={<LockOutlined className='form-login-icon' />}
-								type='password'
-								placeholder='Contraseña'
-							/>
-						</Form.Item>
-						<Form.Item className='login-form-forgot-content'>
-							<Link className='login-form-forgot' to={paths.FORGOT_PASSWORD}>
-								<span>&nbsp;¿Olvidaste tu contraseña?</span>
-							</Link>
-						</Form.Item>
 						<Form.Item className='main-button-content'>
 							<Button
 								type='primary'
 								htmlType='submit'
 								className='login-form-button'
 							>
-								Iniciar Sesión
+								Restablecer contraseña
 							</Button>
 						</Form.Item>
 						<Divider />
 						<Form.Item>
-							<Link className='login-form-register' to={paths.REGISTER}>
-								¿Aún no tienes una cuenta?<span>&nbsp;Regístrate ahora</span>
+							<Link className='login-form-register' to={paths.LOGIN}>
+								¿Ya tienes una cuenta?<span>&nbsp; Iniciar Sesión</span>
 							</Link>
 						</Form.Item>
 					</Form>
@@ -153,5 +133,4 @@ const LogIn = () => {
 		</Row>
 	)
 }
-
-export default LogIn
+export default ForgottenPassword

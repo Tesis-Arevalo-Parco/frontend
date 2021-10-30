@@ -9,6 +9,28 @@ export const MESSAGES = {
 		description: 'Usuario o contraseña incorrectos.',
 		duration: 5,
 	},
+	FORGOT_PASSWORD_SUCCESS: {
+		message: 'Envio exitoso del correo de recuperacion de contrasena',
+		description:
+			'Revisa la bandeja de tu correo el enlace para restablecer tu contrasena',
+		duration: 5,
+	},
+	FORGOT_PASSWORD_FAILED: {
+		message: 'El correo no existe ',
+		description: 'No tiene ninguna cuenta con ese correo, Registrate',
+		duration: 5,
+	},
+	RESET_PASSWORD_SUCCESS: {
+		message: 'Cambio exitoso de contrasena',
+		description: 'Puedes iniciar sesion con tu nueva contrasena',
+		duration: 5,
+	},
+	RESET_PASSWORD_FAILED: {
+		message: 'Intento fallido de cambio de contrasena',
+		description:
+			'No se pudo cambiar la contrasena, comunicate con el administrador',
+		duration: 5,
+	},
 	REGISTER_SUCCESS: {
 		message: 'Registro exitoso',
 		description:

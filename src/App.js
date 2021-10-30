@@ -12,6 +12,8 @@ import LogIn from 'pages/LogIn'
 import Register from 'pages/Register'
 import UserDashboard from 'pages/UserDashboard'
 import 'handsontable/dist/handsontable.full.css'
+import ForgottenPassword from 'pages/ForgottenPassword'
+import ResetPassword from 'pages/ResetPassword'
 
 const App = () => {
 	return (
@@ -30,6 +32,18 @@ const App = () => {
 								<PublicRoute
 									component={Register}
 									path={paths.REGISTER}
+									restricted={true}
+									exact={true}
+								/>
+								<PublicRoute
+									component={ForgottenPassword}
+									path={paths.FORGOT_PASSWORD}
+									restricted={true}
+									exact={true}
+								/>
+								<PublicRoute
+									component={ResetPassword}
+									path={paths.RESET_PASSWORD}
 									restricted={true}
 									exact={true}
 								/>
