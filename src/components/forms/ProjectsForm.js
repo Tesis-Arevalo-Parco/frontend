@@ -44,7 +44,6 @@ const ProjectsForm = () => {
 
 	useEffect(() => {
 		if (toggleFormProject) {
-			console.log(toggleFormProject)
 			form.setFieldsValue({
 				name: projectFormData.name,
 				description: projectFormData.description,

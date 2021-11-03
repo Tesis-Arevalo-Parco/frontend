@@ -54,8 +54,6 @@ export const deleteSafeguards = async (id) => {
 
 export const updateSafeguards = async (
 	id,
-	safeguard_code,
-	safeguard_name,
 	safeguard_type,
 	treath_list,
 	safeguard_description,
@@ -63,8 +61,6 @@ export const updateSafeguards = async (
 ) => {
 	try {
 		const response = await axios.put(`${API_URL}/safeguards/${id}`, {
-			safeguard_code,
-			safeguard_name,
 			safeguard_type,
 			treath_list,
 			safeguard_description,

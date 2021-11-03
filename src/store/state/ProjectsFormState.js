@@ -8,9 +8,9 @@ import {
 	assetsFormToggleAction,
 	setAssetsFormDataAction,
 	safeguardsFormToggleAction,
-	safeguardsFormChildrenToggleAction,
 	setSafeguardsFormDataAction,
 	uploadToggleAction,
+	setToggleSafeguardDataFormAction,
 } from 'store/actions/projectsFormActions'
 
 const projectsFormState = (props) => {
@@ -20,6 +20,7 @@ const projectsFormState = (props) => {
 		toggleFormSafeguards: false,
 		toggleFormChildrenSafeguards: false,
 		toggleUpload: false,
+		toggleSafeguardDataForm: false,
 		projectFormData: { id: '', name: '', description: '' },
 		assetsFormData: {
 			id: '',
@@ -30,11 +31,11 @@ const projectsFormState = (props) => {
 		},
 		safeguardsFormData: {
 			id: '',
-			safeguard_code: '',
-			safeguard_name: '',
-			safeguard_type: '',
-			treath_list: [],
-			safeguard_description: '',
+			safeguardCode: '',
+			safeguardName: '',
+			safeguardType: '',
+			threatList: [],
+			safeguardDescription: '',
 		},
 	}
 
@@ -52,11 +53,8 @@ const projectsFormState = (props) => {
 		dispatch(safeguardsFormToggleAction(!state.toggleFormSafeguards))
 	}
 
-	const setSafeguardsFormChildrenToggle = () => {
-		console.log(state.toggleFormChildrenSafeguards)
-		dispatch(
-			safeguardsFormChildrenToggleAction(!state.toggleFormChildrenSafeguards)
-		)
+	const setToggleSafeguardDataForm = () => {
+		dispatch(setToggleSafeguardDataFormAction(!state.toggleSafeguardDataForm))
 	}
 
 	const setUploadToggle = (data) => {
@@ -80,22 +78,22 @@ const projectsFormState = (props) => {
 	}
 	const setSafeguardsFormData = (
 		id,
-		safeguard_code,
-		safeguard_name,
-		safeguard_type,
-		treath_list,
+		safeguardCode,
+		safeguardName,
+		safeguardType,
+		threatList,
 		safeguardsFormData,
-		safeguard_description
+		safeguardDescription
 	) => {
 		dispatch(
 			setSafeguardsFormDataAction(
 				id,
-				safeguard_code,
-				safeguard_name,
-				safeguard_type,
-				treath_list,
+				safeguardCode,
+				safeguardName,
+				safeguardType,
+				threatList,
 				safeguardsFormData,
-				safeguard_description
+				safeguardDescription
 			)
 		)
 	}
@@ -107,24 +105,19 @@ const projectsFormState = (props) => {
 				toggleFormProject: state.toggleFormProject,
 				toggleFormSafeguards: state.toggleFormSafeguards,
 				toggleFormChildrenSafeguards: state.toggleFormChildrenSafeguards,
-
 				projectFormData: state.projectFormData,
 				assetsFormData: state.assetsFormData,
 				safeguardsFormData: state.safeguardsFormData,
-
 				toggleUpload: state.toggleUpload,
-
+				toggleSafeguardDataForm: state.toggleSafeguardDataForm,
 				setProjectsFormToggle,
 				setProjectsFormData,
-
 				setAssetsFormToggle,
 				setAssetsFormData,
-
 				setSafeguardsFormToggle,
 				setSafeguardsFormData,
-				setSafeguardsFormChildrenToggle,
-
 				setUploadToggle,
+				setToggleSafeguardDataForm,
 			}}
 		>
 			{props.children}

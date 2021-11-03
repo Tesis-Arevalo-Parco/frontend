@@ -7,15 +7,15 @@ import ParamsContext from 'store/context/ParamsContext'
 import SpinnerContext from 'store/context/SpinnerContext'
 
 const SafeguardsIdentification = () => {
-	const { setSafeguardsParams } = useContext(ParamsContext)
-	const { safeguards, getSafeguardsData } = useContext(ProjectsContext)
+	const { setAssetsParams } = useContext(ParamsContext)
+	const { safeguards, getAssetsData } = useContext(ProjectsContext)
 	const { active, activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
 
 	useEffect(async () => {
 		activeSpinner(true)
-		setSafeguardsParams(id)
-		await getSafeguardsData(id)
+		setAssetsParams(id)
+		await getAssetsData(id)
 		activeSpinner(false)
 	}, [id])
 

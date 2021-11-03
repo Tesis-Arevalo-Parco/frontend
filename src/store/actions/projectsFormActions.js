@@ -35,21 +35,21 @@ const assetsFormToggleAction = (data) => {
 
 const setSafeguardsFormDataAction = (
 	id,
-	safeguard_code,
-	safeguard_name,
-	safeguard_type,
-	treath_list,
-	safeguard_description
+	safeguardCode,
+	safeguardName,
+	safeguardType,
+	threatList,
+	safeguardDescription
 ) => {
 	return {
 		action: projectFormActionTypes.SAFEGUARDS_SET_FORM_DATA,
 		payload: {
 			id,
-			safeguard_code,
-			safeguard_name,
-			safeguard_type,
-			treath_list,
-			safeguard_description,
+			safeguardCode,
+			safeguardName,
+			safeguardType,
+			threatList,
+			safeguardDescription,
 		},
 	}
 }
@@ -61,9 +61,9 @@ const safeguardsFormToggleAction = (data) => {
 	}
 }
 
-const safeguardsFormChildrenToggleAction = (data) => {
+const setToggleSafeguardDataFormAction = (data) => {
 	return {
-		action: projectFormActionTypes.SAFEGUARDS_FORM_CHILDREN_TOGGLE,
+		action: projectFormActionTypes.SAFEGUARDS_FORM_DATA_TOGGLE,
 		payload: data,
 	}
 }
@@ -81,7 +81,7 @@ export {
 	assetsFormToggleAction,
 	setAssetsFormDataAction,
 	safeguardsFormToggleAction,
-	safeguardsFormChildrenToggleAction,
 	setSafeguardsFormDataAction,
 	uploadToggleAction,
+	setToggleSafeguardDataFormAction,
 }

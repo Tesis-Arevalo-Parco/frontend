@@ -43,6 +43,11 @@ export default (state, data) => {
 				...state,
 				toggleUpload: payload,
 			}
+		case projectFormActionTypes.SAFEGUARDS_FORM_DATA_TOGGLE:
+			return {
+				...state,
+				toggleSafeguardDataForm: payload,
+			}
 		default:
 			break
 	}

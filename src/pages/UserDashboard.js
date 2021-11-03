@@ -21,8 +21,7 @@ import ThreadsIdentifications from 'pages/threads/ThreadsIdentifications'
 import Root from './Root'
 import Safeguards from './safeguards/Safeguards'
 import SafeguardsIdentification from './safeguards/SafeguardsIdentification'
-import SafeguardsForm from 'components/forms/SafeguardsForm'
-import SafeguardsUpdateForm from 'components/forms/SafeguardsFormUpdate'
+import SafeguardsModal from 'components/modals/SafeguardsModal'
 import ThreadsValue from 'pages/threads/ThreadsValue'
 import ThreatValueTable from 'pages/threads/ThreatValueTable'
 
@@ -121,8 +120,7 @@ const UserDashboard = () => {
 					<Route component={Projects} path={paths.PROJECTS} exact />
 					<Route component={Root} path={paths.ROOT_APP} exact />
 				</Card>
-				<SafeguardsForm />
-				<SafeguardsUpdateForm />
+				<SafeguardsModal />
 				<ProjectsForm />
 				<AssetsForm />
 				<Uploader />

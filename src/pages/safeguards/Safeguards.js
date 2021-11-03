@@ -8,12 +8,12 @@ import ParamsContext from 'store/context/ParamsContext'
 
 const Safeguards = () => {
 	const { projects } = useContext(ProjectsContext)
-	const { safeguardsParams } = useContext(ParamsContext)
+	const { assetsParams } = useContext(ParamsContext)
 	const history = useHistory()
 
 	useEffect(() => {
-		if (safeguardsParams) {
-			history.push(`${paths.SAFEGUARDS_IDENTIFICATION}/${safeguardsParams}`)
+		if (assetsParams) {
+			history.push(`${paths.SAFEGUARDS_IDENTIFICATION}/${assetsParams}`)
 		}
 	}, [])
 

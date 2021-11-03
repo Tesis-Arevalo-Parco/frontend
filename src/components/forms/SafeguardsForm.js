@@ -1,283 +1,205 @@
 import { useState, useContext, useEffect } from 'react'
-import {
-	Form,
-	Input,
-	Button,
-	Spin,
-	Drawer,
-	Card,
-	Space,
-	Table,
-	Select,
-	Typography,
-} from 'antd'
-import ProjectsFormContext from 'store/context/ProjectsFormContext'
-import { saveSafeguards } from 'epics/safeguardsEpics'
-import ParamsContext from 'store/context/ParamsContext'
-import ProjectsContext from 'store/context/ProjectsContext'
-import { RightCircleOutlined } from '@ant-design/icons'
+import { Form, Input, Button, Spin, Drawer, Select } from 'antd'
 import { optionsTypes } from 'constants/safeguards'
+import { saveSafeguards, updateSafeguards } from 'epics/safeguardsEpics'
+import ParamsContext from 'store/context/ParamsContext'
+import ProjectsFormContext from 'store/context/ProjectsFormContext'
+import ProjectsContext from 'store/context/ProjectsContext'
 
-const SafeguardsForm = () => {
-	const [form] = Form.useForm()
-	const [spinner, setSpinner] = useState(false)
-	const [childrenDrawer, setChildrenDrawer] = useState(false)
-	const { safeguardsParams } = useContext(ParamsContext)
-	const { getSafeguardsData, safeguardsCatalog } = useContext(ProjectsContext)
-
-	const [treeData, setTreeData] = useState([])
-	const [safeguardCode, setSafeguardCode] = useState([])
-	const [safeguardName, setSafeguardName] = useState([])
-	const [safeguardType, setSafeguardType] = useState([])
-	const [treathList, setTreathList] = useState([])
+const SafeguardsForm = ({
+	safeguardCode,
+	setSafeguardCode,
+	safeguardName,
+	setSafeguardName,
+}) => {
+	const { assetsParams } = useContext(ParamsContext)
+	const { getAssetsData, assets } = useContext(ProjectsContext)
 	const {
 		setSafeguardsFormToggle,
-		toggleFormSafeguards,
 		safeguardsFormData,
+		toggleSafeguardDataForm,
+		setToggleSafeguardDataForm,
 	} = useContext(ProjectsFormContext)
+
+	const [threatList, setThreatList] = useState([])
+	const [spinner, setSpinner] = useState(false)
+	const [threatData, setThreatData] = useState([])
+
+	const [form] = Form.useForm()
 	const { Option } = Select
-	const { Text } = Typography
+
+	const onFinish = async (values) => {
+		setSpinner(true)
+		if (safeguardsFormData?.id) {
+			const response = await updateSafeguards(
+				safeguardsFormData.id,
+				values.safeguard_type,
+				threatList,
+				values.safeguard_description,
+				assetsParams
+			)
+			await setAfterSaveProjects(response)
+		} else {
+			const response = await saveSafeguards(
+				safeguardCode,
+				safeguardName,
+				values.safeguard_type,
+				assetsParams,
+				threatList,
+				values.safeguard_description
+			)
+			await setAfterSaveProjects(response)
+		}
+	}
+
+	const handleChange = (values) => {
+		const threatListSend = []
+		values.map((item) =>
+			threatListSend.push(threatData.find((option) => option.value === item))
+		)
+		const threat = threatListSend.map((treath) => {
+			return { treath_code: treath?.key, treath_name: treath?.value }
+		})
+		setThreatList(threat)
+	}
+
+	const setAfterSaveProjects = async (response) => {
+		if (response) {
+			setToggleSafeguardDataForm()
+			await getAssetsData(assetsParams)
+			onReset()
+		}
+		if (!safeguardsFormData?.id) {
+			setSafeguardsFormToggle()
+		}
+		setSpinner(false)
+	}
 
 	const onReset = () => {
 		form.resetFields()
 		setSafeguardCode('')
 		setSafeguardName('')
-		setTreathList([])
+		setThreatList([])
 	}
 
-	const showChildrenDrawer = () => {
-		setChildrenDrawer(true)
+	const getThreats = () => {
+		const threatList = assets
+			?.map((asset) => {
+				return asset?.threat?.threats.map((threatData) => ({
+					key: threatData.key,
+					value: threatData.title,
+				}))
+			})
+			.flat()
+		setThreatData([...new Set(threatList)] || [])
 	}
-
-	const onChildrenDrawerClose = () => {
-		setChildrenDrawer(false)
-	}
-
-	const onFinish = async (values) => {
-		setSpinner(true)
-		const response = await saveSafeguards(
-			safeguardCode,
-			safeguardName,
-			values.safeguard_type,
-			safeguardsParams,
-			treathList,
-			values.safeguard_description
-		)
-		await setAfterSaveProjects(response)
-	}
-
-	const handleChange = (values) => {
-		const treathListSend = []
-		values.map((item) =>
-			treathListSend.push(optionsSelect.find((option) => option.value === item))
-		)
-		const treath = treathListSend.map((treath) => {
-			return { treath_code: treath.key, treath_name: treath.value }
-		})
-		setTreathList(treath)
-	}
-
-	const setAfterSaveProjects = async (response) => {
-		if (response) {
-			onChildrenDrawerClose()
-			setSafeguardsFormToggle()
-			await getSafeguardsData(safeguardsParams)
-			onReset()
-		}
-		setSpinner(false)
-	}
-
-	const columns = [
-		{
-			title: 'Codigo',
-			dataIndex: 'code',
-			key: 'code',
-			width: '30%',
-		},
-		{
-			title: 'Nombre',
-			dataIndex: 'name',
-			key: 'name',
-			width: '30%',
-		},
-		{
-			title: 'Acción',
-			dataIndex: '',
-			key: 'action',
-			render: (_, record) => tableActions(record),
-			width: '10%',
-		},
-	]
-
-	const optionsSelect = [
-		{ key: '[S]', value: 'FS' },
-		{ key: '[F]', value: 'F Fuego' },
-		{ key: '[W]', value: 'W Humedad' },
-		{ key: '[A]', value: 'A Agua' },
-		{ key: '[D]', value: 'Desastres Naturales' },
-	]
-
-	const onChange = (value) => {
-		setSafeguardType(value)
-	}
-
-	const tableActions = (dataItem) => {
-		return (
-			<Space className='table-button-actions'>
-				<Button
-					key='edit'
-					onClick={() => {
-						showChildrenDrawer()
-						setSafeguardCode(dataItem.code)
-						setSafeguardName(dataItem.name)
-					}}
-					icon={<RightCircleOutlined />}
-					className='update-button'
-				/>
-			</Space>
-		)
-	}
-
-	const filterSafeguards = (safeguards) =>
-		safeguards.map((safeguard) => ({
-			key: safeguard.key,
-			code: safeguard.key,
-			name: safeguard.title,
-		}))
 
 	useEffect(() => {
-		if (toggleFormSafeguards) {
-			form.setFieldsValue({
-				treath_list: safeguardsFormData.treath_list,
-			})
-		}
+		getThreats()
+	}, [assets])
+
+	useEffect(() => {
+		const defaultThreats = safeguardsFormData?.threatList?.map(
+			(item) => item?.treath_name
+		)
+
+		form.setFieldsValue({
+			safeguard_type: safeguardsFormData?.safeguardType || [],
+			safeguard_threats_list: defaultThreats || [],
+			safeguard_description: safeguardsFormData?.safeguardDescription || '',
+		})
+		setThreatList(safeguardsFormData?.threatList || [])
 	}, [safeguardsFormData])
 
-	useEffect(() => {
-		if (safeguardsCatalog?.length !== 0 && safeguardsCatalog) {
-			setTreeData(safeguardsCatalog)
-		}
-	}, [safeguardsCatalog])
-
 	return (
-		<>
-			<Drawer
-				className='assets-main-form'
-				title={'Nueva Salvaguarda'}
-				placement='right'
-				width='700px'
-				onClose={setSafeguardsFormToggle}
-				visible={toggleFormSafeguards}
-			>
-				<Text>
-					En esta lista de salvaguardas, elije que salvaguarda deseas aplicar?
-				</Text>
-				{treeData.map((safeguard) => (
-					<Card
-						key={`code_${safeguard.value}`}
-						title={safeguard.title}
-						style={{ width: 700 }}
-					>
-						<Table
-							key={safeguard.key}
-							columns={columns}
-							bordered={true}
-							dataSource={filterSafeguards(safeguard.children)}
-						/>
-					</Card>
-				))}
-
-				<Drawer
-					title={safeguardName}
-					width={600}
-					closable={false}
-					onClose={onChildrenDrawerClose}
-					visible={childrenDrawer}
+		<Drawer
+			title={safeguardName}
+			width={400}
+			onClose={setToggleSafeguardDataForm}
+			visible={toggleSafeguardDataForm}
+		>
+			<Spin spinning={spinner}>
+				<Form
+					name='assets-form'
+					className='safeguard-form'
+					onFinish={onFinish}
+					layout='vertical'
+					form={form}
 				>
-					<Spin spinning={spinner}>
-						<Form
-							name='assets-form'
-							className='assets-form'
-							onFinish={onFinish}
-							layout='vertical'
-							form={form}
+					<Form.Item
+						label='Tipo de la Salvaguarda'
+						name='safeguard_type'
+						className='main-form-item'
+						rules={[
+							{
+								required: true,
+								message: '¡Ingrese el tipo de la salvaguarda!',
+							},
+						]}
+					>
+						<Select
+							showSearch
+							placeholder='Seleccione una salvaguarda'
+							optionFilterProp='children'
+							filterOption={(input, option) =>
+								option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+							}
 						>
-							<Form.Item
-								label='Tipo de la Salvaguarda'
-								name='safeguard_type'
-								className='main-form-item'
-								rules={[
-									{
-										required: true,
-										message: '¡Ingrese el tipo de la salvaguarda!',
-									},
-								]}
-							>
-								<Select
-									showSearch
-									style={{ width: '70%' }}
-									placeholder='Select a person'
-									optionFilterProp='children'
-									onChange={onChange}
-									filterOption={(input, option) =>
-										option.children
-											.toLowerCase()
-											.indexOf(input.toLowerCase()) >= 0
-									}
-								>
-									{optionsTypes.map((option) => (
-										<Option key={option.key} value={option.value}>
-											{option.label}
-										</Option>
-									))}
-								</Select>
-							</Form.Item>
-							<Form.Item
-								label='Lista de amenazas'
-								className='main-form-item'
-								rules={[
-									{
-										required: true,
-										message: '¡Ingrese las amenazas!',
-									},
-								]}
-							>
-								<Select
-									mode='multiple'
-									style={{ width: '70%' }}
-									placeholder='Seleccione las amenazas'
-									onChange={handleChange}
-									options={optionsSelect}
-								/>
-							</Form.Item>
-							<Form.Item
-								label='Descripcion de Salvaguardas'
-								name='safeguard_description'
-								className='main-form-item'
-								rules={[
-									{
-										required: true,
-										message: '¡Ingrese la descripcion de la Salvaguardas!',
-									},
-								]}
-							>
-								<Input placeholder='Descripcion de Salvaguardas' type='text' />
-							</Form.Item>
-							<Form.Item className='main-button-content'>
-								<Button
-									type='primary'
-									htmlType='submit'
-									className='assets-form-button'
-									block
-								>
-									Crear Salvaguarda
-								</Button>
-							</Form.Item>
-						</Form>
-					</Spin>
-				</Drawer>
-			</Drawer>
-		</>
+							{optionsTypes.map((option) => (
+								<Option key={option.key} value={option.value}>
+									{option.label}
+								</Option>
+							))}
+						</Select>
+					</Form.Item>
+					<Form.Item
+						label='Lista de amenazas'
+						className='main-form-item'
+						name='safeguard_threats_list'
+						rules={[
+							{
+								required: true,
+								message: '¡Ingrese las amenazas!',
+							},
+						]}
+					>
+						<Select
+							mode='multiple'
+							placeholder='Seleccione las amenazas'
+							className='select-safeguard-forms'
+							onChange={handleChange}
+							options={threatData}
+						/>
+					</Form.Item>
+					<Form.Item
+						label='Descripcion de Salvaguardas'
+						name='safeguard_description'
+						className='main-form-item'
+						rules={[
+							{
+								required: true,
+								message: '¡Ingrese la descripcion de la Salvaguardas!',
+							},
+						]}
+					>
+						<Input placeholder='Descripcion de Salvaguardas' type='text' />
+					</Form.Item>
+					<Form.Item className='main-button-content'>
+						<Button
+							type='primary'
+							htmlType='submit'
+							className='assets-form-button'
+							block
+						>
+							{safeguardsFormData?.id
+								? 'Actualizar Salvaguarda'
+								: 'Crear Salvaguarda'}
+						</Button>
+					</Form.Item>
+				</Form>
+			</Spin>
+		</Drawer>
 	)
 }
+
 export default SafeguardsForm

@@ -6,54 +6,52 @@ import ParamsContext from 'store/context/ParamsContext'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
 import { POPCONFIRM_MESSAGES } from 'constants/popconfirmMessages'
-import SearchInput from 'components/SearchInput'
 import EmptyImage from 'components/EmptyImage'
 import images from 'constants/assets'
 import { deleteSafeguards } from 'epics/safeguardsEpics'
 
 const TableSafeguardsIdentification = ({ safeguards }) => {
 	const [localSafeguards, setLocalSafeguards] = useState([])
-	const { getSafeguardsData } = useContext(ProjectsContext)
-	const { safeguardsParams } = useContext(ParamsContext)
+	const { getAssetsData } = useContext(ProjectsContext)
+	const { assetsParams } = useContext(ParamsContext)
 	const {
 		setSafeguardsFormToggle,
-		setSafeguardsFormChildrenToggle,
 		setSafeguardsFormData,
+		setToggleSafeguardDataForm,
 	} = useContext(ProjectsFormContext)
 
 	const updateSafeguards = (
 		id,
-		safeguard_code,
-		safeguard_name,
-		safeguard_type,
-		treath_list,
-		safeguard_description
+		safeguardCode,
+		safeguardName,
+		safeguardType,
+		threatList,
+		safeguardDescription
 	) => {
 		setSafeguardsFormData(
 			id,
-			safeguard_code,
-			safeguard_name,
-			safeguard_type,
-			treath_list,
-			safeguard_description
+			safeguardCode,
+			safeguardName,
+			safeguardType,
+			threatList,
+			safeguardDescription
 		)
-		setSafeguardsFormChildrenToggle()
+		setToggleSafeguardDataForm()
 	}
 
 	const deleteSafeguardsById = async (id) => {
 		await deleteSafeguards(id)
-		await getSafeguardsData(safeguardsParams)
+		await getAssetsData(assetsParams)
 	}
 
 	const filterSafeguards = (safeguards) =>
-		// safeguards.map((safeguard) => console.log(safeguard))
-		safeguards.map((safeguard) => ({
+		safeguards?.map((safeguard) => ({
 			key: safeguard.id,
-			safeguard_code: safeguard.safeguard_code,
-			safeguard_name: safeguard.safeguard_name,
-			safeguard_type: safeguard.safeguard_type,
-			treath_list: safeguard.treath_list,
-			safeguard_description: safeguard.safeguard_description,
+			safeguardCode: safeguard.safeguard_code,
+			safeguardName: safeguard.safeguard_name,
+			safeguardType: safeguard.safeguard_type,
+			threatList: safeguard.treath_list,
+			safeguardDescription: safeguard.safeguard_description,
 		}))
 
 	const tableActions = (dataItem) => {
@@ -64,11 +62,11 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 					onClick={() =>
 						updateSafeguards(
 							dataItem.key,
-							dataItem.safeguard_code,
-							dataItem.safeguard_name,
-							dataItem.safeguard_type,
-							dataItem.treath_list,
-							dataItem.safeguard_description
+							dataItem.safeguardCode,
+							dataItem.safeguardName,
+							dataItem.safeguardType,
+							dataItem.threatList,
+							dataItem.safeguardDescription
 						)
 					}
 					icon={<EditOutlined />}
@@ -77,7 +75,7 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 				<Popconfirm
 					okText={POPCONFIRM_MESSAGES.YES}
 					cancelText={POPCONFIRM_MESSAGES.NO}
-					title={`¿Desea eliminar la salvaguarda ${dataItem.safeguard_name}?`}
+					title={`¿Desea eliminar la salvaguarda ${dataItem.safeguardName}?`}
 					onConfirm={() => deleteSafeguardsById(dataItem.key)}
 				>
 					<Button
@@ -92,29 +90,29 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 	const columns = [
 		{
 			title: 'Codigo',
-			dataIndex: 'safeguard_code',
-			key: 'safeguard_code',
+			dataIndex: 'safeguardCode',
+			key: 'safeguardCode',
 			width: '30%',
 		},
 		{
 			title: 'Nombre',
-			dataIndex: 'safeguard_name',
-			key: 'safeguard_name',
+			dataIndex: 'safeguardName',
+			key: 'safeguardName',
 			width: '30%',
 		},
 		{
 			title: 'Tipo',
-			dataIndex: 'safeguard_type',
-			key: 'safeguard_type',
+			dataIndex: 'safeguardType',
+			key: 'safeguardType',
 			width: '30%',
 		},
 		{
 			title: 'Amenazas',
-			dataIndex: 'treath_list',
-			key: 'treath_list',
-			render: (treath_list) => (
+			dataIndex: 'threatList',
+			key: 'threatList',
+			render: (threatList) => (
 				<span>
-					{treath_list.map((treath) => {
+					{threatList?.map((treath) => {
 						return <Tag key={treath.treath_name}>{treath.treath_name}</Tag>
 					})}
 				</span>
@@ -123,8 +121,8 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 		},
 		{
 			title: 'Descripcion',
-			dataIndex: 'safeguard_description',
-			key: 'safeguard_description',
+			dataIndex: 'safeguardDescription',
+			key: 'safeguardDescription',
 			width: '30%',
 		},
 		{
@@ -142,12 +140,6 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 
 	return (
 		<div className='table-assets-expandable'>
-			<SearchInput
-				data={safeguards}
-				setFilteredData={setLocalSafeguards}
-				searchName='safeguard_code'
-				placeholder='Buscar Salvaguarda'
-			/>
 			<Table
 				columns={columns}
 				bordered={true}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {
 	Row,
 	Col,
@@ -28,7 +28,6 @@ const ResetPassword = () => {
 		const queryString = window.location.search
 		const urlParams = new URLSearchParams(queryString)
 		const code = urlParams.get('code')
-		console.log(code)
 		const response = await resetPassword(code, values.password)
 		setSpinner(false)
 		responseActions(response?.status, response)

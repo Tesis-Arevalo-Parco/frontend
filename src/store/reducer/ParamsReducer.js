@@ -11,7 +11,7 @@ export default (state, data) => {
 		case paramsActionTypes.PARAMS_SAFEGUARDS_SET_DATA:
 			return {
 				...state,
-				safeguardsParams: payload,
+				assetsParams: payload,
 			}
 		case paramsActionTypes.SET_PROJECT_NAME:
 			return {

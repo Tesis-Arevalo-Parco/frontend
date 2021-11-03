@@ -1,5 +1,4 @@
-import { useContext } from 'react'
-import { Card, Row, Col, Avatar, Divider } from 'antd'
+import { Card, Avatar, Divider } from 'antd'
 import { Link } from 'react-router-dom'
 import { paths } from 'constants/paths'
 import {

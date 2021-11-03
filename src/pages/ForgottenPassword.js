@@ -26,7 +26,6 @@ const ForgottenPassword = () => {
 		setSpinner(true)
 		const response = await forgotPassword(values.username)
 		setSpinner(false)
-		console.log(response)
 		responseActions(response?.status, response)
 	}
 

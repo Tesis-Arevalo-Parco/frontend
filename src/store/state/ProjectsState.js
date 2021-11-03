@@ -51,19 +51,12 @@ const projectsState = (props) => {
 			if (response.data?.dependency?.dependencies) {
 				setAssetsDependencies(response.data?.dependency?.dependencies)
 				setAssetsDependencyId(response.data?.dependency?.id)
+				dispatch(safeguardsGetDataAction(response.data?.safeguards))
 			} else {
 				setAssetsDependencies([])
 				setAssetsDependencyId('')
+				dispatch(safeguardsGetDataAction([]))
 			}
-		}
-		activeSpinner(false)
-	}
-
-	const getSafeguardsData = async (id) => {
-		activeSpinner(true)
-		const response = await getProjectById(id)
-		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
-			dispatch(safeguardsGetDataAction(response.data?.safeguards))
 		}
 		activeSpinner(false)
 	}
@@ -138,7 +131,6 @@ const projectsState = (props) => {
 				safeguardsCatalog: state.safeguardsCatalog,
 				getProjectsData,
 				getAssetsData,
-				getSafeguardsData,
 				setAssetsDependencies,
 				setAssetsDependencyId,
 				setAssetsNewDependencies,
