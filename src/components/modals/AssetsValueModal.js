@@ -29,6 +29,7 @@ const AssetsValueModal = ({ toggleModal, setToggleModal, dataModal }) => {
 		9: 'Nivel 9',
 		10: 'Nivel 10',
 	}
+
 	const initialState = {
 		radioFirstValue: false,
 		radioSecondValue: true,

@@ -13,6 +13,16 @@ export default (state, data) => {
 				...state,
 				toggleFormAssets: payload,
 			}
+		case projectFormActionTypes.SAFEGUARDS_FORM_TOGGLE:
+			return {
+				...state,
+				toggleFormSafeguards: payload,
+			}
+		case projectFormActionTypes.SAFEGUARDS_FORM_CHILDREN_TOGGLE:
+			return {
+				...state,
+				toggleFormChildrenSafeguards: payload,
+			}
 		case projectFormActionTypes.PROJECTS_SET_FORM_DATA:
 			return {
 				...state,
@@ -23,10 +33,20 @@ export default (state, data) => {
 				...state,
 				assetsFormData: payload,
 			}
+		case projectFormActionTypes.SAFEGUARDS_SET_FORM_DATA:
+			return {
+				...state,
+				safeguardsFormData: payload,
+			}
 		case projectFormActionTypes.UPLOAD_TOGGLE:
 			return {
 				...state,
 				toggleUpload: payload,
+			}
+		case projectFormActionTypes.SAFEGUARDS_FORM_DATA_TOGGLE:
+			return {
+				...state,
+				toggleSafeguardDataForm: payload,
 			}
 		default:
 			break

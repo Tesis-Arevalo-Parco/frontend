@@ -97,15 +97,28 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 						</NavLink>
 					</Menu.Item>
 				</SubMenu>
-				<Menu.Item key='7' icon={<FlagFilled />}>
-					<NavLink
-						to={paths.SAFEGUARDS}
-						activeClassName='selected-nav-link'
-						className='nav-link-router'
-					>
-						Salvaguardas
-					</NavLink>
-				</Menu.Item>
+				<SubMenu
+					key='submenu-safeguards'
+					icon={<FlagFilled />}
+					title='Salvaguardas'
+				>
+					<Menu.Item key='5'>
+						<NavLink
+							to={paths.SAFEGUARDS_IDENTIFICATION}
+							activeClassName='selected-nav-link'
+						>
+							Identificar Salvaguardas
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='6'>
+						<NavLink
+							to={paths.SAFEGUARDS_VALUATION}
+							activeClassName='selected-nav-link'
+						>
+							Valorar Salvaguardas
+						</NavLink>
+					</Menu.Item>
+				</SubMenu>
 				<Menu.Item key='8' icon={<PieChartFilled />}>
 					<NavLink
 						className='nav-link-router'

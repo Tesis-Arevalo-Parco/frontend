@@ -28,6 +28,13 @@
   background-color: $color-hover-nav-bar;
 }
 
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled)
+  .ant-select-item-option-state {
+  color: $color-primary;
+}
+
+/*
+
 .ant-select-item {
   &.ant-select-item-option {
     padding-bottom: 0;
@@ -73,3 +80,4 @@
 .ant-select-dropdown {
   padding: 0;
 }
+ */

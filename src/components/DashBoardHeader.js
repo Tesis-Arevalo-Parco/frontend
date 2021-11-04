@@ -12,9 +12,12 @@ import { paths } from 'constants/paths'
 import ParamsContext from 'store/context/ParamsContext'
 import { saveDependencies, updateDependencies } from 'epics/dependenciesEpics'
 import SpinnerContext from 'store/context/SpinnerContext'
+import UserContext from 'store/context/UserContext'
 
 const DashBoardHeader = () => {
 	const { Option } = Select
+
+	const { getUserLoginData, user } = useContext(UserContext)
 	const {
 		projects,
 		assetsDependencyId,
@@ -31,8 +34,11 @@ const DashBoardHeader = () => {
 		setProjectsFormData,
 		setAssetsFormToggle,
 		setAssetsFormData,
+		setSafeguardsFormToggle,
+		setSafeguardsFormData,
 		setUploadToggle,
 	} = useContext(ProjectsFormContext)
+
 	const location = useLocation()
 
 	const onClickToggleFormProjects = () => {
@@ -43,6 +49,11 @@ const DashBoardHeader = () => {
 	const onClickToggleFormAssets = () => {
 		setAssetsFormData('', '', '', '', [])
 		setAssetsFormToggle()
+	}
+
+	const onClickToggleFormSafeguards = () => {
+		setSafeguardsFormData('', '', '', '', [], '')
+		setSafeguardsFormToggle()
 	}
 
 	const onSaveAssetsDependencies = async () => {
@@ -68,6 +79,10 @@ const DashBoardHeader = () => {
 			setProjectName(response.name)
 		}
 	}, [projects])
+
+	useEffect(() => {
+		getUserLoginData()
+	}, [])
 
 	const getHeader = () => {
 		if (location.pathname.includes(paths.PROJECTS)) {
@@ -303,6 +318,101 @@ const DashBoardHeader = () => {
 						</Row>
 					</Row>
 				</Col>
+			)
+		} else if (location.pathname.includes(paths.SAFEGUARDS_IDENTIFICATION)) {
+			return (
+				<Col>
+					<Row justify='space-between' align='middle'>
+						<Row justify='space-between' align='middle'>
+							<Space size='middle'>
+								<span level={2} className='header-card-title'>
+									Identificación de Salvaguardas
+								</span>
+								<Select
+									showSearch
+									style={{ width: 200, marginTop: '0.5rem' }}
+									placeholder='Seleccione un proyecto'
+									optionFilterProp='children'
+									filterOption={(input, option) =>
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+									}
+									value={projectName}
+								>
+									{projects.map((project) => {
+										return (
+											<Option key={project.id} value={project.name}>
+												<Link
+													to={`${paths.SAFEGUARDS_IDENTIFICATION}/${project.id}`}
+													style={{ display: 'block' }}
+													onClick={() => setProjectName(project.name)}
+												>
+													{project.name}
+												</Link>
+											</Option>
+										)
+									})}
+								</Select>
+							</Space>
+						</Row>
+						{projects.length ? (
+							<Space size='middle'>
+								<Button
+									type='primary'
+									icon={<PlusCircleFilled />}
+									onClick={onClickToggleFormSafeguards}
+								>
+									Ingresar Salvaguarda
+								</Button>
+							</Space>
+						) : null}
+					</Row>
+				</Col>
+			)
+		} else if (location.pathname.includes(paths.SAFEGUARDS_VALUATION)) {
+			return (
+				<Col>
+					<Row justify='space-between' align='middle'>
+						<Row justify='space-between' align='middle'>
+							<Space size='middle'>
+								<span level={2} className='header-card-title'>
+									Valoración de Salvaguardas
+								</span>
+								<Select
+									showSearch
+									style={{ width: 200, marginTop: '0.5rem' }}
+									placeholder='Seleccione un proyecto'
+									optionFilterProp='children'
+									filterOption={(input, option) =>
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+									}
+									value={projectName}
+								>
+									{projects.map((project) => {
+										return (
+											<Option key={project.id} value={project.name}>
+												<Link
+													to={`${paths.SAFEGUARDS_VALUATION}/${project.id}`}
+													style={{ display: 'block' }}
+													onClick={() => setProjectName(project.name)}
+												>
+													{project.name}
+												</Link>
+											</Option>
+										)
+									})}
+								</Select>
+							</Space>
+						</Row>
+					</Row>
+				</Col>
+			)
+		} else if (location.pathname.includes(paths.ROOT_APP)) {
+			return (
+				<Row justify='space-between' align='middle'>
+					<span level={2} className='header-card-title'>
+						Bienvenido, {user.name}
+					</span>
+				</Row>
 			)
 		}
 	}

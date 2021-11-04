@@ -1,0 +1,695 @@
+[
+    {
+        "title": "Protecciones generales",
+        "key": "H",
+        "value": "H",
+        "children": [
+            {
+                "title": "Identificación y autenticación",
+                "key": "H.IA",
+                "value": "H.IA",
+                "children": []
+            },
+            {
+                "title": "Control de acceso lógico",
+                "key": "H.AC",
+                "value": "H.AC",
+                "children": []
+            },
+            {
+                "title": "Segregación de tareas",
+                "key": "H.ST",
+                "value": "H.ST",
+                "children": []
+            },
+            {
+                "title": "Gestión de incidencias",
+                "key": "H.IR",
+                "value": "H.IR",
+                "children": []
+            },
+            {
+                "title": "Herramientas de seguridad ",
+                "key": "H.tools",
+                "value": "H.tools",
+                "children": []
+            },
+            {
+                "title": "Herramienta contra código dañino",
+                "key": "H.tools.AV ",
+                "value": "H.tools.AV ",
+                "children": []
+            },
+            {
+                "title": "IDS/IPS: Herramienta de detección / prevención de ",
+                "key": "H.tools.IDS",
+                "value": "H.tools.IDS",
+                "children": []
+            },
+            {
+                "title": "Herramienta de chequeo de configuración",
+                "key": "H.tools.CC",
+                "value": "H.tools.CC",
+                "children": []
+            },
+            {
+                "title": "Herramienta de análisis de vulnerabilidades",
+                "key": "H.tools.VA",
+                "value": "H.tools.VA",
+                "children": []
+            },
+            {
+                "title": "Herramienta de monitorización de tráfico",
+                "key": "H.tools.TM",
+                "value": "H.tools.TM",
+                "children": []
+            },
+            {
+                "title": "DLP: Herramienta de monitorización de contenidos",
+                "key": "H.tools.DLP",
+                "value": "H.tools.DLP",
+                "children": []
+            },
+            {
+                "title": "Herramienta para análisis de logs",
+                "key": "H.tools.LA",
+                "value": "H.tools.LA",
+                "children": []
+            },
+            {
+                "title": "Honey net / honey pot",
+                "key": "H.tools.HP",
+                "value": "H.tools.HP",
+                "children": []
+            },
+            {
+                "title": "Verificación de las funciones de seguridad",
+                "key": "H.tools.SFV",
+                "value": "H.tools.SFV",
+                "children": []
+            },
+            {
+                "title": "Gestión de vulnerabilidades",
+                "key": "H.VM",
+                "value": "H.VM",
+                "children": []
+            },
+            {
+                "title": "Registro y auditoría",
+                "key": "H.AU",
+                "value": "H.AU",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de la Información",
+        "key": "D",
+        "value": "D",
+        "children": [
+            {
+                "title": "Copias de seguridad de los datos (backup)",
+                "key": "D.A ",
+                "value": "D.A ",
+                "children": []
+            },
+            {
+                "title": "Aseguramiento de la integridad",
+                "key": "D.I",
+                "value": "D.I",
+                "children": []
+            },
+            {
+                "title": "Cifrado de la información",
+                "key": "D.C",
+                "value": "D.C",
+                "children": []
+            },
+            {
+                "title": "Uso de firmas electrónicas",
+                "key": "D.DS",
+                "value": "D.DS",
+                "children": []
+            },
+            {
+                "title": "Uso de servicios de fechado electrónico (time stamping)",
+                "key": "D.TS",
+                "value": "D.TS",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de los Servicios ",
+        "key": "S",
+        "value": "S",
+        "children": [
+            {
+                "title": "Aseguramiento de la disponibilidad",
+                "key": "S.A",
+                "value": "S.A",
+                "children": []
+            },
+            {
+                "title": "Aceptación y puesta en operación",
+                "key": "S.start",
+                "value": "S.start",
+                "children": []
+            },
+            {
+                "title": "Se aplican perfiles de seguridad",
+                "key": "S.SC",
+                "value": "S.SC",
+                "children": []
+            },
+            {
+                "title": "Explotación",
+                "key": "S.op",
+                "value": "S.op",
+                "children": []
+            },
+            {
+                "title": "Gestión de cambios (mejoras y sustituciones)",
+                "key": "S.CM",
+                "value": "S.CM",
+                "children": []
+            },
+            {
+                "title": "Terminación",
+                "key": "S.end",
+                "value": "S.end",
+                "children": []
+            },
+            {
+                "title": "Protección de servicios y aplicaciones web",
+                "key": "S.www",
+                "value": "S.www",
+                "children": []
+            },
+            {
+                "title": "Protección del correo electrónico",
+                "key": "S.email",
+                "value": "S.email",
+                "children": []
+            },
+            {
+                "title": "Protección del directorio",
+                "key": "S.dir",
+                "value": "S.dir",
+                "children": []
+            },
+            {
+                "title": "Protección del servidor de nombres de dominio (DNS)",
+                "key": "S.dns",
+                "value": "S.dns",
+                "children": []
+            },
+            {
+                "title": " Teletrabajo",
+                "key": "S.TW",
+                "value": "S.TW",
+                "children": []
+            },
+            {
+                "title": "Voz sobre IP",
+                "key": "S.voip",
+                "value": "S.voip",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de las Aplicaciones Informáticas",
+        "key": "SW",
+        "value": "SW",
+        "children": [
+            {
+                "title": "Copias de seguridad (backup)",
+                "key": "SW.A",
+                "value": "SW.A",
+                "children": []
+            },
+            {
+                "title": "Puesta en producción",
+                "key": "SW.start",
+                "value": "SW.start",
+                "children": []
+            },
+            {
+                "title": "Se aplican perfiles de seguridad",
+                "key": "SW.SC",
+                "value": "SW.SC",
+                "children": []
+            },
+            {
+                "title": "Explotación / Producción",
+                "key": "SW.op",
+                "value": "SW.op",
+                "children": []
+            },
+            {
+                "title": "Cambios (actualizaciones y mantenimiento)",
+                "key": "SW.CM",
+                "value": "SW.CM",
+                "children": []
+            },
+            {
+                "title": "Terminación",
+                "key": "SW.end",
+                "value": "SW.end",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de los Equipos Informáticos ",
+        "key": "HW",
+        "value": "HW",
+        "children": [
+            {
+                "title": "Puesta en producción",
+                "key": "HW.start",
+                "value": "HW.start",
+                "children": []
+            },
+            {
+                "title": "Se aplican perfiles de seguridad",
+                "key": "HW.SC",
+                "value": "HW.SC",
+                "children": []
+            },
+            {
+                "title": "Aseguramiento de la disponibilidad",
+                "key": "HW.A",
+                "value": "HW.A",
+                "children": []
+            },
+            {
+                "title": "Operación",
+                "key": "HW.op",
+                "value": "HW.op",
+                "children": []
+            },
+            {
+                "title": "Cambios (actualizaciones y mantenimiento)",
+                "key": "HW.CM",
+                "value": "HW.CM",
+                "children": []
+            },
+            {
+                "title": "Terminación",
+                "key": "HW.end",
+                "value": "HW.end",
+                "children": []
+            },
+            {
+                "title": "Informática móvil",
+                "key": "HW.PCD",
+                "value": "HW.PCD",
+                "children": []
+            },
+            {
+                "title": "Reproducción de documentos",
+                "key": "HW.print",
+                "value": "HW.print",
+                "children": []
+            },
+            {
+                "title": "Protección de la centralita telefónica (PABX)",
+                "key": "HW.pabx",
+                "value": "HW.pabx",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de las Comunicaciones ",
+        "key": "COM",
+        "value": "COM",
+        "children": [
+            {
+                "title": "Entrada en servicio ",
+                "key": "COM.start",
+                "value": "COM.start",
+                "children": []
+            },
+            {
+                "title": "Se aplican perfiles de seguridad ",
+                "key": "COM.SC",
+                "value": "COM.SC",
+                "children": []
+            },
+            {
+                "title": "Aseguramiento de la disponibilidad ",
+                "key": "COM.A",
+                "value": "COM.A",
+                "children": []
+            },
+            {
+                "title": "Autenticación del canal ",
+                "key": "COM.aut",
+                "value": "COM.aut",
+                "children": []
+            },
+            {
+                "title": "Protección de la integridad de los datos intercambiados ",
+                "key": "COM.I",
+                "value": "COM.I",
+                "children": []
+            },
+            {
+                "title": "Protección criptográfica de la confidencialidad de los datos intercambiados ",
+                "key": "COM.C",
+                "value": "COM.C",
+                "children": []
+            },
+            {
+                "title": "Operación",
+                "key": "COM..op",
+                "value": "COM..op",
+                "children": []
+            },
+            {
+                "title": "Cambios (actualizaciones y mantenimiento)",
+                "key": "COM.CM",
+                "value": "COM.CM",
+                "children": []
+            },
+            {
+                "title": "Terminación",
+                "key": "COM.end",
+                "value": "COM.end",
+                "children": []
+            },
+            {
+                "title": "Internet: uso de ? acceso a",
+                "key": "COM.internet",
+                "value": "COM.internet",
+                "children": []
+            },
+            {
+                "title": "Seguridad Wireless (WiFi)",
+                "key": "COM.wifi",
+                "value": "COM.wifi",
+                "children": []
+            },
+            {
+                "title": "Telefonía móvil",
+                "key": "COM.mobile",
+                "value": "COM.mobile",
+                "children": []
+            },
+            {
+                "title": "Segregación de las redes en dominios",
+                "key": "COM.DS",
+                "value": "COM.DS",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Puntos de interconexión: conexiones entre zonas de confianza ",
+        "key": "IP",
+        "value": "IP",
+        "children": [
+            {
+                "title": "Sistema de protección perimetral ",
+                "key": "IP.SPP",
+                "value": "IP.SPP",
+                "children": []
+            },
+            {
+                "title": "Protección de los equipos de frontera ",
+                "key": "IP.BS",
+                "value": "IP.BS",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de los Soportes de Información",
+        "key": "MP",
+        "value": "MP",
+        "children": [
+            {
+                "title": "Aseguramiento de la disponibilidad ",
+                "key": "MP.A",
+                "value": "MP.A",
+                "children": []
+            },
+            {
+                "title": "Protección criptográfica del contenido ",
+                "key": "MP.IC",
+                "value": "MP.IC",
+                "children": []
+            },
+            {
+                "title": "Limpieza de contenidos",
+                "key": "MP.clean",
+                "value": "MP.clean",
+                "children": []
+            },
+            {
+                "title": "Destrucción de soportes",
+                "key": "MP.end",
+                "value": "MP.end",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Elementos Auxiliares",
+        "key": "AUX",
+        "value": "AUX",
+        "children": [
+            {
+                "title": "Aseguramiento de la disponibilidad ",
+                "key": "AUX.A",
+                "value": "AUX.A",
+                "children": []
+            },
+            {
+                "title": " Instalación",
+                "key": "AUX.start",
+                "value": "AUX.start",
+                "children": []
+            },
+            {
+                "title": "Suministro eléctrico  ",
+                "key": "AUX.power",
+                "value": "AUX.power",
+                "children": []
+            },
+            {
+                "title": "Climatización",
+                "key": "AUX.AC",
+                "value": "AUX.AC",
+                "children": []
+            },
+            {
+                "title": "Protección del cableado ",
+                "key": "AUX.wires",
+                "value": "AUX.wires",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Protección de las Instalaciones ",
+        "key": "L",
+        "value": "L",
+        "children": [
+            {
+                "title": "Diseño ",
+                "key": "L.design",
+                "value": "L.design",
+                "children": []
+            },
+            {
+                "title": "Defensa en profundidad ",
+                "key": "L.depth ",
+                "value": "L.depth ",
+                "children": []
+            },
+            {
+                "title": "Control de los accesos físicos ",
+                "key": "L.AC",
+                "value": "L.AC",
+                "children": []
+            },
+            {
+                "title": "Aseguramiento de la disponibilidad ",
+                "key": "L.A",
+                "value": "L.A",
+                "children": []
+            },
+            {
+                "title": "Terminación",
+                "key": "L.end",
+                "value": "L.end",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Gestión del Personal ",
+        "key": "PS",
+        "value": "PS",
+        "children": [
+            {
+                "title": "Formación y concienciación ",
+                "key": "PS.AT",
+                "value": "PS.AT",
+                "children": []
+            },
+            {
+                "title": "Aseguramiento de la disponibilidad ",
+                "key": "PS.A",
+                "value": "PS.A",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Organización",
+        "key": "G",
+        "value": "G",
+        "children": [
+            {
+                "title": "Gestión de riesgos ",
+                "key": "G.RM",
+                "value": "G.RM",
+                "children": []
+            },
+            {
+                "title": "Planificación de la seguridad ",
+                "key": "G.plan",
+                "value": "G.plan",
+                "children": []
+            },
+            {
+                "title": "Inspecciones de seguridad",
+                "key": "G.exam",
+                "value": "G.exam",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Continuidad del negocio",
+        "key": "BC",
+        "value": "BC",
+        "children": [
+            {
+                "title": "Análisis de impacto (BIA)",
+                "key": "BC.BIA",
+                "value": "BC.BIA",
+                "children": []
+            },
+            {
+                "title": "Plan de Recuperación de Desastres (DRP) ",
+                "key": "BC.DRP",
+                "value": "BC.DRP",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Relaciones Externas ",
+        "key": "E",
+        "value": "E",
+        "children": [
+            {
+                "title": "Acuerdos para intercambio de información y software ",
+                "key": "E.1",
+                "value": "E.1",
+                "children": []
+            },
+            {
+                "title": "Acceso externo ",
+                "key": "E.2",
+                "value": "E.2",
+                "children": []
+            },
+            {
+                "title": "Servicios proporcionados por otras organizaciones ",
+                "key": "E.3",
+                "value": "E.3",
+                "children": []
+            },
+            {
+                "title": "Personal subcontratado ",
+                "key": "E.4",
+                "value": "E.4",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "Adquisición / desarrollo ",
+        "key": "NEW",
+        "value": "NEW",
+        "children": [
+            {
+                "title": "Servicios: Adquisición o desarrollo ",
+                "key": "NEW.S",
+                "value": "NEW.S",
+                "children": []
+            },
+            {
+                "title": "Aplicaciones: Adquisición o desarrollo ",
+                "key": "NEW.SW",
+                "value": "NEW.SW",
+                "children": []
+            },
+            {
+                "title": "Equipos: Adquisición o desarrollo ",
+                "key": "NEW.HW",
+                "value": "NEW.HW",
+                "children": []
+            },
+            {
+                "title": "Comunicaciones: Adquisición o contratación",
+                "key": "NEW.COM",
+                "value": "NEW.COM",
+                "children": []
+            },
+            {
+                "title": "Soportes de Información: Adquisición ",
+                "key": "NEW.MP",
+                "value": "NEW.MP",
+                "children": []
+            },
+            {
+                "title": "Productos certificados o acreditados ",
+                "key": "NEW.C",
+                "value": "NEW.C",
+                "children": []
+            }
+        ]
+    }
+]
+
+[
+    {
+        "treath_name": "Fuego",
+        "treath_code": "F"
+    },
+    {
+        "treath_name": "Fuego",
+        "treath_code": "F"
+    }
+]
+
+
+[PR] Prevención
+[DR] Disuasión
+[EL] Eliminación
+[IM] Minimización o Limitación del impacto
+[CR] Corrección
+[RC] Recuperación
+[MN] Monitorización
+[DC] Detección
+[AW] Concienciación
+[AD] Administración
+[OT] Otro

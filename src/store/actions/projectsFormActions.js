@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import projectFormActionTypes from 'store/actionsType/projectFormActionTypes'
 const projectsFormToggleAction = (data) => {
 	return {
@@ -32,6 +33,41 @@ const assetsFormToggleAction = (data) => {
 	}
 }
 
+const setSafeguardsFormDataAction = (
+	id,
+	safeguardCode,
+	safeguardName,
+	safeguardType,
+	threatList,
+	safeguardDescription
+) => {
+	return {
+		action: projectFormActionTypes.SAFEGUARDS_SET_FORM_DATA,
+		payload: {
+			id,
+			safeguardCode,
+			safeguardName,
+			safeguardType,
+			threatList,
+			safeguardDescription,
+		},
+	}
+}
+
+const safeguardsFormToggleAction = (data) => {
+	return {
+		action: projectFormActionTypes.SAFEGUARDS_FORM_TOGGLE,
+		payload: data,
+	}
+}
+
+const setToggleSafeguardDataFormAction = (data) => {
+	return {
+		action: projectFormActionTypes.SAFEGUARDS_FORM_DATA_TOGGLE,
+		payload: data,
+	}
+}
+
 const uploadToggleAction = (data) => {
 	return {
 		action: projectFormActionTypes.UPLOAD_TOGGLE,
@@ -44,5 +80,8 @@ export {
 	setProjectsFormDataAction,
 	assetsFormToggleAction,
 	setAssetsFormDataAction,
+	safeguardsFormToggleAction,
+	setSafeguardsFormDataAction,
 	uploadToggleAction,
+	setToggleSafeguardDataFormAction,
 }
