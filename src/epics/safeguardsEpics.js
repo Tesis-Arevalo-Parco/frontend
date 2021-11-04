@@ -71,3 +71,21 @@ export const updateSafeguards = async (
 		return error.response
 	}
 }
+
+export const updateSafeguardsValue = async (
+	id,
+	effectiveness_against_impact,
+	effectiveness_against_probability,
+	total_effectiveness
+) => {
+	try {
+		const response = await axios.put(`${API_URL}/safeguards/${id}`, {
+			effectiveness_against_impact,
+			effectiveness_against_probability,
+			total_effectiveness,
+		})
+		return response
+	} catch (error) {
+		return error.response
+	}
+}

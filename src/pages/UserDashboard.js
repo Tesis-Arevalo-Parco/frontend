@@ -24,6 +24,8 @@ import SafeguardsIdentification from './safeguards/SafeguardsIdentification'
 import SafeguardsModal from 'components/modals/SafeguardsModal'
 import ThreadsValue from 'pages/threads/ThreadsValue'
 import ThreatValueTable from 'pages/threads/ThreatValueTable'
+import SafeguardValue from 'pages/safeguards/SafeguardValue'
+import SafeguardsValueTable from 'pages/safeguards/SafeguardsValueTable'
 
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
@@ -109,6 +111,17 @@ const UserDashboard = () => {
 						<Route
 							path={paths.SAFEGUARDS_IDENTIFICATION}
 							component={Safeguards}
+							exact
+						/>
+					</Route>
+					<Route path={paths.SAFEGUARDS_VALUATION} exact={false}>
+						<Route
+							path={`${paths.SAFEGUARDS_VALUATION}/:id`}
+							component={SafeguardsValueTable}
+						/>
+						<Route
+							component={SafeguardValue}
+							path={paths.SAFEGUARDS_VALUATION}
 							exact
 						/>
 					</Route>
