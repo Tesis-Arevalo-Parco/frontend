@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from 'react'
 import { Layout, Card } from 'antd'
-import { Route, useLocation } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import SideNavBar from 'components/SideNavBar'
 import Header from 'components/Header'
 import ProjectsContext from 'store/context/ProjectsContext'
