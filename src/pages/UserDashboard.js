@@ -30,7 +30,7 @@ import SafeguardsValueTable from 'pages/safeguards/SafeguardsValueTable'
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
 	const [fakeSideNavbar, setFakeSideNavbar] = useState(false)
-	const location = useLocation()
+	// const location = useLocation()
 
 	useEffect(() => {
 		getProjectsData()
