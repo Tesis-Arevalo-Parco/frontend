@@ -1,5 +1,7 @@
+/* eslint-disable no-unreachable-loop */
+/* eslint-disable camelcase */
 import { useState, useEffect, useContext } from 'react'
-import { Table, Button, Space, Popconfirm } from 'antd'
+import { Table, Button, Space, Popconfirm, Tag } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import SearchInput from 'components/SearchInput'
 import { POPCONFIRM_MESSAGES } from 'constants/popconfirmMessages'
@@ -13,16 +15,40 @@ import { updateDependencies } from 'epics/dependenciesEpics'
 
 const TableAssetsIdentification = ({ assets }) => {
 	const [localAssets, setLocalAssets] = useState([])
-	const { getAssetsData, assetsDependencies, assetsDependencyId } = useContext(
-		ProjectsContext
-	)
+	const [dataAssetTypes, setDataAssetTypes] = useState([])
+	const {
+		getAssetsData,
+		assetsDependencies,
+		assetsDependencyId,
+		assetsClassCatalog,
+	} = useContext(ProjectsContext)
 	const { assetsParams } = useContext(ParamsContext)
 	const { setAssetsFormToggle, setAssetsFormData } = useContext(
 		ProjectsFormContext
 	)
 
-	const updateAssets = (id, identification, name, model, classType) => {
-		setAssetsFormData(id, identification, name, model, classType)
+	const updateAssets = (
+		id,
+		identification,
+		name,
+		person_charge,
+		location,
+		quantity,
+		description_asset,
+		specific_characteristics,
+		classType
+	) => {
+		setAssetsFormData(
+			id,
+			identification,
+			name,
+			person_charge,
+			location,
+			quantity,
+			description_asset,
+			specific_characteristics,
+			classType
+		)
 		setAssetsFormToggle()
 	}
 
@@ -57,7 +83,11 @@ const TableAssetsIdentification = ({ assets }) => {
 							dataItem.key,
 							dataItem.identification,
 							dataItem.name,
-							dataItem.model,
+							dataItem.person_charge,
+							dataItem.location,
+							dataItem.quantity,
+							dataItem.description_asset,
+							dataItem.specific_characteristics,
 							dataItem.classType
 						)
 					}
@@ -79,46 +109,147 @@ const TableAssetsIdentification = ({ assets }) => {
 			</Space>
 		)
 	}
+	const arrayToObject = (type) => {
+		// Devolver un array
+		const arrayTitle = []
+		type.forEach((tipo) =>
+			dataAssetTypes.forEach((objeto) => {
+				const a = findType(tipo, objeto)
+				if (a !== false) {
+					arrayTitle.push(a)
+				}
+			})
+		)
+		return arrayTitle
+	}
+
+	const findType = (type, assetsCatalog) => {
+		let result, i, currentChild
+		if (type === assetsCatalog.key || type === assetsCatalog.value) {
+			return assetsCatalog.title
+		} else {
+			for (i = 0; i < assetsCatalog.children.length; i += 1) {
+				currentChild = assetsCatalog.children[i]
+				// Search in the current child
+				result = findType(type, currentChild)
+				// Return the result if the node has been found
+				if (result !== false) {
+					return result
+				}
+			}
+			return false
+		}
+	}
+
 	const filterAssets = (assets) =>
 		assets.map((asset) => ({
 			key: asset.id,
 			identification: asset.identification,
 			name: asset.name,
-			model: asset.model,
+			person_charge: asset.person_charge,
+			location: asset.location,
+			quantity: asset.quantity,
+			description_asset: asset.description_asset,
+			specific_characteristics: asset.specific_characteristics,
+			assetclassType: arrayToObject(asset.classType.parentValueData),
+			assetclassSubType: arrayToObject(asset.classType.tree),
 			classType: asset.classType,
 		}))
 
 	const columns = [
 		{
-			title: 'Identificación',
+			title: 'Código',
 			dataIndex: 'identification',
 			key: 'identification',
-			width: '30%',
+			width: 100,
+			fixed: 'left',
 		},
 		{
 			title: 'Nombre',
 			dataIndex: 'name',
 			key: 'name',
-			width: '30%',
+			width: 100,
+			fixed: 'left',
 		},
 		{
-			title: 'Modelo',
-			dataIndex: 'model',
-			key: 'model',
-			width: '30%',
+			title: 'Persona a Cargo',
+			dataIndex: 'person_charge',
+			key: 'person_charge',
+			width: '10%',
+		},
+		{
+			title: 'Tipo',
+			dataIndex: 'assetclassType',
+			key: 'assetclassType',
+			width: '20%',
+			render: (tipos) => (
+				<span>
+					{tipos.map((tipo) => (
+						<Tag color='cyan' style={{ fontSize: 10 }} key={tipo}>
+							{tipo}
+						</Tag>
+					))}
+				</span>
+			),
+		},
+		{
+			title: 'Subtipo',
+			dataIndex: 'assetclassSubType',
+			key: 'assetclassSubType',
+			width: '20%',
+			render: (subTipos) => (
+				<span>
+					{subTipos.map((subTipo) => (
+						<Tag color='cyan' style={{ fontSize: 10 }} key={subTipo}>
+							{subTipo}
+						</Tag>
+					))}
+				</span>
+			),
+		},
+		{
+			title: 'Ubicación',
+			dataIndex: 'location',
+			key: 'location',
+			width: '10%',
+		},
+		{
+			title: 'Cantidad',
+			dataIndex: 'quantity',
+			key: 'quantity',
+			width: '10%',
+		},
+		{
+			title: 'Descripción',
+			dataIndex: 'description_asset',
+			key: 'description_asset',
+			width: '20%',
+		},
+		{
+			title: 'Características Específicas',
+			dataIndex: 'specific_characteristics',
+			key: 'specific_characteristics',
+			width: '20%',
 		},
 		{
 			title: 'Acción',
 			dataIndex: '',
 			key: 'action',
 			render: (_, record) => tableActions(record),
-			width: '10%',
+			width: 100,
+			fixed: 'right',
 		},
 	]
 
 	useEffect(() => {
 		setLocalAssets(assets)
 	}, [assets])
+
+	useEffect(() => {
+		if (assetsClassCatalog?.length !== 0 && assetsClassCatalog) {
+			setDataAssetTypes(assetsClassCatalog)
+		}
+	}, [assetsClassCatalog])
 
 	return (
 		<div className='table-assets-expandable'>
@@ -132,6 +263,7 @@ const TableAssetsIdentification = ({ assets }) => {
 				columns={columns}
 				bordered={true}
 				dataSource={filterAssets(localAssets)}
+				scroll={{ x: 2000 }}
 				locale={{
 					emptyText: (
 						<EmptyImage

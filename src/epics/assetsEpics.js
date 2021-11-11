@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
 import { API_URL } from 'constants/url'
 
@@ -13,7 +14,11 @@ export const getAssets = async () => {
 export const saveAssets = async (
 	identification,
 	name,
-	model,
+	person_charge,
+	location,
+	quantity,
+	description_asset,
+	specific_characteristics,
 	project,
 	classType,
 	threats
@@ -22,7 +27,11 @@ export const saveAssets = async (
 		const response = await axios.post(`${API_URL}/assets`, {
 			identification,
 			name,
-			model,
+			person_charge,
+			location,
+			quantity,
+			description_asset,
+			specific_characteristics,
 			project,
 			classType,
 			threats,
@@ -37,7 +46,11 @@ export const updateAssets = async (
 	id,
 	identification,
 	name,
-	model,
+	person_charge,
+	location,
+	quantity,
+	description_asset,
+	specific_characteristics,
 	project,
 	classType,
 	threats
@@ -46,7 +59,11 @@ export const updateAssets = async (
 		const response = await axios.put(`${API_URL}/assets/${id}`, {
 			identification,
 			name,
-			model,
+			person_charge,
+			location,
+			quantity,
+			description_asset,
+			specific_characteristics,
 			project,
 			classType,
 			threats,

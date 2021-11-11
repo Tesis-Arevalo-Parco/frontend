@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { useReducer } from 'react'
 import ProjectsFormReducer from 'store/reducer/ProjectsFormReducer'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
@@ -14,12 +15,23 @@ const projectsFormState = (props) => {
 		toggleFormProject: false,
 		toggleFormAssets: false,
 		toggleUpload: false,
-		projectFormData: { id: '', name: '', description: '' },
+		projectFormData: {
+			id: '',
+			code_project: '',
+			name: '',
+			date_project: '',
+			security_manager: '',
+			description: '',
+		},
 		assetsFormData: {
 			id: '',
 			identification: '',
 			name: '',
-			model: '',
+			person_charge: '',
+			location: '',
+			quantity: '',
+			description: '',
+			specific_characteristics: '',
 			classType: {},
 		},
 	}
@@ -37,19 +49,49 @@ const projectsFormState = (props) => {
 		dispatch(uploadToggleAction(data))
 	}
 
-	const setProjectsFormData = (id, name, description) => {
-		dispatch(setProjectsFormDataAction(id, name, description))
+	const setProjectsFormData = (
+		id,
+		code_project,
+		name,
+		date_project,
+		security_manager,
+		description
+	) => {
+		dispatch(
+			setProjectsFormDataAction(
+				id,
+				code_project,
+				name,
+				date_project,
+				security_manager,
+				description
+			)
+		)
 	}
 
 	const setAssetsFormData = (
 		id,
 		identification,
 		name,
-		model,
+		person_charge,
+		location,
+		quantity,
+		description_asset,
+		specific_characteristics,
 		assetsFormData
 	) => {
 		dispatch(
-			setAssetsFormDataAction(id, identification, name, model, assetsFormData)
+			setAssetsFormDataAction(
+				id,
+				identification,
+				name,
+				person_charge,
+				location,
+				quantity,
+				description_asset,
+				specific_characteristics,
+				assetsFormData
+			)
 		)
 	}
 

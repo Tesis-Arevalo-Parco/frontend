@@ -37,7 +37,11 @@ const AssetsForm = () => {
 				assetsFormData.id,
 				values.identification,
 				values.name,
-				values.model,
+				values.person_charge,
+				values.location,
+				values.quantity,
+				values.description_asset,
+				values.specific_characteristics,
 				assetsParams,
 				{ valueData, tree, parentValueData },
 				threatValues
@@ -47,9 +51,13 @@ const AssetsForm = () => {
 			const response = await saveAssets(
 				values.identification,
 				values.name,
-				values.model,
+				values.person_charge,
+				values.location,
+				values.quantity,
+				values.description_asset,
+				values.specific_characteristics,
 				assetsParams,
-				{ valueData, tree },
+				{ valueData, tree, parentValueData },
 				threatValues
 			)
 			await setAfterSaveProjects(response)
@@ -128,7 +136,11 @@ const AssetsForm = () => {
 			form.setFieldsValue({
 				identification: assetsFormData.identification,
 				name: assetsFormData.name,
-				model: assetsFormData.model,
+				person_charge: assetsFormData.person_charge,
+				location: assetsFormData.location,
+				quantity: assetsFormData.quantity,
+				description_asset: assetsFormData.description_asset,
+				specific_characteristics: assetsFormData.specific_characteristics,
 			})
 			setTree(assetsFormData?.classType?.tree)
 		}
@@ -159,13 +171,13 @@ const AssetsForm = () => {
 						form={form}
 					>
 						<Form.Item
-							label='Identificación del activo'
+							label='Código del activo'
 							name='identification'
 							className='main-form-item'
 							rules={[
 								{
 									required: true,
-									message: '¡Ingrese la identificación del activo!',
+									message: '¡Ingrese la código del activo!',
 								},
 							]}
 						>
@@ -185,17 +197,69 @@ const AssetsForm = () => {
 							<Input placeholder='Nombre del activo' type='text' />
 						</Form.Item>
 						<Form.Item
-							label='Modelo del activo'
-							name='model'
+							label='Persona a cargo del activo'
+							name='person_charge'
 							className='main-form-item'
 							rules={[
 								{
 									required: true,
-									message: '¡Ingrese el modelo del activo!',
+									message: '¡Ingrese la persona a cargo del activo!',
 								},
 							]}
 						>
-							<Input type='text' placeholder='Modelo del activo' />
+							<Input type='text' placeholder='Persona a cargo del activo' />
+						</Form.Item>
+						<Form.Item
+							label='Ubicación'
+							name='location'
+							className='main-form-item'
+							rules={[
+								{
+									required: true,
+									message: '¡Ingrese la ubicación del activo!',
+								},
+							]}
+						>
+							<Input type='text' placeholder='Ubicacion' />
+						</Form.Item>
+						<Form.Item
+							label='Cantidad'
+							name='quantity'
+							className='main-form-item'
+							rules={[
+								{
+									required: true,
+									message: '¡Ingrese la cantidad!',
+								},
+							]}
+						>
+							<Input type='text' placeholder='Cantidad' />
+						</Form.Item>
+						<Form.Item
+							label='Descripción'
+							name='description_asset'
+							className='main-form-item'
+							rules={[
+								{
+									required: true,
+									message: '¡Ingrese la descripción!',
+								},
+							]}
+						>
+							<Input type='text' placeholder='Descripcion' />
+						</Form.Item>
+						<Form.Item
+							label='Características Específicas'
+							name='specific_characteristics'
+							className='main-form-item'
+							rules={[
+								{
+									required: true,
+									message: '¡Ingrese las características específicas!',
+								},
+							]}
+						>
+							<Input type='text' placeholder='Características Específicas' />
 						</Form.Item>
 						<div className='ant-col ant-form-item-label'>Clase de activo</div>
 						{isTreeEmpty && (
@@ -212,14 +276,25 @@ const AssetsForm = () => {
 							style={{ marginBottom: '12px' }}
 						/>
 						<Form.Item className='main-button-content'>
-							<Button
-								type='primary'
-								htmlType='submit'
-								className='assets-form-button'
-								block
-							>
-								Crear Activo
-							</Button>
+							{assetsFormData.name === '' ? (
+								<Button
+									type='primary'
+									htmlType='submit'
+									className='assets-form-button'
+									block
+								>
+									Crear Activo
+								</Button>
+							) : (
+								<Button
+									type='primary'
+									htmlType='submit'
+									className='assets-form-button'
+									block
+								>
+									Guardar Cambios
+								</Button>
+							)}
 						</Form.Item>
 					</Form>
 				</Spin>
