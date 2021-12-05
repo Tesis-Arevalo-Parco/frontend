@@ -2,6 +2,7 @@ import { useReducer, useContext } from 'react'
 import ProjectsReducer from 'store/reducer/ProjectsReducer'
 import ProjectsContext from 'store/context/ProjectsContext'
 import { getProjects, getProjectById } from 'epics/projectsEpics'
+import { getSafeguardsWithThreatValue } from 'epics/safeguardsEpics'
 import { getAssetsCatalog } from 'epics/assetsEpics'
 import {
 	projectsGetDataAction,
@@ -14,6 +15,7 @@ import {
 	setAssetsValuationCatalogAction,
 	setThreatCatalogAction,
 	setSafeguardsCatalogAction,
+	setSafeguardsWithThreatDataAction,
 } from 'store/actions/projectsActions'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
 import SpinnerContext from 'store/context/SpinnerContext'
@@ -31,6 +33,7 @@ const projectsState = (props) => {
 		assetsValuationCatalog: [],
 		threatCatalog: [],
 		safeguardsCatalog: [],
+		safeguardsWithThreat: [],
 	}
 	const [state, dispatch] = useReducer(ProjectsReducer, initialProjectsState)
 
@@ -90,6 +93,15 @@ const projectsState = (props) => {
 		}
 	}
 
+	const getSafeguardsWithThreat = async (id) => {
+		activeSpinner(true)
+		const response = await getSafeguardsWithThreatValue(id)
+		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
+			dispatch(setSafeguardsWithThreatDataAction(response.data))
+		}
+		activeSpinner(false)
+	}
+
 	const setAssetsDependencies = async (dependencies) => {
 		dispatch(setAssetsDependenciesAction(dependencies))
 	}
@@ -129,12 +141,14 @@ const projectsState = (props) => {
 				assetsValuationCatalog: state.assetsValuationCatalog,
 				threatCatalog: state.threatCatalog,
 				safeguardsCatalog: state.safeguardsCatalog,
+				safeguardsWithThreat: state.safeguardsWithThreat,
 				getProjectsData,
 				getAssetsData,
 				setAssetsDependencies,
 				setAssetsDependencyId,
 				setAssetsNewDependencies,
 				getAssetsClassCatalog,
+				getSafeguardsWithThreat,
 			}}
 		>
 			{props.children}

@@ -106,6 +106,7 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 						<NavLink
 							to={paths.SAFEGUARDS_IDENTIFICATION}
 							activeClassName='selected-nav-link'
+							title='Identificar Salvaguardas'
 						>
 							Identificar Salvaguardas
 						</NavLink>
@@ -116,6 +117,17 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 							activeClassName='selected-nav-link'
 						>
 							Valorar Salvaguardas
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item
+						key='7'
+						title='Valorar Amenazas implementando salvaguardas'
+					>
+						<NavLink
+							to={paths.SAFEGUARDS_VALUATION_THREATS}
+							activeClassName='selected-nav-link'
+						>
+							Valorar Amenazas implementando salvaguardas
 						</NavLink>
 					</Menu.Item>
 				</SubMenu>
