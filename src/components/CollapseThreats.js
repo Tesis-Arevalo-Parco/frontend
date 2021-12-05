@@ -78,10 +78,7 @@ const CollapseThreats = ({ assets }) => {
 		<>
 			<Collapse defaultActiveKey={[0]}>
 				{assets.map((data, key) => (
-					<Panel
-						header={`${data?.name} / ${data?.model} / ${data?.identification}`}
-						key={key}
-					>
+					<Panel header={`${data?.identification} / ${data?.name} `} key={key}>
 						{buildThreatTable(
 							data?.threat?.threats,
 							data?.threat?.id,

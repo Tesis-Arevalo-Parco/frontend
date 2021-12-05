@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
 import { API_URL } from 'constants/url'
 import { getUserData } from 'utils/localStorageUtils'
@@ -11,11 +12,20 @@ export const getProjects = async () => {
 	}
 }
 
-export const saveProjects = async (name, description) => {
+export const saveProjects = async (
+	code_project,
+	name,
+	date_project,
+	security_manager,
+	description
+) => {
 	const user = getUserData()
 	try {
 		const response = await axios.post(`${API_URL}/projects`, {
+			code_project,
 			name,
+			date_project,
+			security_manager,
 			description,
 			user: user.id,
 		})
@@ -34,10 +44,20 @@ export const deleteProject = async (id) => {
 	}
 }
 
-export const updateProject = async (id, name, description) => {
+export const updateProject = async (
+	id,
+	code_project,
+	name,
+	date_project,
+	security_manager,
+	description
+) => {
 	try {
 		const response = await axios.put(`${API_URL}/projects/${id}`, {
+			code_project,
 			name,
+			date_project,
+			security_manager,
 			description,
 		})
 		return response

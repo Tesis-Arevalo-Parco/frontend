@@ -6,10 +6,24 @@ const projectsFormToggleAction = (data) => {
 		payload: data,
 	}
 }
-const setProjectsFormDataAction = (id, name, description) => {
+const setProjectsFormDataAction = (
+	id,
+	code_project,
+	name,
+	date_project,
+	security_manager,
+	description
+) => {
 	return {
 		action: projectFormActionTypes.PROJECTS_SET_FORM_DATA,
-		payload: { id, name, description },
+		payload: {
+			id,
+			code_project,
+			name,
+			date_project,
+			security_manager,
+			description,
+		},
 	}
 }
 
@@ -17,12 +31,26 @@ const setAssetsFormDataAction = (
 	id,
 	identification,
 	name,
-	model,
+	person_charge,
+	location,
+	quantity,
+	description_asset,
+	specific_characteristics,
 	classType
 ) => {
 	return {
 		action: projectFormActionTypes.ASSETS_SET_FORM_DATA,
-		payload: { id, identification, name, model, classType },
+		payload: {
+			id,
+			identification,
+			name,
+			person_charge,
+			location,
+			quantity,
+			description_asset,
+			specific_characteristics,
+			classType,
+		},
 	}
 }
 

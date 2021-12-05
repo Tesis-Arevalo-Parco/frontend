@@ -79,6 +79,11 @@ const ForgottenPassword = () => {
 							className='main-form-item'
 							rules={[
 								{
+									type: 'email',
+									message:
+										'Escribe la dirección de correo electrónico con el formato alguien@example.com',
+								},
+								{
 									required: true,
 									message: '¡Ingrese su correo electrónico!',
 								},

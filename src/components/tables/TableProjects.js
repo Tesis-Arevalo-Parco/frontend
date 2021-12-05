@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { useContext, useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Table, Button, Space, Popconfirm } from 'antd'
@@ -29,10 +30,24 @@ const TableProjects = () => {
 		await getProjectsData()
 	}
 
-	const updateProject = (id, name, description) => {
+	const updateProject = (
+		id,
+		code_project,
+		name,
+		date_project,
+		security_manager,
+		description
+	) => {
 		appendParams.append('selectedProject', id)
 		history.push({ search: appendParams.toString() })
-		setProjectsFormData(id, name, description)
+		setProjectsFormData(
+			id,
+			code_project,
+			name,
+			date_project,
+			security_manager,
+			description
+		)
 		setProjectsFormToggle()
 	}
 
@@ -49,7 +64,14 @@ const TableProjects = () => {
 				<Button
 					key='edit'
 					onClick={() =>
-						updateProject(dataItem.key, dataItem.name, dataItem.description)
+						updateProject(
+							dataItem.key,
+							dataItem.code_project,
+							dataItem.name,
+							dataItem.date_project,
+							dataItem.security_manager,
+							dataItem.description
+						)
 					}
 					icon={<EditOutlined />}
 					className='update-button'
@@ -72,17 +94,38 @@ const TableProjects = () => {
 	const filterProjects = (projects) =>
 		projects.map((project) => ({
 			key: project.id,
+			code_project: project.code_project,
 			name: project.name,
+			date_project: project.date_project,
+			security_manager: project.security_manager,
 			description: project.description,
 		}))
 
 	const columns = [
-		{ title: 'Nombre', dataIndex: 'name', key: 'name', width: '40%' },
+		{
+			title: 'Codigo',
+			dataIndex: 'code_project',
+			key: 'code_project',
+			width: '20%',
+		},
+		{ title: 'Nombre', dataIndex: 'name', key: 'name', width: '20%' },
+		{
+			title: 'Fecha',
+			dataIndex: 'date_project',
+			key: 'date_project',
+			width: '20%',
+		},
+		{
+			title: 'Responsable de Seguridad',
+			dataIndex: 'security_manager',
+			key: 'security_manager',
+			width: '20%',
+		},
 		{
 			title: 'Descripción',
 			dataIndex: 'description',
 			key: 'description',
-			width: '50%',
+			width: '25%',
 		},
 		{
 			title: 'Acción',

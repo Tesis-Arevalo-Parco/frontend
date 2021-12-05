@@ -23,7 +23,11 @@ const Uploader = () => {
 				await saveAssets(
 					asset.identification,
 					asset.name,
-					asset.model,
+					asset.person_charge,
+					asset.location,
+					asset.quantity,
+					asset.description,
+					asset.specific_characteristics,
 					assetsParams,
 					[],
 					[]
@@ -66,17 +70,31 @@ const Uploader = () => {
 				if (
 					upperCasedTitle.includes('ID') &&
 					upperCasedTitle.includes('NOMBRE') &&
-					upperCasedTitle.includes('MODELO')
+					upperCasedTitle.includes('PERSON_CHARGE') &&
+					upperCasedTitle.includes('LOCATION') &&
+					upperCasedTitle.includes('QUANTITY') &&
+					upperCasedTitle.includes('DESCRIPTION') &&
+					upperCasedTitle.includes('SPECIFIC_CHARACTERISTICS')
 				) {
 					const idIndex = upperCasedTitle.indexOf('ID')
 					const nameIndex = upperCasedTitle.indexOf('NOMBRE')
-					const modelIndex = upperCasedTitle.indexOf('MODELO')
+					const personChargeIndex = upperCasedTitle.indexOf('PERSON_CHARGE')
+					const locationIndex = upperCasedTitle.indexOf('LOCATION')
+					const quantityIndex = upperCasedTitle.indexOf('QUANTITY')
+					const descriptionIndex = upperCasedTitle.indexOf('DESCRIPTION')
+					const specificCharacteristicsIndex = upperCasedTitle.indexOf(
+						'SPECIFIC_CHARACTERISTICS'
+					)
 					response.rows.slice(1).map((row, index) => {
 						if (row && row.length) {
 							newRows.push({
 								identification: row[idIndex],
 								name: row[nameIndex],
-								model: row[modelIndex],
+								person_charge: row[personChargeIndex],
+								location: row[locationIndex],
+								quantity: row[quantityIndex],
+								description: row[descriptionIndex],
+								specific_characteristics: row[specificCharacteristicsIndex],
 							})
 						}
 					})
