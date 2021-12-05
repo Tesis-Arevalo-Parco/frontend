@@ -89,3 +89,12 @@ export const updateSafeguardsValue = async (
 		return error.response
 	}
 }
+
+export const getSafeguardsWithThreatValue = async (id) => {
+	try {
+		const response = await axios.get(`${API_URL}/safeguards-threats/${id}`)
+		return response
+	} catch (error) {
+		return error.response
+	}
+}

@@ -68,6 +68,13 @@ const setSafeguardsCatalogAction = (data) => {
 	}
 }
 
+const setSafeguardsWithThreatDataAction = (data) => {
+	return {
+		action: projectActionTypes.PROJECT_SET_SAFEGUARDS_WITH_THREAT_DATA,
+		payload: data,
+	}
+}
+
 export {
 	projectsGetDataAction,
 	assetsGetDataAction,
@@ -79,4 +86,5 @@ export {
 	setAssetsValuationCatalogAction,
 	setThreatCatalogAction,
 	setSafeguardsCatalogAction,
+	setSafeguardsWithThreatDataAction,
 }

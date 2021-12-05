@@ -17,4 +17,5 @@ export const paths = {
 	ASSETS_LIST: '/activos/lista',
 	STATICS: '/estadisticas',
 	PROJECTS: '/proyectos',
+	SAFEGUARDS_VALUATION_THREATS: '/salvaguardas-amenazas/valoracion',
 }
