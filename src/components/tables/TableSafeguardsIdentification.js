@@ -44,8 +44,8 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 		await getAssetsData(assetsParams)
 	}
 
-	const filterSafeguards = (safeguards) =>
-		safeguards?.map((safeguard) => ({
+	const filterSafeguards = (safeguards) => {
+		return safeguards?.map((safeguard) => ({
 			key: safeguard.id,
 			safeguardCode: safeguard.safeguard_code,
 			safeguardName: safeguard.safeguard_name,
@@ -53,6 +53,7 @@ const TableSafeguardsIdentification = ({ safeguards }) => {
 			threatList: safeguard.treath_list,
 			safeguardDescription: safeguard.safeguard_description,
 		}))
+	}
 
 	const tableActions = (dataItem) => {
 		return (

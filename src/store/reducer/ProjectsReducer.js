@@ -58,6 +58,11 @@ export default (state, data) => {
 				...state,
 				safeguardsWithThreat: payload,
 			}
+		case projectActionTypes.PROJECT_SET_SAFEGUARDS_WITH_THREAT__RISK_DATA:
+			return {
+				...state,
+				safeguardsWithThreatRisk: payload,
+			}
 		default:
 			break
 	}

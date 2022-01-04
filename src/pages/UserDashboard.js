@@ -28,6 +28,9 @@ import SafeguardValue from 'pages/safeguards/SafeguardValue'
 import SafeguardsValueTable from 'pages/safeguards/SafeguardsValueTable'
 import SafeguardThreadsValue from 'pages/safeguards/SafeguardThreadsValue'
 import SafeguardThreatValueTable from 'pages/safeguards/SafeguardThreatValueTable'
+import PotentialImpact from 'pages/risks/PotentialImpact'
+import ResidualImpact from 'pages/risks/ResidualImpact'
+import Risks from 'pages/risks/Risks'
 
 const UserDashboard = () => {
 	const { getProjectsData, getAssetsClassCatalog } = useContext(ProjectsContext)
@@ -135,6 +138,28 @@ const UserDashboard = () => {
 						<Route
 							component={SafeguardThreadsValue}
 							path={paths.SAFEGUARDS_VALUATION_THREATS}
+							exact
+						/>
+					</Route>
+					<Route path={paths.STATE_POTENTIAL_IMPACT} exact={false}>
+						<Route
+							path={`${paths.STATE_POTENTIAL_IMPACT}/:id`}
+							component={PotentialImpact}
+						/>
+						<Route
+							component={() => <Risks path={paths.STATE_POTENTIAL_IMPACT} />}
+							path={paths.STATE_POTENTIAL_IMPACT}
+							exact
+						/>
+					</Route>
+					<Route path={paths.STATE_RESIDUAL_IMPACT} exact={false}>
+						<Route
+							path={`${paths.STATE_RESIDUAL_IMPACT}/:id`}
+							component={ResidualImpact}
+						/>
+						<Route
+							component={() => <Risks path={paths.STATE_RESIDUAL_IMPACT} />}
+							path={paths.STATE_RESIDUAL_IMPACT}
 							exact
 						/>
 					</Route>

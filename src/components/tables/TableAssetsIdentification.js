@@ -59,9 +59,9 @@ const TableAssetsIdentification = ({ assets }) => {
 	}
 
 	const deleteAssetDependencies = async (id) => {
-		if (assetsDependencies.length) {
+		if (assetsDependencies?.length) {
 			const newDependency = []
-			assetsDependencies.forEach((dependency) => {
+			assetsDependencies?.forEach((dependency) => {
 				if (
 					dependency.firstAsset.id !== id &&
 					dependency.secondAsset.id !== id
@@ -112,8 +112,8 @@ const TableAssetsIdentification = ({ assets }) => {
 	const arrayToObject = (type) => {
 		// Devolver un array
 		const arrayTitle = []
-		type.forEach((tipo) =>
-			dataAssetTypes.forEach((objeto) => {
+		type?.forEach((tipo) =>
+			dataAssetTypes?.forEach((objeto) => {
 				const a = findType(tipo, objeto)
 				if (a !== false) {
 					arrayTitle.push(a)
@@ -128,7 +128,7 @@ const TableAssetsIdentification = ({ assets }) => {
 		if (type === assetsCatalog.key || type === assetsCatalog.value) {
 			return assetsCatalog.title
 		} else {
-			for (i = 0; i < assetsCatalog.children.length; i += 1) {
+			for (i = 0; i < assetsCatalog.children?.length; i += 1) {
 				currentChild = assetsCatalog.children[i]
 				// Search in the current child
 				result = findType(type, currentChild)
