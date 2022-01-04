@@ -18,4 +18,9 @@ export const paths = {
 	STATICS: '/estadisticas',
 	PROJECTS: '/proyectos',
 	SAFEGUARDS_VALUATION_THREATS: '/salvaguardas-amenazas/valoracion',
+	STATE: '/estado-riesgo',
+	STATE_POTENTIAL_IMPACT: '/estado-riesgo/impacto-potencial',
+	STATE_RESIDUAL_IMPACT: '/estado-riesgo/impacto-residual',
+	STATE_POTENTIAL_RISK: '/estado-riesgo/riesgo-potencial',
+	STATE_RESIDUAL_RISK: '/estado-riesgo/riesgo-residual',
 }

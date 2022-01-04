@@ -2,7 +2,10 @@ import { useReducer, useContext } from 'react'
 import ProjectsReducer from 'store/reducer/ProjectsReducer'
 import ProjectsContext from 'store/context/ProjectsContext'
 import { getProjects, getProjectById } from 'epics/projectsEpics'
-import { getSafeguardsWithThreatValue } from 'epics/safeguardsEpics'
+import {
+	getSafeguardsWithThreatValue,
+	getSafeguardsWithThreatRiskValue,
+} from 'epics/safeguardsEpics'
 import { getAssetsCatalog } from 'epics/assetsEpics'
 import {
 	projectsGetDataAction,
@@ -16,6 +19,7 @@ import {
 	setThreatCatalogAction,
 	setSafeguardsCatalogAction,
 	setSafeguardsWithThreatDataAction,
+	setSafeguardsWithThreatRiskDataAction,
 } from 'store/actions/projectsActions'
 import { CODE_HTTP_RESPONSE } from 'constants/codeHttpResponse'
 import SpinnerContext from 'store/context/SpinnerContext'
@@ -34,6 +38,7 @@ const projectsState = (props) => {
 		threatCatalog: [],
 		safeguardsCatalog: [],
 		safeguardsWithThreat: [],
+		safeguardsWithThreatRisk: [],
 	}
 	const [state, dispatch] = useReducer(ProjectsReducer, initialProjectsState)
 
@@ -51,15 +56,9 @@ const projectsState = (props) => {
 		const response = await getProjectById(id)
 		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
 			dispatch(assetsGetDataAction(response.data?.assets))
-			if (response.data?.dependency?.dependencies) {
-				setAssetsDependencies(response.data?.dependency?.dependencies)
-				setAssetsDependencyId(response.data?.dependency?.id)
-				dispatch(safeguardsGetDataAction(response.data?.safeguards))
-			} else {
-				setAssetsDependencies([])
-				setAssetsDependencyId('')
-				dispatch(safeguardsGetDataAction([]))
-			}
+			setAssetsDependencies(response.data?.dependency?.dependencies ?? [])
+			setAssetsDependencyId(response.data?.dependency?.id ?? '')
+			dispatch(safeguardsGetDataAction(response?.data?.safeguards ?? []))
 		}
 		activeSpinner(false)
 	}
@@ -98,6 +97,15 @@ const projectsState = (props) => {
 		const response = await getSafeguardsWithThreatValue(id)
 		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
 			dispatch(setSafeguardsWithThreatDataAction(response.data))
+		}
+		activeSpinner(false)
+	}
+
+	const getSafeguardsWithThreatRisk = async (id) => {
+		activeSpinner(true)
+		const response = await getSafeguardsWithThreatRiskValue(id)
+		if (response?.status === CODE_HTTP_RESPONSE.SUCCESS_200) {
+			dispatch(setSafeguardsWithThreatRiskDataAction(response.data))
 		}
 		activeSpinner(false)
 	}
@@ -142,6 +150,7 @@ const projectsState = (props) => {
 				threatCatalog: state.threatCatalog,
 				safeguardsCatalog: state.safeguardsCatalog,
 				safeguardsWithThreat: state.safeguardsWithThreat,
+				safeguardsWithThreatRisk: state.safeguardsWithThreatRisk,
 				getProjectsData,
 				getAssetsData,
 				setAssetsDependencies,
@@ -149,6 +158,7 @@ const projectsState = (props) => {
 				setAssetsNewDependencies,
 				getAssetsClassCatalog,
 				getSafeguardsWithThreat,
+				getSafeguardsWithThreatRisk,
 			}}
 		>
 			{props.children}

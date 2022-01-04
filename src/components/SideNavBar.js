@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom'
 import {
 	HomeFilled,
 	FlagFilled,
-	PieChartFilled,
+	ControlOutlined,
 	FireFilled,
 	SafetyCertificateFilled,
 } from '@ant-design/icons'
@@ -119,27 +119,56 @@ const SideNavBar = ({ setFakeSideNavbar }) => {
 							Valorar Salvaguardas
 						</NavLink>
 					</Menu.Item>
+				</SubMenu>
+				<SubMenu
+					key='submenu-state-risk'
+					icon={<ControlOutlined />}
+					title='Estado de Riesgo'
+				>
 					<Menu.Item
 						key='7'
-						title='Valorar Amenazas implementando salvaguardas'
+						title='Valoración de amenazas implementando salvaguardas'
 					>
 						<NavLink
 							to={paths.SAFEGUARDS_VALUATION_THREATS}
 							activeClassName='selected-nav-link'
 						>
-							Valorar Amenazas implementando salvaguardas
+							Valoración de amenazas implementando salvaguardas
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='8' title='Impacto Potencial'>
+						<NavLink
+							to={paths.STATE_POTENTIAL_IMPACT}
+							activeClassName='selected-nav-link'
+						>
+							Impacto Potencial
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='9' title='Impacto Residual'>
+						<NavLink
+							to={paths.STATE_RESIDUAL_IMPACT}
+							activeClassName='selected-nav-link'
+						>
+							Impacto Residual
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='10' title='Riesgo Potencial'>
+						<NavLink
+							to={paths.STATE_POTENTIAL_RISK}
+							activeClassName='selected-nav-link'
+						>
+							Riesgo Potencial
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key='11' title='Riesgo Residual'>
+						<NavLink
+							to={paths.STATE_RESIDUAL_RISK}
+							activeClassName='selected-nav-link'
+						>
+							Riesgo Residual
 						</NavLink>
 					</Menu.Item>
 				</SubMenu>
-				<Menu.Item key='8' icon={<PieChartFilled />}>
-					<NavLink
-						className='nav-link-router'
-						activeClassName='selected-nav-link'
-						to={paths.STATICS}
-					>
-						Estadísticas
-					</NavLink>
-				</Menu.Item>
 			</Menu>
 		</Sider>
 	)
