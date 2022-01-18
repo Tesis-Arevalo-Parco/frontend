@@ -128,7 +128,7 @@ const TableAssetsIdentification = ({ assets }) => {
 		if (type === assetsCatalog.key || type === assetsCatalog.value) {
 			return assetsCatalog.title
 		} else {
-			for (i = 0; i < assetsCatalog.children?.length; i += 1) {
+			for (i = 0; i < assetsCatalog?.children?.length; i += 1) {
 				currentChild = assetsCatalog.children[i]
 				// Search in the current child
 				result = findType(type, currentChild)

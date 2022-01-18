@@ -17,7 +17,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 	useEffect(() => {
 		listOfDependencies = []
 		setLocalAssets(assets.map((asset) => asset.name))
-		const test = createData(assets.length)
+		const test = createData(assets?.length)
 		setData(test)
 		hotTableRef.current?.hotInstance.updateSettings({
 			cells(row, col) {
