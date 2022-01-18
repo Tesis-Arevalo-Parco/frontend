@@ -57,6 +57,7 @@ const TablePotentialImpactComputation = ({ assets }) => {
 		return result
 	}
 
+	// eslint-disable-next-line no-unused-vars
 	const calculoRiesgo = (valoProbabilidad, valorImpacto) => {
 		let valorX = -1
 		let valorY = -1
