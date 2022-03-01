@@ -520,6 +520,82 @@ const DashBoardHeader = () => {
 					</Row>
 				</Col>
 			)
+		} else if (location.pathname.includes(paths.STATE_POTENTIAL_RISK)) {
+			return (
+				<Col>
+					<Row justify='space-between' align='middle'>
+						<Row justify='space-between' align='middle'>
+							<Space size='middle'>
+								<span level={2} className='header-card-title'>
+									Riesgo Potencial
+								</span>
+								<Select
+									showSearch
+									style={{ width: 200, marginTop: '0.5rem' }}
+									placeholder='Seleccione un proyecto'
+									optionFilterProp='children'
+									filterOption={(input, option) =>
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+									}
+									value={projectName}
+								>
+									{projects.map((project) => {
+										return (
+											<Option key={project.id} value={project.name}>
+												<Link
+													to={`${paths.STATE_POTENTIAL_RISK}/${project.id}`}
+													style={{ display: 'block' }}
+													onClick={() => setProjectName(project.name)}
+												>
+													{project.name}
+												</Link>
+											</Option>
+										)
+									})}
+								</Select>
+							</Space>
+						</Row>
+					</Row>
+				</Col>
+			)
+		} else if (location.pathname.includes(paths.STATE_RESIDUAL_RISK)) {
+			return (
+				<Col>
+					<Row justify='space-between' align='middle'>
+						<Row justify='space-between' align='middle'>
+							<Space size='middle'>
+								<span level={2} className='header-card-title'>
+									Riesgo Residual
+								</span>
+								<Select
+									showSearch
+									style={{ width: 200, marginTop: '0.5rem' }}
+									placeholder='Seleccione un proyecto'
+									optionFilterProp='children'
+									filterOption={(input, option) =>
+										option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+									}
+									value={projectName}
+								>
+									{projects.map((project) => {
+										return (
+											<Option key={project.id} value={project.name}>
+												<Link
+													to={`${paths.STATE_RESIDUAL_RISK}/${project.id}`}
+													style={{ display: 'block' }}
+													onClick={() => setProjectName(project.name)}
+												>
+													{project.name}
+												</Link>
+											</Option>
+										)
+									})}
+								</Select>
+							</Space>
+						</Row>
+					</Row>
+				</Col>
+			)
 		} else if (location.pathname.includes(paths.ROOT_APP)) {
 			return (
 				<Row justify='space-between' align='middle'>

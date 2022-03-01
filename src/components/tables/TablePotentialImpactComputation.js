@@ -19,6 +19,7 @@ const TablePotentialImpactComputation = ({ assets }) => {
 		['MA', 'MA', 'A', 'M', 'B'],
 	]
 
+	// Impacto Repercutido Potencial
 	const calculoImpacto = (valorActivo, valorDegradacion) => {
 		// valorActivo = 5  10 7 4 1 0
 		// 0 < valorActivo < 0.9 indice=4
@@ -57,7 +58,49 @@ const TablePotentialImpactComputation = ({ assets }) => {
 		return result
 	}
 
+	// Impacto Acumulado Potencial - considerar el valor de la dependencia
+	const calculoImpactoAcumulado = (valorAcumuladoActivo, valorDegradacion) => {
+		// valorAcumualadoActivo => es el valor de la dependencia 1,2,3,4
+		// 0 < valorAcumuladoActivo < 0.9 indice=4
+		// valorActivo = 5  10 7 4 1 0
+		// 0 < valorActivo < 0.9 indice=4
+		// 1 < valorActivo < 3.9 indice=3
+		// 4 < valorActivo < 6.9 indice=2
+		// 7 < valorActivo < 9.9 indice=1
+		// valorActivo = 10      indice=0
+		// valorDegradacion = 30%    1%-20%	30%-70%	80%-100%
+		// 0 < valorDegradacion < 29 indice=0
+		// 30 < valorDegradacion < 79 indice=1
+		// 80 < valorDegradacion < 100 indice=2
+
+		let valorX = -1
+		let valorY = -1
+
+		if (valorDegradacion >= 80 && valorDegradacion <= 100) {
+			valorX = 2
+		} else if (valorDegradacion >= 30 && valorDegradacion <= 79) {
+			valorX = 1
+		} else if (valorDegradacion >= 0 && valorDegradacion <= 29) {
+			valorX = 0
+		}
+
+		if (valorAcumuladoActivo === 10) {
+			valorY = 0
+		} else if (valorAcumuladoActivo >= 7 && valorAcumuladoActivo <= 9.9) {
+			valorY = 1
+		} else if (valorAcumuladoActivo >= 4 && valorAcumuladoActivo <= 6.9) {
+			valorY = 2
+		} else if (valorAcumuladoActivo >= 1 && valorAcumuladoActivo <= 3.9) {
+			valorY = 3
+		} else if (valorAcumuladoActivo >= 0 && valorAcumuladoActivo <= 0.9) {
+			valorY = 4
+		}
+		const result = matrizImpacto[valorX][valorY]
+		return result
+	}
+
 	// eslint-disable-next-line no-unused-vars
+	// Riesgo repercutido Potencial
 	const calculoRiesgo = (valoProbabilidad, valorImpacto) => {
 		let valorX = -1
 		let valorY = -1
@@ -89,6 +132,225 @@ const TablePotentialImpactComputation = ({ assets }) => {
 		return result
 	}
 
+	// Riesgo cumulado Potencial
+	const calculoRiesgoAcumulado = (valoProbabilidad, valorImpactoAcumualado) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valoProbabilidad === 'MB') {
+			valorX = 0
+		} else if (valoProbabilidad === 'B') {
+			valorX = 1
+		} else if (valoProbabilidad === 'M') {
+			valorX = 2
+		} else if (valoProbabilidad === 'A') {
+			valorX = 3
+		} else if (valoProbabilidad === 'MA') {
+			valorX = 4
+		}
+
+		if (valorImpactoAcumualado === 'MA') {
+			valorY = 0
+		} else if (valorImpactoAcumualado === 'A') {
+			valorY = 1
+		} else if (valorImpactoAcumualado === 'M') {
+			valorY = 2
+		} else if (valorImpactoAcumualado === 'B') {
+			valorY = 3
+		} else if (valorImpactoAcumualado === 'MB') {
+			valorY = 4
+		}
+		const result = matrizRiesgo[valorX][valorY]
+		return result
+	}
+
+	// RESIDUAL
+
+	// Impacto Residual Repercutido sacar => Valorar Amenazas implementando salvaguardas
+	const calculoImpactoResidualRepercutido = (
+		valorActivo,
+		valorDegradacionResidual
+	) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
+			valorX = 2
+		} else if (
+			valorDegradacionResidual >= 30 &&
+			valorDegradacionResidual <= 79
+		) {
+			valorX = 1
+		} else if (
+			valorDegradacionResidual >= 0 &&
+			valorDegradacionResidual <= 29
+		) {
+			valorX = 0
+		}
+
+		if (valorActivo === 10) {
+			valorY = 0
+		} else if (valorActivo >= 7 && valorActivo <= 9.9) {
+			valorY = 1
+		} else if (valorActivo >= 4 && valorActivo <= 6.9) {
+			valorY = 2
+		} else if (valorActivo >= 1 && valorActivo <= 3.9) {
+			valorY = 3
+		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
+			valorY = 4
+		}
+		const result = matrizImpacto[valorX][valorY]
+		return result
+	}
+	// Impacto Residual Acumulado
+	const calculoImpactoResidualAcumulado = (
+		valorActivoAcumulado,
+		valorDegradacionResidual
+	) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
+			valorX = 2
+		} else if (
+			valorDegradacionResidual >= 30 &&
+			valorDegradacionResidual <= 79
+		) {
+			valorX = 1
+		} else if (
+			valorDegradacionResidual >= 0 &&
+			valorDegradacionResidual <= 29
+		) {
+			valorX = 0
+		}
+
+		if (valorActivoAcumulado === 10) {
+			valorY = 0
+		} else if (valorActivoAcumulado >= 7 && valorActivoAcumulado <= 9.9) {
+			valorY = 1
+		} else if (valorActivoAcumulado >= 4 && valorActivoAcumulado <= 6.9) {
+			valorY = 2
+		} else if (valorActivoAcumulado >= 1 && valorActivoAcumulado <= 3.9) {
+			valorY = 3
+		} else if (valorActivoAcumulado >= 0 && valorActivoAcumulado <= 0.9) {
+			valorY = 4
+		}
+		const result = matrizImpacto[valorX][valorY]
+		return result
+	}
+
+	// Riesgo Repercutido Residual
+	// valoProbabilidadResidual ==> sacar de [P] Probabilidad de Valorar Amenazas implementando salvaguardas
+	// valorImpacto => sacar de calculoImpactoResidualRepercutido()
+	const calculoRiesgoRepercutidoResidual = (
+		valoProbabilidadResidual,
+		valorImpactoResidualRepercutido
+	) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valoProbabilidadResidual === 'MB') {
+			valorX = 0
+		} else if (valoProbabilidadResidual === 'B') {
+			valorX = 1
+		} else if (valoProbabilidadResidual === 'M') {
+			valorX = 2
+		} else if (valoProbabilidadResidual === 'A') {
+			valorX = 3
+		} else if (valoProbabilidadResidual === 'MA') {
+			valorX = 4
+		}
+
+		if (valorImpactoResidualRepercutido === 'MA') {
+			valorY = 0
+		} else if (valorImpactoResidualRepercutido === 'A') {
+			valorY = 1
+		} else if (valorImpactoResidualRepercutido === 'M') {
+			valorY = 2
+		} else if (valorImpactoResidualRepercutido === 'B') {
+			valorY = 3
+		} else if (valorImpactoResidualRepercutido === 'MB') {
+			valorY = 4
+		}
+		const result = matrizRiesgo[valorX][valorY]
+		return result
+	}
+
+	// riesgo residual
+	// Riesgo repercutido Residual
+	// valoProbabilidadResidual => [P] Probabilidad
+	// valorImpactoRepercutidoResidual => calculoImpactoResidualRepercutido()
+	const calculoRiesgoResidualRepercutido = (
+		valoProbabilidadResidual,
+		valorImpactoResidualRepercutido
+	) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valoProbabilidadResidual === 'MB') {
+			valorX = 0
+		} else if (valoProbabilidadResidual === 'B') {
+			valorX = 1
+		} else if (valoProbabilidadResidual === 'M') {
+			valorX = 2
+		} else if (valoProbabilidadResidual === 'A') {
+			valorX = 3
+		} else if (valoProbabilidadResidual === 'MA') {
+			valorX = 4
+		}
+
+		if (valorImpactoResidualRepercutido === 'MA') {
+			valorY = 0
+		} else if (valorImpactoResidualRepercutido === 'A') {
+			valorY = 1
+		} else if (valorImpactoResidualRepercutido === 'M') {
+			valorY = 2
+		} else if (valorImpactoResidualRepercutido === 'B') {
+			valorY = 3
+		} else if (valorImpactoResidualRepercutido === 'MB') {
+			valorY = 4
+		}
+		const result = matrizRiesgo[valorX][valorY]
+		return result
+	}
+
+	// Riesgo Acumulado Residual
+	// valoProbabilidadResidual => [P] Probabilidad
+	// valorImpactoAcumualadoResidual => calculoImpactoResidualAcumulado()
+	const calculoRiesgoAcumuladoResidual = (
+		valoProbabilidadResidual,
+		valorImpactoAcumualadoResidual
+	) => {
+		let valorX = -1
+		let valorY = -1
+
+		if (valoProbabilidadResidual === 'MB') {
+			valorX = 0
+		} else if (valoProbabilidadResidual === 'B') {
+			valorX = 1
+		} else if (valoProbabilidadResidual === 'M') {
+			valorX = 2
+		} else if (valoProbabilidadResidual === 'A') {
+			valorX = 3
+		} else if (valoProbabilidadResidual === 'MA') {
+			valorX = 4
+		}
+
+		if (valorImpactoAcumualadoResidual === 'MA') {
+			valorY = 0
+		} else if (valorImpactoAcumualadoResidual === 'A') {
+			valorY = 1
+		} else if (valorImpactoAcumualadoResidual === 'M') {
+			valorY = 2
+		} else if (valorImpactoAcumualadoResidual === 'B') {
+			valorY = 3
+		} else if (valorImpactoAcumualadoResidual === 'MB') {
+			valorY = 4
+		}
+		const result = matrizRiesgo[valorX][valorY]
+		return result
+	}
+
 	const { Panel } = Collapse
 	const [form] = Form.useForm()
 	const { active } = useContext(SpinnerContext)
@@ -100,7 +362,7 @@ const TablePotentialImpactComputation = ({ assets }) => {
 			key: 'name',
 		},
 		{
-			title: 'Impacto Acumulado',
+			title: 'Impacto Acumulado Potencial',
 			children: [
 				{
 					title: DATA_ASSETS_VALUE.availability.label,
@@ -140,7 +402,7 @@ const TablePotentialImpactComputation = ({ assets }) => {
 			],
 		},
 		{
-			title: 'Impacto Residual',
+			title: 'Impacto Repercutido Potencial',
 			children: [
 				{
 					title: DATA_ASSETS_VALUE.availability.label,
