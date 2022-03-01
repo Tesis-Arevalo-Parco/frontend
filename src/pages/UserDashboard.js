@@ -30,6 +30,8 @@ import SafeguardThreadsValue from 'pages/safeguards/SafeguardThreadsValue'
 import SafeguardThreatValueTable from 'pages/safeguards/SafeguardThreatValueTable'
 import PotentialImpact from 'pages/risks/PotentialImpact'
 import ResidualImpact from 'pages/risks/ResidualImpact'
+import PotentialRisk from 'pages/risks/PotentialRisk'
+import ResidualRisk from 'pages/risks/ResidualRisk'
 import Risks from 'pages/risks/Risks'
 
 const UserDashboard = () => {
@@ -163,11 +165,28 @@ const UserDashboard = () => {
 							exact
 						/>
 					</Route>
-					<Route
-						component={() => <div>estadísticas</div>}
-						path={paths.STATICS}
-						exact
-					/>
+					<Route path={paths.STATE_POTENTIAL_RISK} exact={false}>
+						<Route
+							path={`${paths.STATE_POTENTIAL_RISK}/:id`}
+							component={PotentialRisk}
+						/>
+						<Route
+							component={() => <Risks path={paths.STATE_POTENTIAL_RISK} />}
+							path={paths.STATE_POTENTIAL_RISK}
+							exact
+						/>
+					</Route>
+					<Route path={paths.STATE_RESIDUAL_RISK} exact={false}>
+						<Route
+							path={`${paths.STATE_RESIDUAL_RISK}/:id`}
+							component={ResidualRisk}
+						/>
+						<Route
+							component={() => <Risks path={paths.STATE_RESIDUAL_RISK} />}
+							path={paths.STATE_RESIDUAL_RISK}
+							exact
+						/>
+					</Route>
 					<Route component={Projects} path={paths.PROJECTS} exact />
 					<Route component={Root} path={paths.ROOT_APP} exact />
 				</Card>

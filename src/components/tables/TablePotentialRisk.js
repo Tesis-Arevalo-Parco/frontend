@@ -4,7 +4,7 @@ import { Collapse, Table, Form, Spin } from 'antd'
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 import SpinnerContext from 'store/context/SpinnerContext'
 
-const TableResidualImpactComputation = ({ safeguardsWithThreatRisk }) => {
+const TablePotentialRisk = ({ safeguardsWithThreatRisk }) => {
 	const { Panel } = Collapse
 	const [form] = Form.useForm()
 	const { active } = useContext(SpinnerContext)
@@ -16,7 +16,7 @@ const TableResidualImpactComputation = ({ safeguardsWithThreatRisk }) => {
 			key: 'name',
 		},
 		{
-			title: 'Impacto Acumulado Residual',
+			title: 'Riesgo Acumulado Potencial',
 			children: [
 				{
 					title: DATA_ASSETS_VALUE.availability.label,
@@ -56,7 +56,7 @@ const TableResidualImpactComputation = ({ safeguardsWithThreatRisk }) => {
 			],
 		},
 		{
-			title: 'Impacto Repercutido Residual',
+			title: 'Riesgo Repercutido Potencial',
 			children: [
 				{
 					title: DATA_ASSETS_VALUE.availability.label,
@@ -114,7 +114,7 @@ const TableResidualImpactComputation = ({ safeguardsWithThreatRisk }) => {
 	}
 
 	const getPanel = () => {
-		return safeguardsWithThreatRisk.map((asset, key) => {
+		return safeguardsWithThreatRisk?.map((asset, key) => {
 			return (
 				<Panel
 					header={`${asset?.name} / ${asset?.model} / ${asset?.identification}`}
@@ -129,4 +129,4 @@ const TableResidualImpactComputation = ({ safeguardsWithThreatRisk }) => {
 	return <Collapse defaultActiveKey={[0]}>{getPanel()}</Collapse>
 }
 
-export default TableResidualImpactComputation
+export default TablePotentialRisk
