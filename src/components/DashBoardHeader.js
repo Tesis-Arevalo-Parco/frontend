@@ -58,6 +58,7 @@ const DashBoardHeader = () => {
 
 	const onSaveAssetsDependencies = async () => {
 		activeSpinner(true)
+		console.log('assetsNewDependencies', assetsNewDependencies)
 		if (assetsNewDependencies.length) {
 			if (assetsDependencyId) {
 				await updateDependencies(

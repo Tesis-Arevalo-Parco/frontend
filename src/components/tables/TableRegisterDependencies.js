@@ -5,6 +5,7 @@ import { Button, Empty } from 'antd'
 import ProjectsContext from 'store/context/ProjectsContext'
 import images from 'constants/assets'
 import { paths } from 'constants/paths'
+import { DEPENDENCIES_OPTIONS } from 'constants/constants'
 
 let listOfDependencies = []
 
@@ -13,13 +14,20 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 	const [data, setData] = useState([])
 	const { setAssetsNewDependencies } = useContext(ProjectsContext)
 	const hotTableRef = useRef(null)
+	const dependenciesNames = DEPENDENCIES_OPTIONS.map(
+		(dependency) => dependency.name
+	)
 
 	useEffect(() => {
+		readOnlyCells()
+	}, [assets])
+
+	const readOnlyCells = () => {
 		listOfDependencies = []
 		setLocalAssets(assets.map((asset) => asset.name))
 		const test = createData(assets?.length)
 		setData(test)
-		hotTableRef.current?.hotInstance.updateSettings({
+		/* 		hotTableRef.current?.hotInstance.updateSettings({
 			cells(row, col) {
 				const cellProperties = {}
 				if (row === col || row > col) {
@@ -28,16 +36,43 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 				}
 				return cellProperties
 			},
-		})
-	}, [assets])
+		}) */
+	}
+
+	hotTableRef.current?.hotInstance.updateSettings({
+		cells(row, col) {
+			const cellProperties = {}
+			if (row === col || row > col) {
+				cellProperties.readOnly = true
+				cellProperties.className = 'read-only-table-dependencies'
+			}
+			return cellProperties
+		},
+	})
 
 	const settings = {
 		licenseKey: 'non-commercial-and-evaluation',
 	}
 
+	const getDependencyValue = (name) => {
+		return DEPENDENCIES_OPTIONS.find((dependency) => dependency.name === name)
+			.value
+	}
+
 	const afterChangeCell = (changes) => {
-		changes?.forEach(([row, col, oldValue, newValue]) => {
+		const values = changes?.pop()
+		if (changes && values[2] !== values[3] && values[3] !== '') {
+			listOfDependencies.push({
+				firstAsset: assets[values[0]],
+				secondAsset: assets[values[1]],
+				value: getDependencyValue(values[3]),
+				name: values[3],
+			})
+			setAssetsNewDependencies(listOfDependencies)
+		}
+		/* 		changes?.forEach(([row, col, oldValue, newValue]) => {
 			if (!isNaN(+newValue) && oldValue !== newValue && newValue !== '') {
+				console.log('assets==>', assets)
 				listOfDependencies.push({
 					firstAsset: assets[row],
 					secondAsset: assets[col],
@@ -55,7 +90,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 					listOfDependencies.splice(index, 1)
 				}
 			}
-		})
+		}) */
 	}
 
 	const createData = (size) => {
@@ -81,7 +116,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 					hotTableRef.current?.hotInstance.setDataAtCell(
 						row,
 						column,
-						dependency.value
+						dependency.name
 					)
 				}
 			})
@@ -94,7 +129,8 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 			ref={hotTableRef}
 			data={data}
 			columns={localAssets.map(() => ({
-				type: 'numeric',
+				editor: 'select',
+				selectOptions: dependenciesNames,
 			}))}
 			startCols={localAssets.length}
 			startRows={localAssets.length}
