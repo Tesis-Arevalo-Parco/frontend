@@ -9,3 +9,22 @@ export const DATA_ASSETS_VALUE = {
 	traceability: { value: 'traceability', label: '[T] Trazabilidad' },
 	probability: { value: 'probability', label: '[P] Probabilidad' },
 }
+
+export const DEPENDENCIES_OPTIONS = [
+	{
+		name: '1 - Servicio',
+		value: 1,
+	},
+	{
+		name: '2 - Aplicación',
+		value: 2,
+	},
+	{
+		name: '3 - Equipo',
+		value: 3,
+	},
+	{
+		name: '4 - Instalación',
+		value: 4,
+	},
+]
