@@ -36,6 +36,7 @@ const TableRegisterDependencies = ({ assets, assetsDependencies }) => {
 	}
 
 	const afterChangeCell = (changes) => {
+		console.log('assets', assets)
 		changes?.forEach(([row, col, oldValue, newValue]) => {
 			if (!isNaN(+newValue) && oldValue !== newValue && newValue !== '') {
 				listOfDependencies.push({

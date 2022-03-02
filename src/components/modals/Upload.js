@@ -69,7 +69,7 @@ const Uploader = () => {
 				)
 				if (
 					upperCasedTitle.includes('ID') &&
-					upperCasedTitle.includes('NOMBRE') &&
+					upperCasedTitle.includes('NAME') &&
 					upperCasedTitle.includes('PERSON_CHARGE') &&
 					upperCasedTitle.includes('LOCATION') &&
 					upperCasedTitle.includes('QUANTITY') &&
@@ -77,7 +77,7 @@ const Uploader = () => {
 					upperCasedTitle.includes('SPECIFIC_CHARACTERISTICS')
 				) {
 					const idIndex = upperCasedTitle.indexOf('ID')
-					const nameIndex = upperCasedTitle.indexOf('NOMBRE')
+					const nameIndex = upperCasedTitle.indexOf('NAME')
 					const personChargeIndex = upperCasedTitle.indexOf('PERSON_CHARGE')
 					const locationIndex = upperCasedTitle.indexOf('LOCATION')
 					const quantityIndex = upperCasedTitle.indexOf('QUANTITY')

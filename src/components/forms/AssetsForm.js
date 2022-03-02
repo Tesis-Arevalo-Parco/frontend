@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { Form, Input, Button, Spin, Drawer, Tree } from 'antd'
+import { Form, Input, Button, Spin, Drawer, Tree, InputNumber } from 'antd'
 import { saveAssets, updateAssets } from 'epics/assetsEpics'
 import ProjectsContext from 'store/context/ProjectsContext'
 import ProjectsFormContext from 'store/context/ProjectsFormContext'
@@ -200,12 +200,7 @@ const AssetsForm = () => {
 							label='Persona a cargo del activo'
 							name='person_charge'
 							className='main-form-item'
-							rules={[
-								{
-									required: true,
-									message: '¡Ingrese la persona a cargo del activo!',
-								},
-							]}
+							required={false}
 						>
 							<Input type='text' placeholder='Persona a cargo del activo' />
 						</Form.Item>
@@ -213,12 +208,7 @@ const AssetsForm = () => {
 							label='Ubicación'
 							name='location'
 							className='main-form-item'
-							rules={[
-								{
-									required: true,
-									message: '¡Ingrese la ubicación del activo!',
-								},
-							]}
+							required={false}
 						>
 							<Input type='text' placeholder='Ubicacion' />
 						</Form.Item>
@@ -233,18 +223,13 @@ const AssetsForm = () => {
 								},
 							]}
 						>
-							<Input type='text' placeholder='Cantidad' />
+							<InputNumber min={1} max={100} />
 						</Form.Item>
 						<Form.Item
 							label='Descripción'
 							name='description_asset'
 							className='main-form-item'
-							rules={[
-								{
-									required: true,
-									message: '¡Ingrese la descripción!',
-								},
-							]}
+							required={false}
 						>
 							<Input type='text' placeholder='Descripcion' />
 						</Form.Item>
@@ -252,12 +237,7 @@ const AssetsForm = () => {
 							label='Características Específicas'
 							name='specific_characteristics'
 							className='main-form-item'
-							rules={[
-								{
-									required: true,
-									message: '¡Ingrese las características específicas!',
-								},
-							]}
+							required={false}
 						>
 							<Input type='text' placeholder='Características Específicas' />
 						</Form.Item>

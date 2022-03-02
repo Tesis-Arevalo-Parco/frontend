@@ -112,15 +112,19 @@ const TableAssetsIdentification = ({ assets }) => {
 	const arrayToObject = (type) => {
 		// Devolver un array
 		const arrayTitle = []
-		type.forEach((tipo) =>
-			dataAssetTypes.forEach((objeto) => {
-				const a = findType(tipo, objeto)
-				if (a !== false) {
-					arrayTitle.push(a)
-				}
-			})
-		)
-		return arrayTitle
+		if (type !== undefined) {
+			type.forEach((tipo) =>
+				dataAssetTypes.forEach((objeto) => {
+					const a = findType(tipo, objeto)
+					if (a !== false) {
+						arrayTitle.push(a)
+					}
+				})
+			)
+			return arrayTitle
+		} else {
+			return arrayTitle
+		}
 	}
 
 	const findType = (type, assetsCatalog) => {

@@ -1,0 +1,1527 @@
+[
+    {
+        "title": "[N] Desastres naturales",
+        "key": "N",
+        "value": "N",
+        "children": [
+            {
+                "title": "[N.1] Fuego",
+                "key": "N.1",
+                "value": "N.1",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "N.1.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "N.1.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "N.1.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "N.1.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[N.2] Daños por agua",
+                "key": "N.2",
+                "value": "N.2",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "N.2.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "N.2.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "N.2.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "N.2.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[N.*] Desastres naturales",
+                "key": "N.*",
+                "value": "N.*",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "N.*.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "N.*.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "N.*.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "N.*.L",
+                        "value": "L"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "[I] De origen industrial",
+        "key": "I",
+        "value": "I",
+        "children": [
+            {
+                "title": "[I.1] Fuego",
+                "key": "I.1",
+                "value": "I.1",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.1.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.1.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.1.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones ",
+                        "key": "I.1.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[I.2] Daños por agua",
+                "key": "I.2",
+                "value": "I.2",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.2.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.2.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.2.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "I.2.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[I.*] Desastres industriales",
+                "key": "I.*",
+                "value": "I.*",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.*.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.*.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.*.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "I.*.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[I.3] Contaminación mecánica",
+                "key": "I.3",
+                "value": "I.3",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.3.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.3.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.3.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.4] Contaminación electromagnética",
+                "key": "I.4",
+                "value": "I.4",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.4.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información (electrónicos)",
+                        "key": "I.4.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.4.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.5] Avería de origen físico o lógico",
+                "key": "I.5",
+                "value": "I.5",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "I.5.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.5.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.5.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.5.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.6] Corte del suministro eléctrico",
+                "key": "I.6",
+                "value": "I.6",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.6.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información (electrónicos)",
+                        "key": "I.6.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.6.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.7] Condiciones inadecuadas de temperatura o humedad",
+                "key": "I.7",
+                "value": "I.7",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.7.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.7.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.7.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.8] Fallo de servicios de comunicaciones",
+                "key": "I.8",
+                "value": "I.8",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "I.8.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[I.9] Interrupción de otros servicios y suministros esenciales",
+                "key": "I.9",
+                "value": "I.9",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.9.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[I.10] Degradación de los soportes de almacenamiento de la información",
+                "key": "I.10",
+                "value": "I.10",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.10.Media",
+                        "value": "Media"
+                    }
+                ]
+            },
+            {
+                "title": "[I.11] Emanaciones electromagnéticas",
+                "key": "I.11",
+                "value": "I.11",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "I.11.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "I.11.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "I.11.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "I.11.L",
+                        "value": "L"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "[E] Errores y fallos no intencionados",
+        "key": "E",
+        "value": "E",
+        "children": [
+            {
+                "title": "[E.1] Errores de los usuarios",
+                "key": "E.1",
+                "value": "E.1",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "E.1.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "E.1.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.1.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.1.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "E.1.Media",
+                        "value": "Media"
+                    }
+                ]
+            },
+            {
+                "title": "[E.2] Errores del administrador",
+                "key": "E.2",
+                "value": "E.2",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "E.2.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "E.2.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.2.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.2.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "E.2.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "E.2.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "E.2.Media",
+                        "value": "Media"
+                    }
+                ]
+            },
+            {
+                "title": "[E.3] Errores de monitorización (log)",
+                "key": "E.3",
+                "value": "E.3",
+                "dimensions": [
+                    "integrity",
+                    "traceability"
+                ],
+                "children": [
+                    {
+                        "title": "[D.log] registros de actividad",
+                        "key": "E.3.D.log",
+                        "value": "D.log"
+                    }
+                ]
+            },
+            {
+                "title": "[E.4] Errores de configuración",
+                "key": "E.4",
+                "value": "E.4",
+                "dimensions": [
+                    "integrity"
+                ],
+                "children": [
+                    {
+                        "title": "[D.conf] datos de configuración",
+                        "key": "E.4.D.conf",
+                        "value": "D.conf"
+                    }
+                ]
+            },
+            {
+                "title": "[E.7] Deficiencias en la organización",
+                "key": "E.7",
+                "value": "E.7",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[P] personal",
+                        "key": "E.7.P",
+                        "value": "P"
+                    }
+                ]
+            },
+            {
+                "title": "[E.8] Difusión de software dañino",
+                "key": "E.8",
+                "value": "E.8",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.8.SW",
+                        "value": "E.8"
+                    }
+                ]
+            },
+            {
+                "title": "[E.9] Errores de [re-]encaminamiento",
+                "key": "E.9",
+                "value": "E.9",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.9.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.9.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "E.9.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[E.10] Errores de secuencia",
+                "key": "E.10",
+                "value": "E.10",
+                "dimensions": [
+                    "integrity"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.10.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.10.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "E.10.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[E.15] Alteración accidental de la información",
+                "key": "E.15",
+                "value": "E.15",
+                "dimensions": [
+                    "integrity"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "E.15.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "E.15.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.15.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.15.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] comunicaciones (tránsito)",
+                        "key": "E.15.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "E.15.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "E.15.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[E.18] Destrucción de información",
+                "key": "E.18",
+                "value": "E.18",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "E.18.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "E.18.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.18.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.18.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] comunicaciones (tránsito)",
+                        "key": "E.18.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "E.18.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "E.18.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[E.19] Fugas de información",
+                "key": "E.19",
+                "value": "E.19",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "E.19.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "E.19.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.19.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.19.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] comunicaciones (tránsito)",
+                        "key": "E.19.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "E.19.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "E.19.L",
+                        "value": "L"
+                    },
+                    {
+                        "title": "[P] personal (revelación)",
+                        "key": "E.19.P",
+                        "value": "P"
+                    }
+                ]
+            },
+            {
+                "title": "[E.20] Vulnerabilidades de los programas (software)",
+                "key": "E.20",
+                "value": "E.20",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.20.SW",
+                        "value": "SW"
+                    }
+                ]
+            },
+            {
+                "title": "[E.21] Errores de mantenimiento / actualización de programas (software)",
+                "key": "E.21",
+                "value": "E.21",
+                "dimensions": [
+                    "integrity",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "E.21.SW",
+                        "value": "SW"
+                    }
+                ]
+            },
+            {
+                "title": "[E.23] Errores de mantenimiento / actualización de equipos (hardware)",
+                "key": "E.23",
+                "value": "E.23",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "E.23.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes electrónicos",
+                        "key": "E.23.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "E.23.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[E.24] Caída del sistema por agotamiento de recursos",
+                "key": "E.24",
+                "value": "E.24",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "E.24.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "E.24.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "E.24.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[E.25] Pérdida de equipos",
+                "key": "E.25",
+                "value": "E.25",
+                "dimensions": [
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "E.25.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes electrónicos",
+                        "key": "E.25.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "E.25.AUX",
+                        "value": "AUX"
+                    }
+                ]
+            },
+            {
+                "title": "[E.28] Indisponibilidad del personal",
+                "key": "E.28",
+                "value": "E.28",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[P] personal interno",
+                        "key": "E.28.P",
+                        "value": "P"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "[A] Ataques intencionados",
+        "key": "A",
+        "value": "A",
+        "children": [
+            {
+                "title": "[A.3] Manipulación de los registros de actividad (log)",
+                "key": "A.3",
+                "value": "A.3",
+                "dimensions": [
+                    "integrity",
+                    "traceability"
+                ],
+                "children": [
+                    {
+                        "title": "[D.log] registros de actividad",
+                        "key": "A.3.D.log",
+                        "value": "D.log"
+                    }
+                ]
+            },
+            {
+                "title": "[A.4] Manipulación de la configuración",
+                "key": "A.4",
+                "value": "A.4",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D.log] registros de actividad",
+                        "key": "A.4.D.log",
+                        "value": "D.log"
+                    }
+                ]
+            },
+            {
+                "title": "[A.5] Suplantación de la identidad del usuario",
+                "key": "A.5",
+                "value": "A.5",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "authenticity"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.5.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.5.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.5.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.5.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.5.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.6] Abuso de privilegios de acceso",
+                "key": "A.6",
+                "value": "A.6",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.6.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.6.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.6.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.6.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.6.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.6.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.7] Uso no previsto",
+                "key": "A.7",
+                "value": "A.7",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.7.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.7.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.7.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.7.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.7.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "A.7.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.7.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.8] Difusión de software dañino",
+                "key": "A.8",
+                "value": "A.8",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.8.SW",
+                        "value": "SW"
+                    }
+                ]
+            },
+            {
+                "title": "[A.9] [Re-]encaminamiento de mensajes",
+                "key": "A.9",
+                "value": "A.9",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.9.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.9.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.9.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.10] Alteración de secuencia",
+                "key": "A.10",
+                "value": "A.10",
+                "dimensions": [
+                    "integrity"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.10.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.10.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.10.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.11] Acceso no autorizado",
+                "key": "A.11",
+                "value": "A.11",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.11.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.11.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.11.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.11.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.11.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.11.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.11.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "A.11.AUX",
+                        "value": "AUX"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.11.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.12] Análisis de tráfico",
+                "key": "A.12",
+                "value": "A.12",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.12.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.13] Repudio",
+                "key": "A.13",
+                "value": "A.13",
+                "dimensions": [
+                    "integrity",
+                    "traceability"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.13.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[D.log] registros de actividad",
+                        "key": "A.13.D.log",
+                        "value": "D.log"
+                    }
+                ]
+            },
+            {
+                "title": "[A.14] Interceptación de información (escucha)",
+                "key": "A.14",
+                "value": "A.14",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.14.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.15] Modificación deliberada de la información",
+                "key": "A.15",
+                "value": "A.15",
+                "dimensions": [
+                    "integrity"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.15.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.15.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios (acceso)",
+                        "key": "A.15.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.15.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] comunicaciones (tránsito)",
+                        "key": "A.15.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.15.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.15.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.18] Destrucción de información",
+                "key": "A.18",
+                "value": "A.18",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.18.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.18.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios (acceso)",
+                        "key": "A.18.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.18.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.18.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.18.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.19] Divulgación de información",
+                "key": "A.19",
+                "value": "A.19",
+                "dimensions": [
+                    "confidentiality"
+                ],
+                "children": [
+                    {
+                        "title": "[D] datos / información",
+                        "key": "A.19.D",
+                        "value": "D"
+                    },
+                    {
+                        "title": "[keys] claves criptográficas",
+                        "key": "A.19.keys",
+                        "value": "keys"
+                    },
+                    {
+                        "title": "[S] servicios (acceso)",
+                        "key": "A.19.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.19.SW",
+                        "value": "SW"
+                    },
+                    {
+                        "title": "[COM] comunicaciones (tránsito)",
+                        "key": "A.19.COM",
+                        "value": "COM"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.19.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.19.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.22] Manipulación de programas",
+                "key": "A.22",
+                "value": "A.22",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[SW] aplicaciones (software)",
+                        "key": "A.22.SW",
+                        "value": "SW"
+                    }
+                ]
+            },
+            {
+                "title": "[A.23] Manipulación de los equipos",
+                "key": "A.23",
+                "value": "A.23",
+                "dimensions": [
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos",
+                        "key": "A.23.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.23.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "A.23.AUX",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "title": "[A.24] Denegación de servicio",
+                "key": "A.24",
+                "value": "A.24",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[S] servicios",
+                        "key": "A.24.S",
+                        "value": "S"
+                    },
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.24.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[COM] redes de comunicaciones",
+                        "key": "A.24.COM",
+                        "value": "COM"
+                    }
+                ]
+            },
+            {
+                "title": "[A.25] Robo",
+                "key": "A.25",
+                "value": "A.25",
+                "dimensions": [
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.25.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.25.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "A.25.AUX",
+                        "value": ""
+                    }
+                ]
+            },
+            {
+                "title": "[A.26] Ataque destructivo",
+                "key": "A.26",
+                "value": "A.26",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[HW] equipos informáticos (hardware)",
+                        "key": "A.26.HW",
+                        "value": "HW"
+                    },
+                    {
+                        "title": "[Media] soportes de información",
+                        "key": "A.26.Media",
+                        "value": "Media"
+                    },
+                    {
+                        "title": "[AUX] equipamiento auxiliar",
+                        "key": "A.26.AUX",
+                        "value": ""
+                    },
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.26.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.27] Ocupación enemiga",
+                "key": "A.27",
+                "value": "A.27",
+                "dimensions": [
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[L] instalaciones",
+                        "key": "A.27.L",
+                        "value": "L"
+                    }
+                ]
+            },
+            {
+                "title": "[A.28] Indisponibilidad del personal",
+                "key": "A.28",
+                "value": "A.28",
+                "dimensions": [
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[P] personal interno",
+                        "key": "A.28.P",
+                        "value": "P"
+                    }
+                ]
+            },
+            {
+                "title": "[A.29] Extorsión",
+                "key": "A.29",
+                "value": "A.29",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[P] personal interno",
+                        "key": "A.29.P",
+                        "value": "P"
+                    }
+                ]
+            },
+            {
+                "title": "[A.30] Ingeniería social (picaresca)",
+                "key": "A.30",
+                "value": "A.30",
+                "dimensions": [
+                    "integrity",
+                    "confidentiality",
+                    "availability"
+                ],
+                "children": [
+                    {
+                        "title": "[P] personal interno",
+                        "key": "A.30.P",
+                        "value": "P"
+                    }
+                ]
+            }
+        ]
+    }
