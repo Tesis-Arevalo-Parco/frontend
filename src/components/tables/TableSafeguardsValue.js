@@ -180,7 +180,12 @@ const TableSafeguardsValue = ({ safeguards }) => {
 							margin: 0,
 						}}
 					>
-						<InputNumber />
+						<InputNumber
+							min={0}
+							max={100}
+							formatter={(value) => `${value}%`}
+							parser={(value) => value.replace('%', '')}
+						/>
 					</Form.Item>
 				) : (
 					children

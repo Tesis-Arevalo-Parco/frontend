@@ -24,6 +24,7 @@ module.exports = {
 		'react/prop-types': 'off',
 		'react/display-name': 0,
 		'no-console': 1,
+		// disallowArithmeticOperators: true,
 		'prettier/prettier': [
 			'error',
 			{

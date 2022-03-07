@@ -1,10 +1,272 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Collapse, Table, Form, Spin } from 'antd'
 
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 import SpinnerContext from 'store/context/SpinnerContext'
+const children = 'children'
 
-const TablePotentialImpactComputation = ({ assets }) => {
+const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
+	const accumulatedValues = []
+	const getDependenciesAssetsLevels = (dependencies, level) =>
+		dependencies.filter((item) => item?.value === level)
+
+	const getAssetValues = (assetsValues, id) =>
+		assetsValues.find((item) => item?.id === id)
+
+	const findAccumulatedValueById = (id, dimension) =>
+		accumulatedValues?.findIndex(
+			(item) => item?.id === id && item[dimension].value
+		)
+
+	const findNodeIndex = (arrayNode, id) =>
+		arrayNode.find((item) => item?.id === id)
+
+	const createAccumulatedValueObject = (
+		id,
+		dimension,
+		accumulatedValue,
+		listValues,
+		name
+	) => ({
+		id,
+		name,
+		[dimension]: {
+			value: accumulatedValue,
+			listValues: listValues,
+		},
+	})
+
+	const setAccumulatedValues = (
+		firstAssetValues,
+		secondAssetValues,
+		dimension
+	) => {
+		const listValues = []
+		const firstAssetsAccumulatedIndex = findAccumulatedValueById(
+			firstAssetValues?.id,
+			dimension
+		)
+		const secondAssetsAccumulatedIndex = findAccumulatedValueById(
+			secondAssetValues?.id,
+			dimension
+		)
+		const firstAssetsAccumulated =
+			accumulatedValues[firstAssetsAccumulatedIndex]
+		const secondAssetsAccumulated =
+			accumulatedValues[secondAssetsAccumulatedIndex]
+
+		const firstValue = firstAssetValues[dimension]?.value
+		const secondValue = secondAssetValues[dimension]?.value
+		listValues.push(firstValue)
+		listValues.push(secondValue)
+
+		if (firstAssetsAccumulatedIndex !== -1) {
+			const listAccumulatedValues =
+				firstAssetsAccumulated[dimension]?.listValues
+			const totalAccumulated = [...listAccumulatedValues, ...listValues]
+			accumulatedValues[firstAssetsAccumulatedIndex][
+				dimension
+			].listValues = totalAccumulated
+		} else {
+			const accumulatedValue = Math.max(...listValues)
+			accumulatedValues.push(
+				createAccumulatedValueObject(
+					firstAssetValues?.id,
+					dimension,
+					accumulatedValue,
+					listValues,
+					firstAssetValues?.name
+				)
+			)
+		}
+
+		if (secondAssetsAccumulatedIndex !== -1) {
+			const listAccumulatedValues =
+				secondAssetsAccumulated[dimension]?.listValues
+			const totalAccumulated = [...listAccumulatedValues, ...listValues]
+			accumulatedValues[secondAssetsAccumulatedIndex][
+				dimension
+			].listValues = totalAccumulated
+		} else {
+			const accumulatedValue = Math.max(...listValues)
+			accumulatedValues.push(
+				createAccumulatedValueObject(
+					secondAssetValues?.id,
+					dimension,
+					accumulatedValue,
+					listValues,
+					secondAssetValues?.name
+				)
+			)
+		}
+	}
+
+	const getNodeIds = (nodeLevels) => {
+		const nodes = []
+		nodeLevels?.forEach((itemLevel) => {
+			if (!findNodeIndex(nodes, itemLevel?.firstAsset?.id)) {
+				nodes.push({
+					id: itemLevel?.firstAsset?.id,
+					name: itemLevel?.firstAsset?.name,
+				})
+			}
+			if (!findNodeIndex(nodes, itemLevel?.secondAsset?.id)) {
+				nodes.push({
+					id: itemLevel?.secondAsset?.id,
+					name: itemLevel?.secondAsset?.name,
+				})
+			}
+		})
+		return nodes
+	}
+	const treeData = {
+		levelOne: [],
+		levelTwo: [],
+		levelThree: [],
+		levelFour: [],
+		levelFive: [],
+	}
+
+	const fillTreeData = (firstNodes, secondNodes, thirdNodes, fourthNode) => {
+		firstNodes?.forEach((node) => {
+			const secondNode = secondNodes.find((item) => item.id === node.id)
+			if (!secondNode) {
+				treeData.levelOne.push({
+					id: node.id,
+					name: node.name,
+					children: [],
+				})
+			}
+		})
+		secondNodes?.forEach((node) => {
+			const firstNode = firstNodes.find((item) => item.id === node.id)
+			if (firstNode) {
+				treeData.levelTwo.push({
+					id: node.id,
+					name: node.name,
+					children: [],
+				})
+			}
+		})
+		thirdNodes?.forEach((node) => {
+			const secondNode = secondNodes.find((item) => item.id === node.id)
+			if (secondNode) {
+				treeData.levelThree.push({
+					id: node.id,
+					name: node.name,
+					children: [],
+				})
+			}
+		})
+		fourthNode?.forEach((node) => {
+			const thirdNode = thirdNodes.find((item) => item.id === node.id)
+			if (thirdNode) {
+				treeData.levelFour.push({
+					id: node.id,
+					name: node.name,
+					children: [],
+				})
+			} else {
+				treeData.levelFive.push({
+					id: node.id,
+					name: node.name,
+					children: [],
+				})
+			}
+		})
+	}
+	const finalTreeData = []
+	const fillTreeDataWithValues = (level, treeDataLevel) => {
+		level.forEach((itemLevel) => {})
+	}
+	useEffect(() => {
+		if (assets.length && assetsDependencies.length) {
+			const firstLevel = getDependenciesAssetsLevels(assetsDependencies, 1)
+			const secondLevel = getDependenciesAssetsLevels(assetsDependencies, 2)
+			const thirdLevel = getDependenciesAssetsLevels(assetsDependencies, 3)
+			const fourthLevel = getDependenciesAssetsLevels(assetsDependencies, 4)
+			// console.log({ firstLevel, secondLevel, thirdLevel, fourthLevel })
+
+			const firstNodes = getNodeIds(firstLevel)
+			const secondNodes = getNodeIds(secondLevel)
+			const thirdNodes = getNodeIds(thirdLevel)
+			const fourthNode = getNodeIds(fourthLevel)
+			// console.log({ firstNodes, secondNodes, thirdNodes, fourthNode })
+			fillTreeData(firstNodes, secondNodes, thirdNodes, fourthNode)
+			fillTreeDataWithValues(firstLevel, treeData.levelOne)
+			fillTreeDataWithValues(secondLevel, treeData.levelTwo)
+			/* 			fillTreeDataWithValues(thirdLevel, treeData.levelThree)
+			fillTreeDataWithValues(fourthLevel, treeData.levelFour) */
+			console.log({ treeData })
+			/* 			console.log('firstLevel==>', firstLevel)
+			console.log('levelOne==>', treeData.levelOne)
+			console.log('levelTwo==>', treeData.levelTwo) */
+
+			/* 			firstLevel.forEach((dependency) => {
+				const firstAssetValues = getAssetValues(
+					assets,
+					dependency?.firstAsset?.id
+				)
+				const secondAssetValues = getAssetValues(
+					assets,
+					dependency?.secondAsset?.id
+				)
+				setAccumulatedValues(
+					firstAssetValues,
+					secondAssetValues,
+					DATA_ASSETS_VALUE.availability.value
+				)
+			})
+			secondLevel.forEach((dependency) => {
+				const firstAssetValues = getAssetValues(
+					assets,
+					dependency?.firstAsset?.id
+				)
+				const secondAssetValues = getAssetValues(
+					assets,
+					dependency?.secondAsset?.id
+				)
+				setAccumulatedValues(
+					firstAssetValues,
+					secondAssetValues,
+					DATA_ASSETS_VALUE.availability.value
+				)
+			})
+			thirdLevel.forEach((dependency) => {
+				const firstAssetValues = getAssetValues(
+					assets,
+					dependency?.firstAsset?.id
+				)
+				const secondAssetValues = getAssetValues(
+					assets,
+					dependency?.secondAsset?.id
+				)
+				setAccumulatedValues(
+					firstAssetValues,
+					secondAssetValues,
+					DATA_ASSETS_VALUE.availability.value
+				)
+			})
+			fourthLevel.forEach((dependency) => {
+				const firstAssetValues = getAssetValues(
+					assets,
+					dependency?.firstAsset?.id
+				)
+				const secondAssetValues = getAssetValues(
+					assets,
+					dependency?.secondAsset?.id
+				)
+				setAccumulatedValues(
+					firstAssetValues,
+					secondAssetValues,
+					DATA_ASSETS_VALUE.availability.value
+				)
+			}) */
+			console.log(accumulatedValues)
+			/* 			console.log({ firstLevel, secondLevel, thirdLevel, fourthLevel })
+			console.log({ assets, assetsDependencies }) */
+		}
+	}, [assets, assetsDependencies])
 	const matrizImpacto = [
 		['M', 'B', 'MB', 'MB', 'MB'],
 		['A', 'M', 'B', 'MB', 'MB'],
