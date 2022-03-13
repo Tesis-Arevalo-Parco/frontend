@@ -3,7 +3,6 @@ import { Collapse, Table, Form, Spin } from 'antd'
 
 import { DATA_ASSETS_VALUE } from 'constants/constants'
 import SpinnerContext from 'store/context/SpinnerContext'
-const children = 'children'
 
 const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 	const accumulatedValues = []
@@ -134,7 +133,7 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelOne.push({
 					id: node.id,
 					name: node.name,
-					children: [],
+					parent: [],
 				})
 			}
 		})
@@ -144,7 +143,7 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelTwo.push({
 					id: node.id,
 					name: node.name,
-					children: [],
+					parent: [],
 				})
 			}
 		})
@@ -154,7 +153,7 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelThree.push({
 					id: node.id,
 					name: node.name,
-					children: [],
+					parent: [],
 				})
 			}
 		})
@@ -164,20 +163,182 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelFour.push({
 					id: node.id,
 					name: node.name,
-					children: [],
+					parent: [],
 				})
 			} else {
 				treeData.levelFive.push({
 					id: node.id,
 					name: node.name,
-					children: [],
+					parent: [],
 				})
 			}
 		})
 	}
 	const finalTreeData = []
-	const fillTreeDataWithValues = (level, treeDataLevel) => {
-		level.forEach((itemLevel) => {})
+	const removeDuplicatesById = (dataArray) =>
+		dataArray?.reduce((acc, current) => {
+			const x = acc.find((item) => item?.id === current?.id)
+			if (!x) {
+				return acc.concat([current])
+			} else {
+				return acc
+			}
+		}, [])
+	const fillTreeDataWithValues = (level, treeDataLevel, levelName) => {
+		level.forEach((itemLevel) => {
+			const findFirstAsset = treeDataLevel.find(
+				(item) => item?.id === itemLevel?.firstAsset?.id
+			)
+			const findSecondAsset = treeDataLevel.find(
+				(item) => item?.id === itemLevel?.secondAsset?.id
+			)
+			if (findFirstAsset) {
+				const findParent = treeData[levelName].find(
+					(item) => item?.id === itemLevel?.secondAsset?.id
+				)
+				if (findParent) {
+					if (levelName === 'levelThree') {
+						const levelTwoData = treeData.levelTwo.find(
+							(item) => item?.id === itemLevel?.firstAsset?.id
+						)
+						if (levelTwoData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelTwoData?.parent,
+								{
+									id: itemLevel?.firstAsset?.id,
+									name: itemLevel?.firstAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.firstAsset?.id,
+								name: itemLevel?.firstAsset?.name,
+							})
+						}
+					} else if (levelName === 'levelFour') {
+						const levelThreeData = treeData.levelThree.find(
+							(item) => item?.id === itemLevel?.firstAsset?.id
+						)
+						if (levelThreeData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelThreeData?.parent,
+								{
+									id: itemLevel?.firstAsset?.id,
+									name: itemLevel?.firstAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.firstAsset?.id,
+								name: itemLevel?.firstAsset?.name,
+							})
+						}
+					} else if (levelName === 'levelFive') {
+						const levelFourData = treeData.levelFour.find(
+							(item) => item?.id === itemLevel?.firstAsset?.id
+						)
+						if (levelFourData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelFourData?.parent,
+								{
+									id: itemLevel?.firstAsset?.id,
+									name: itemLevel?.firstAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.firstAsset?.id,
+								name: itemLevel?.firstAsset?.name,
+							})
+						}
+					} else {
+						findParent?.parent?.push({
+							id: itemLevel?.firstAsset?.id,
+							name: itemLevel?.firstAsset?.name,
+						})
+					}
+				}
+			}
+			if (findSecondAsset) {
+				const findParent = treeData[levelName].find(
+					(item) => item?.id === itemLevel?.firstAsset?.id
+				)
+				if (findParent) {
+					if (levelName === 'levelThree') {
+						const levelTwoData = treeData.levelTwo.find(
+							(item) => item?.id === itemLevel?.secondAsset?.id
+						)
+						if (levelTwoData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelTwoData?.parent,
+								{
+									id: itemLevel?.secondAsset?.id,
+									name: itemLevel?.secondAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.secondAsset?.id,
+								name: itemLevel?.secondAsset?.name,
+							})
+						}
+					} else if (levelName === 'levelFour') {
+						const levelThreeData = treeData.levelThree.find(
+							(item) => item?.id === itemLevel?.secondAsset?.id
+						)
+						if (levelThreeData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelThreeData?.parent,
+								{
+									id: itemLevel?.secondAsset?.id,
+									name: itemLevel?.secondAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.secondAsset?.id,
+								name: itemLevel?.secondAsset?.name,
+							})
+						}
+					} else if (levelName === 'levelFive') {
+						const levelFourData = treeData.levelFour.find(
+							(item) => item?.id === itemLevel?.secondAsset?.id
+						)
+						if (levelFourData) {
+							const finalData = [
+								...findParent?.parent,
+								...levelFourData?.parent,
+								{
+									id: itemLevel?.secondAsset?.id,
+									name: itemLevel?.secondAsset?.name,
+								},
+							]
+							findParent?.parent?.push(...finalData?.flat())
+						} else {
+							findParent?.parent?.push({
+								id: itemLevel?.secondAsset?.id,
+								name: itemLevel?.secondAsset?.name,
+							})
+						}
+					} else {
+						findParent?.parent?.push({
+							id: itemLevel?.secondAsset?.id,
+							name: itemLevel?.secondAsset?.name,
+						})
+					}
+				}
+			}
+		})
 	}
 	useEffect(() => {
 		if (assets.length && assetsDependencies.length) {
@@ -193,8 +354,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 			const fourthNode = getNodeIds(fourthLevel)
 			// console.log({ firstNodes, secondNodes, thirdNodes, fourthNode })
 			fillTreeData(firstNodes, secondNodes, thirdNodes, fourthNode)
-			fillTreeDataWithValues(firstLevel, treeData.levelOne)
-			fillTreeDataWithValues(secondLevel, treeData.levelTwo)
+			fillTreeDataWithValues(firstLevel, treeData.levelOne, 'levelTwo')
+			fillTreeDataWithValues(secondLevel, treeData.levelTwo, 'levelThree')
+			fillTreeDataWithValues(thirdLevel, treeData.levelThree, 'levelFour')
+			fillTreeDataWithValues(fourthLevel, treeData.levelFour, 'levelFive')
+			// eslint-disable-next-line dot-notation
+			// treeData['levelThree'].parent = uniqueData
 			/* 			fillTreeDataWithValues(thirdLevel, treeData.levelThree)
 			fillTreeDataWithValues(fourthLevel, treeData.levelFour) */
 			console.log({ treeData })
