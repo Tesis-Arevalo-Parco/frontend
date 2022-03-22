@@ -1,104 +1,20 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Collapse, Table, Form, Spin } from 'antd'
 
-import { DATA_ASSETS_VALUE } from 'constants/constants'
+import {
+	DATA_ASSETS_VALUE,
+	matrizImpacto,
+	matrizRiesgo,
+} from 'constants/constants'
 import SpinnerContext from 'store/context/SpinnerContext'
 
 const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
-	const accumulatedValues = []
+	const [accumulatedValuesData, setAccumulatedValuesData] = useState([])
 	const getDependenciesAssetsLevels = (dependencies, level) =>
 		dependencies.filter((item) => item?.value === level)
 
-	const getAssetValues = (assetsValues, id) =>
-		assetsValues.find((item) => item?.id === id)
-
-	const findAccumulatedValueById = (id, dimension) =>
-		accumulatedValues?.findIndex(
-			(item) => item?.id === id && item[dimension].value
-		)
-
 	const findNodeIndex = (arrayNode, id) =>
 		arrayNode.find((item) => item?.id === id)
-
-	const createAccumulatedValueObject = (
-		id,
-		dimension,
-		accumulatedValue,
-		listValues,
-		name
-	) => ({
-		id,
-		name,
-		[dimension]: {
-			value: accumulatedValue,
-			listValues: listValues,
-		},
-	})
-
-	const setAccumulatedValues = (
-		firstAssetValues,
-		secondAssetValues,
-		dimension
-	) => {
-		const listValues = []
-		const firstAssetsAccumulatedIndex = findAccumulatedValueById(
-			firstAssetValues?.id,
-			dimension
-		)
-		const secondAssetsAccumulatedIndex = findAccumulatedValueById(
-			secondAssetValues?.id,
-			dimension
-		)
-		const firstAssetsAccumulated =
-			accumulatedValues[firstAssetsAccumulatedIndex]
-		const secondAssetsAccumulated =
-			accumulatedValues[secondAssetsAccumulatedIndex]
-
-		const firstValue = firstAssetValues[dimension]?.value
-		const secondValue = secondAssetValues[dimension]?.value
-		listValues.push(firstValue)
-		listValues.push(secondValue)
-
-		if (firstAssetsAccumulatedIndex !== -1) {
-			const listAccumulatedValues =
-				firstAssetsAccumulated[dimension]?.listValues
-			const totalAccumulated = [...listAccumulatedValues, ...listValues]
-			accumulatedValues[firstAssetsAccumulatedIndex][
-				dimension
-			].listValues = totalAccumulated
-		} else {
-			const accumulatedValue = Math.max(...listValues)
-			accumulatedValues.push(
-				createAccumulatedValueObject(
-					firstAssetValues?.id,
-					dimension,
-					accumulatedValue,
-					listValues,
-					firstAssetValues?.name
-				)
-			)
-		}
-
-		if (secondAssetsAccumulatedIndex !== -1) {
-			const listAccumulatedValues =
-				secondAssetsAccumulated[dimension]?.listValues
-			const totalAccumulated = [...listAccumulatedValues, ...listValues]
-			accumulatedValues[secondAssetsAccumulatedIndex][
-				dimension
-			].listValues = totalAccumulated
-		} else {
-			const accumulatedValue = Math.max(...listValues)
-			accumulatedValues.push(
-				createAccumulatedValueObject(
-					secondAssetValues?.id,
-					dimension,
-					accumulatedValue,
-					listValues,
-					secondAssetValues?.name
-				)
-			)
-		}
-	}
 
 	const getNodeIds = (nodeLevels) => {
 		const nodes = []
@@ -107,12 +23,24 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				nodes.push({
 					id: itemLevel?.firstAsset?.id,
 					name: itemLevel?.firstAsset?.name,
+					availability: itemLevel?.firstAsset?.availability,
+					integrity: itemLevel?.firstAsset?.integrity,
+					confidentiality: itemLevel?.firstAsset?.confidentiality,
+					authenticity: itemLevel?.firstAsset?.authenticity,
+					traceability: itemLevel?.firstAsset?.traceability,
+					threat: itemLevel?.firstAsset?.threat,
 				})
 			}
 			if (!findNodeIndex(nodes, itemLevel?.secondAsset?.id)) {
 				nodes.push({
 					id: itemLevel?.secondAsset?.id,
 					name: itemLevel?.secondAsset?.name,
+					availability: itemLevel?.secondAsset?.availability,
+					integrity: itemLevel?.secondAsset?.integrity,
+					confidentiality: itemLevel?.secondAsset?.confidentiality,
+					authenticity: itemLevel?.secondAsset?.authenticity,
+					traceability: itemLevel?.secondAsset?.traceability,
+					threat: itemLevel?.secondAsset?.threat,
 				})
 			}
 		})
@@ -133,6 +61,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelOne.push({
 					id: node.id,
 					name: node.name,
+					availability: node?.availability,
+					integrity: node?.integrity,
+					confidentiality: node?.confidentiality,
+					authenticity: node?.authenticity,
+					traceability: node?.traceability,
+					threat: node?.threat,
 					parent: [],
 				})
 			}
@@ -143,6 +77,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelTwo.push({
 					id: node.id,
 					name: node.name,
+					availability: node?.availability,
+					integrity: node?.integrity,
+					confidentiality: node?.confidentiality,
+					authenticity: node?.authenticity,
+					traceability: node?.traceability,
+					threat: node?.threat,
 					parent: [],
 				})
 			}
@@ -153,6 +93,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelThree.push({
 					id: node.id,
 					name: node.name,
+					availability: node?.availability,
+					integrity: node?.integrity,
+					confidentiality: node?.confidentiality,
+					authenticity: node?.authenticity,
+					traceability: node?.traceability,
+					threat: node?.threat,
 					parent: [],
 				})
 			}
@@ -163,27 +109,30 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 				treeData.levelFour.push({
 					id: node.id,
 					name: node.name,
+					availability: node?.availability,
+					integrity: node?.integrity,
+					confidentiality: node?.confidentiality,
+					authenticity: node?.authenticity,
+					traceability: node?.traceability,
+					threat: node?.threat,
 					parent: [],
 				})
 			} else {
 				treeData.levelFive.push({
 					id: node.id,
 					name: node.name,
+					availability: node?.availability,
+					integrity: node?.integrity,
+					confidentiality: node?.confidentiality,
+					authenticity: node?.authenticity,
+					traceability: node?.traceability,
+					threat: node?.threat,
 					parent: [],
 				})
 			}
 		})
 	}
-	const finalTreeData = []
-	const removeDuplicatesById = (dataArray) =>
-		dataArray?.reduce((acc, current) => {
-			const x = acc.find((item) => item?.id === current?.id)
-			if (!x) {
-				return acc.concat([current])
-			} else {
-				return acc
-			}
-		}, [])
+
 	const fillTreeDataWithValues = (level, treeDataLevel, levelName) => {
 		level.forEach((itemLevel) => {
 			const findFirstAsset = treeDataLevel.find(
@@ -208,6 +157,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.firstAsset?.id,
 									name: itemLevel?.firstAsset?.name,
+									availability: itemLevel?.firstAsset?.availability,
+									integrity: itemLevel?.firstAsset?.integrity,
+									confidentiality: itemLevel?.firstAsset?.confidentiality,
+									authenticity: itemLevel?.firstAsset?.authenticity,
+									traceability: itemLevel?.firstAsset?.traceability,
+									threat: itemLevel?.firstAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -215,6 +170,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.firstAsset?.id,
 								name: itemLevel?.firstAsset?.name,
+								availability: itemLevel?.firstAsset?.availability,
+								integrity: itemLevel?.firstAsset?.integrity,
+								confidentiality: itemLevel?.firstAsset?.confidentiality,
+								authenticity: itemLevel?.firstAsset?.authenticity,
+								traceability: itemLevel?.firstAsset?.traceability,
+								threat: itemLevel?.firstAsset?.threat,
 							})
 						}
 					} else if (levelName === 'levelFour') {
@@ -228,6 +189,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.firstAsset?.id,
 									name: itemLevel?.firstAsset?.name,
+									availability: itemLevel?.firstAsset?.availability,
+									integrity: itemLevel?.firstAsset?.integrity,
+									confidentiality: itemLevel?.firstAsset?.confidentiality,
+									authenticity: itemLevel?.firstAsset?.authenticity,
+									traceability: itemLevel?.firstAsset?.traceability,
+									threat: itemLevel?.firstAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -235,6 +202,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.firstAsset?.id,
 								name: itemLevel?.firstAsset?.name,
+								availability: itemLevel?.firstAsset?.availability,
+								integrity: itemLevel?.firstAsset?.integrity,
+								confidentiality: itemLevel?.firstAsset?.confidentiality,
+								authenticity: itemLevel?.firstAsset?.authenticity,
+								traceability: itemLevel?.firstAsset?.traceability,
+								threat: itemLevel?.firstAsset?.threat,
 							})
 						}
 					} else if (levelName === 'levelFive') {
@@ -248,6 +221,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.firstAsset?.id,
 									name: itemLevel?.firstAsset?.name,
+									availability: itemLevel?.firstAsset?.availability,
+									integrity: itemLevel?.firstAsset?.integrity,
+									confidentiality: itemLevel?.firstAsset?.confidentiality,
+									authenticity: itemLevel?.firstAsset?.authenticity,
+									traceability: itemLevel?.firstAsset?.traceability,
+									threat: itemLevel?.firstAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -255,12 +234,24 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.firstAsset?.id,
 								name: itemLevel?.firstAsset?.name,
+								availability: itemLevel?.firstAsset?.availability,
+								integrity: itemLevel?.firstAsset?.integrity,
+								confidentiality: itemLevel?.firstAsset?.confidentiality,
+								authenticity: itemLevel?.firstAsset?.authenticity,
+								traceability: itemLevel?.firstAsset?.traceability,
+								threat: itemLevel?.firstAsset?.threat,
 							})
 						}
 					} else {
 						findParent?.parent?.push({
 							id: itemLevel?.firstAsset?.id,
 							name: itemLevel?.firstAsset?.name,
+							availability: itemLevel?.firstAsset?.availability,
+							integrity: itemLevel?.firstAsset?.integrity,
+							confidentiality: itemLevel?.firstAsset?.confidentiality,
+							authenticity: itemLevel?.firstAsset?.authenticity,
+							traceability: itemLevel?.firstAsset?.traceability,
+							threat: itemLevel?.firstAsset?.threat,
 						})
 					}
 				}
@@ -281,6 +272,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.secondAsset?.id,
 									name: itemLevel?.secondAsset?.name,
+									availability: itemLevel?.secondAsset?.availability,
+									integrity: itemLevel?.secondAsset?.integrity,
+									confidentiality: itemLevel?.secondAsset?.confidentiality,
+									authenticity: itemLevel?.secondAsset?.authenticity,
+									traceability: itemLevel?.secondAsset?.traceability,
+									threat: itemLevel?.secondAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -288,6 +285,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.secondAsset?.id,
 								name: itemLevel?.secondAsset?.name,
+								availability: itemLevel?.secondAsset?.availability,
+								integrity: itemLevel?.secondAsset?.integrity,
+								confidentiality: itemLevel?.secondAsset?.confidentiality,
+								authenticity: itemLevel?.secondAsset?.authenticity,
+								traceability: itemLevel?.secondAsset?.traceability,
+								threat: itemLevel?.secondAsset?.threat,
 							})
 						}
 					} else if (levelName === 'levelFour') {
@@ -301,6 +304,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.secondAsset?.id,
 									name: itemLevel?.secondAsset?.name,
+									availability: itemLevel?.secondAsset?.availability,
+									integrity: itemLevel?.secondAsset?.integrity,
+									confidentiality: itemLevel?.secondAsset?.confidentiality,
+									authenticity: itemLevel?.secondAsset?.authenticity,
+									traceability: itemLevel?.secondAsset?.traceability,
+									threat: itemLevel?.secondAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -308,6 +317,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.secondAsset?.id,
 								name: itemLevel?.secondAsset?.name,
+								availability: itemLevel?.secondAsset?.availability,
+								integrity: itemLevel?.secondAsset?.integrity,
+								confidentiality: itemLevel?.secondAsset?.confidentiality,
+								authenticity: itemLevel?.secondAsset?.authenticity,
+								traceability: itemLevel?.secondAsset?.traceability,
+								threat: itemLevel?.secondAsset?.threat,
 							})
 						}
 					} else if (levelName === 'levelFive') {
@@ -321,6 +336,12 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 								{
 									id: itemLevel?.secondAsset?.id,
 									name: itemLevel?.secondAsset?.name,
+									availability: itemLevel?.secondAsset?.availability,
+									integrity: itemLevel?.secondAsset?.integrity,
+									confidentiality: itemLevel?.secondAsset?.confidentiality,
+									authenticity: itemLevel?.secondAsset?.authenticity,
+									traceability: itemLevel?.secondAsset?.traceability,
+									threat: itemLevel?.secondAsset?.threat,
 								},
 							]
 							findParent?.parent?.push(...finalData?.flat())
@@ -328,17 +349,107 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 							findParent?.parent?.push({
 								id: itemLevel?.secondAsset?.id,
 								name: itemLevel?.secondAsset?.name,
+								availability: itemLevel?.secondAsset?.availability,
+								integrity: itemLevel?.secondAsset?.integrity,
+								confidentiality: itemLevel?.secondAsset?.confidentiality,
+								authenticity: itemLevel?.secondAsset?.authenticity,
+								traceability: itemLevel?.secondAsset?.traceability,
+								threat: itemLevel?.secondAsset?.threat,
 							})
 						}
 					} else {
 						findParent?.parent?.push({
 							id: itemLevel?.secondAsset?.id,
 							name: itemLevel?.secondAsset?.name,
+							availability: itemLevel?.secondAsset?.availability,
+							integrity: itemLevel?.secondAsset?.integrity,
+							confidentiality: itemLevel?.secondAsset?.confidentiality,
+							authenticity: itemLevel?.secondAsset?.authenticity,
+							traceability: itemLevel?.secondAsset?.traceability,
+							threat: itemLevel?.secondAsset?.threat,
 						})
 					}
 				}
 			}
 		})
+	}
+
+	const getValuesData = (item, dimension) => {
+		const parentValue = item[dimension]?.value
+		const childValue = item?.parent?.map(
+			(parentValue) => parentValue[dimension]?.value
+		)
+
+		return { parentValue, childValue }
+	}
+
+	const generateAccumulatedValues = (item, accumulatedObject, dimension) => {
+		const { childValue, parentValue } = getValuesData(item, dimension)
+
+		if (childValue?.length) {
+			const maxValue = Math.max(...childValue)
+			if (maxValue > parentValue) {
+				accumulatedObject[dimension] = maxValue
+			} else {
+				accumulatedObject[dimension] = parentValue
+			}
+		}
+	}
+	const accumulatedValues = []
+	const generateAccumulatedValuesForLevel = (level) => {
+		level.forEach((item) => {
+			const accumulatedObject = {
+				id: item?.id,
+				name: item?.name,
+				threat: item?.threat,
+			}
+			generateAccumulatedValues(
+				item,
+				accumulatedObject,
+				DATA_ASSETS_VALUE.availability.value
+			)
+			generateAccumulatedValues(
+				item,
+				accumulatedObject,
+				DATA_ASSETS_VALUE.integrity.value
+			)
+			generateAccumulatedValues(
+				item,
+				accumulatedObject,
+				DATA_ASSETS_VALUE.confidentiality.value
+			)
+			generateAccumulatedValues(
+				item,
+				accumulatedObject,
+				DATA_ASSETS_VALUE.authenticity.value
+			)
+			generateAccumulatedValues(
+				item,
+				accumulatedObject,
+				DATA_ASSETS_VALUE.traceability.value
+			)
+			accumulatedValues.push(accumulatedObject)
+		})
+	}
+
+	const setAccumulatedValues = (data) => {
+		data?.levelOne.forEach((item) => {
+			accumulatedValues.push({
+				id: item?.id,
+				name: item?.name,
+				threat: item?.threat,
+				availability: item?.availability?.value,
+				integrity: item?.integrity?.value,
+				confidentiality: item?.confidentiality?.value,
+				authenticity: item?.authenticity?.value,
+				traceability: item?.traceability?.value,
+			})
+		})
+		generateAccumulatedValuesForLevel(data?.levelTwo)
+		generateAccumulatedValuesForLevel(data?.levelThree)
+		generateAccumulatedValuesForLevel(data?.levelFour)
+		generateAccumulatedValuesForLevel(data?.levelFive)
+		setAccumulatedValuesData(accumulatedValues)
 	}
 	useEffect(() => {
 		if (assets.length && assetsDependencies.length) {
@@ -346,105 +457,19 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 			const secondLevel = getDependenciesAssetsLevels(assetsDependencies, 2)
 			const thirdLevel = getDependenciesAssetsLevels(assetsDependencies, 3)
 			const fourthLevel = getDependenciesAssetsLevels(assetsDependencies, 4)
-			// console.log({ firstLevel, secondLevel, thirdLevel, fourthLevel })
 
 			const firstNodes = getNodeIds(firstLevel)
 			const secondNodes = getNodeIds(secondLevel)
 			const thirdNodes = getNodeIds(thirdLevel)
 			const fourthNode = getNodeIds(fourthLevel)
-			// console.log({ firstNodes, secondNodes, thirdNodes, fourthNode })
 			fillTreeData(firstNodes, secondNodes, thirdNodes, fourthNode)
 			fillTreeDataWithValues(firstLevel, treeData.levelOne, 'levelTwo')
 			fillTreeDataWithValues(secondLevel, treeData.levelTwo, 'levelThree')
 			fillTreeDataWithValues(thirdLevel, treeData.levelThree, 'levelFour')
 			fillTreeDataWithValues(fourthLevel, treeData.levelFour, 'levelFive')
-			// eslint-disable-next-line dot-notation
-			// treeData['levelThree'].parent = uniqueData
-			/* 			fillTreeDataWithValues(thirdLevel, treeData.levelThree)
-			fillTreeDataWithValues(fourthLevel, treeData.levelFour) */
-			console.log({ treeData })
-			/* 			console.log('firstLevel==>', firstLevel)
-			console.log('levelOne==>', treeData.levelOne)
-			console.log('levelTwo==>', treeData.levelTwo) */
-
-			/* 			firstLevel.forEach((dependency) => {
-				const firstAssetValues = getAssetValues(
-					assets,
-					dependency?.firstAsset?.id
-				)
-				const secondAssetValues = getAssetValues(
-					assets,
-					dependency?.secondAsset?.id
-				)
-				setAccumulatedValues(
-					firstAssetValues,
-					secondAssetValues,
-					DATA_ASSETS_VALUE.availability.value
-				)
-			})
-			secondLevel.forEach((dependency) => {
-				const firstAssetValues = getAssetValues(
-					assets,
-					dependency?.firstAsset?.id
-				)
-				const secondAssetValues = getAssetValues(
-					assets,
-					dependency?.secondAsset?.id
-				)
-				setAccumulatedValues(
-					firstAssetValues,
-					secondAssetValues,
-					DATA_ASSETS_VALUE.availability.value
-				)
-			})
-			thirdLevel.forEach((dependency) => {
-				const firstAssetValues = getAssetValues(
-					assets,
-					dependency?.firstAsset?.id
-				)
-				const secondAssetValues = getAssetValues(
-					assets,
-					dependency?.secondAsset?.id
-				)
-				setAccumulatedValues(
-					firstAssetValues,
-					secondAssetValues,
-					DATA_ASSETS_VALUE.availability.value
-				)
-			})
-			fourthLevel.forEach((dependency) => {
-				const firstAssetValues = getAssetValues(
-					assets,
-					dependency?.firstAsset?.id
-				)
-				const secondAssetValues = getAssetValues(
-					assets,
-					dependency?.secondAsset?.id
-				)
-				setAccumulatedValues(
-					firstAssetValues,
-					secondAssetValues,
-					DATA_ASSETS_VALUE.availability.value
-				)
-			}) */
-			console.log(accumulatedValues)
-			/* 			console.log({ firstLevel, secondLevel, thirdLevel, fourthLevel })
-			console.log({ assets, assetsDependencies }) */
+			setAccumulatedValues(treeData)
 		}
 	}, [assets, assetsDependencies])
-	const matrizImpacto = [
-		['M', 'B', 'MB', 'MB', 'MB'],
-		['A', 'M', 'B', 'MB', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-	]
-
-	const matrizRiesgo = [
-		['A', 'M', 'B', 'MB', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-		['MA', 'MA', 'A', 'M', 'B'],
-		['MA', 'MA', 'A', 'M', 'B'],
-	]
 
 	// Impacto Repercutido Potencial
 	const calculoImpacto = (valorActivo, valorDegradacion) => {
@@ -593,79 +618,6 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 
 	// RESIDUAL
 
-	// Impacto Residual Repercutido sacar => Valorar Amenazas implementando salvaguardas
-	const calculoImpactoResidualRepercutido = (
-		valorActivo,
-		valorDegradacionResidual
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
-			valorX = 2
-		} else if (
-			valorDegradacionResidual >= 30 &&
-			valorDegradacionResidual <= 79
-		) {
-			valorX = 1
-		} else if (
-			valorDegradacionResidual >= 0 &&
-			valorDegradacionResidual <= 29
-		) {
-			valorX = 0
-		}
-
-		if (valorActivo === 10) {
-			valorY = 0
-		} else if (valorActivo >= 7 && valorActivo <= 9.9) {
-			valorY = 1
-		} else if (valorActivo >= 4 && valorActivo <= 6.9) {
-			valorY = 2
-		} else if (valorActivo >= 1 && valorActivo <= 3.9) {
-			valorY = 3
-		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
-			valorY = 4
-		}
-		const result = matrizImpacto[valorX][valorY]
-		return result
-	}
-	// Impacto Residual Acumulado
-	const calculoImpactoResidualAcumulado = (
-		valorActivoAcumulado,
-		valorDegradacionResidual
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
-			valorX = 2
-		} else if (
-			valorDegradacionResidual >= 30 &&
-			valorDegradacionResidual <= 79
-		) {
-			valorX = 1
-		} else if (
-			valorDegradacionResidual >= 0 &&
-			valorDegradacionResidual <= 29
-		) {
-			valorX = 0
-		}
-
-		if (valorActivoAcumulado === 10) {
-			valorY = 0
-		} else if (valorActivoAcumulado >= 7 && valorActivoAcumulado <= 9.9) {
-			valorY = 1
-		} else if (valorActivoAcumulado >= 4 && valorActivoAcumulado <= 6.9) {
-			valorY = 2
-		} else if (valorActivoAcumulado >= 1 && valorActivoAcumulado <= 3.9) {
-			valorY = 3
-		} else if (valorActivoAcumulado >= 0 && valorActivoAcumulado <= 0.9) {
-			valorY = 4
-		}
-		const result = matrizImpacto[valorX][valorY]
-		return result
-	}
-
 	// Riesgo Repercutido Residual
 	// valoProbabilidadResidual ==> sacar de [P] Probabilidad de Valorar Amenazas implementando salvaguardas
 	// valorImpacto => sacar de calculoImpactoResidualRepercutido()
@@ -793,36 +745,36 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 			children: [
 				{
 					title: DATA_ASSETS_VALUE.availability.label,
-					dataIndex: DATA_ASSETS_VALUE.availability.value,
-					key: DATA_ASSETS_VALUE.availability.value,
+					dataIndex: `${DATA_ASSETS_VALUE.availability.value}Acumulado`,
+					key: `${DATA_ASSETS_VALUE.availability.value}Acumulado`,
 					editable: true,
 					align: 'center',
 				},
 				{
 					title: DATA_ASSETS_VALUE.integrity.label,
-					dataIndex: DATA_ASSETS_VALUE.integrity.value,
-					key: DATA_ASSETS_VALUE.integrity.value,
+					dataIndex: `${DATA_ASSETS_VALUE.integrity.value}Acumulado`,
+					key: `${DATA_ASSETS_VALUE.integrity.value}Acumulado`,
 					editable: true,
 					align: 'center',
 				},
 				{
 					title: DATA_ASSETS_VALUE.confidentiality.label,
-					dataIndex: DATA_ASSETS_VALUE.confidentiality.value,
-					key: DATA_ASSETS_VALUE.confidentiality.value,
+					dataIndex: `${DATA_ASSETS_VALUE.confidentiality.value}Acumulado`,
+					key: `${DATA_ASSETS_VALUE.confidentiality.value}Acumulado`,
 					editable: true,
 					align: 'center',
 				},
 				{
 					title: DATA_ASSETS_VALUE.authenticity.label,
-					dataIndex: DATA_ASSETS_VALUE.authenticity.value,
-					key: DATA_ASSETS_VALUE.authenticity.value,
+					dataIndex: `${DATA_ASSETS_VALUE.authenticity.value}Acumulado`,
+					key: `${DATA_ASSETS_VALUE.authenticity.value}Acumulado`,
 					editable: true,
 					align: 'center',
 				},
 				{
 					title: DATA_ASSETS_VALUE.traceability.label,
-					dataIndex: DATA_ASSETS_VALUE.traceability.value,
-					key: DATA_ASSETS_VALUE.traceability.value,
+					dataIndex: `${DATA_ASSETS_VALUE.traceability.value}Acumulado`,
+					key: `${DATA_ASSETS_VALUE.traceability.value}Acumulado`,
 					editable: true,
 					align: 'center',
 				},
@@ -912,11 +864,83 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		}
 	}
 
+	const valueDataAccumulated = (threat, key, valueKey, data) => {
+		const threatDataF = threat[valueKey]?.find((item) => item?.keyValue === key)
+		const assetValueA = data?.availabilityAcumulado
+		const assetValueI = data?.integrityAcumulado
+		const assetValueC = data?.confidentialityAcumulado
+		const assetValueAU = data?.authenticityAcumulado
+		const assetValueT = data?.traceabilityAcumulado
+		if (
+			valueKey === DATA_ASSETS_VALUE.availability.value &&
+			threatDataF?.value &&
+			assetValueA
+		) {
+			return calculoImpactoAcumulado(+assetValueA, +threatDataF.value)
+		} else if (
+			valueKey === DATA_ASSETS_VALUE.integrity.value &&
+			threatDataF?.value &&
+			assetValueI
+		) {
+			return calculoImpactoAcumulado(+assetValueI, +threatDataF.value)
+		} else if (
+			valueKey === DATA_ASSETS_VALUE.confidentiality.value &&
+			threatDataF?.value &&
+			assetValueC
+		) {
+			return calculoImpactoAcumulado(+assetValueC, +threatDataF.value)
+		} else if (
+			valueKey === DATA_ASSETS_VALUE.authenticity.value &&
+			threatDataF?.value &&
+			assetValueAU
+		) {
+			return calculoImpactoAcumulado(+assetValueAU, +threatDataF.value)
+		} else if (
+			valueKey === DATA_ASSETS_VALUE.traceability.value &&
+			threatDataF?.value &&
+			assetValueT
+		) {
+			return calculoImpactoAcumulado(+assetValueT, +threatDataF.value)
+		} else {
+			return ''
+		}
+	}
+
 	const buildThreatTable = (data) => {
 		const { threat } = data
 		const filterData = threat?.threats?.map((threatData) => ({
 			key: threatData?.key,
 			name: threatData?.title,
+			availabilityAcumulado: valueDataAccumulated(
+				threat,
+				threatData?.key,
+				DATA_ASSETS_VALUE.availability.value,
+				data
+			),
+			integrityAcumulado: valueDataAccumulated(
+				threat,
+				threatData?.key,
+				DATA_ASSETS_VALUE.integrity.value,
+				data
+			),
+			confidentialityAcumulado: valueDataAccumulated(
+				threat,
+				threatData?.key,
+				DATA_ASSETS_VALUE.confidentiality.value,
+				data
+			),
+			authenticityAcumulado: valueDataAccumulated(
+				threat,
+				threatData?.key,
+				DATA_ASSETS_VALUE.authenticity.value,
+				data
+			),
+			traceabilityAcumulado: valueDataAccumulated(
+				threat,
+				threatData?.key,
+				DATA_ASSETS_VALUE.traceability.value,
+				data
+			),
 			availability: valueData(
 				threat,
 				threatData?.key,
@@ -966,8 +990,29 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		)
 	}
 
+	const [finalData, setFinalData] = useState([])
+
+	useEffect(() => {
+		if (assets?.length && accumulatedValuesData?.length) {
+			const totalData = assets?.map((item) => {
+				const data = accumulatedValuesData?.find(
+					(data) => data?.id === item?.id
+				)
+				return {
+					...item,
+					availabilityAcumulado: data?.availability,
+					integrityAcumulado: data?.integrity,
+					confidentialityAcumulado: data?.confidentiality,
+					authenticityAcumulado: data?.authenticity,
+					traceabilityAcumulado: data?.traceability,
+				}
+			})
+			setFinalData(totalData)
+		}
+	}, [assets, accumulatedValuesData])
+
 	const getPanel = () => {
-		return assets.map((data, key) => (
+		return finalData.map((data, key) => (
 			<Panel
 				header={`${data?.name} / ${data?.model} / ${data?.identification}`}
 				key={key}

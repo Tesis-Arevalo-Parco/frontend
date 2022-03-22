@@ -28,3 +28,17 @@ export const DEPENDENCIES_OPTIONS = [
 		value: 4,
 	},
 ]
+
+export const matrizImpacto = [
+	['M', 'B', 'MB', 'MB', 'MB'],
+	['A', 'M', 'B', 'MB', 'MB'],
+	['MA', 'A', 'M', 'B', 'MB'],
+]
+
+export const matrizRiesgo = [
+	['A', 'M', 'B', 'MB', 'MB'],
+	['MA', 'A', 'M', 'B', 'MB'],
+	['MA', 'A', 'M', 'B', 'MB'],
+	['MA', 'MA', 'A', 'M', 'B'],
+	['MA', 'MA', 'A', 'M', 'B'],
+]
