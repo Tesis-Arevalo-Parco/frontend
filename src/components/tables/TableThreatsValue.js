@@ -280,7 +280,13 @@ const TableThreatsValue = ({ assets }) => {
 							margin: 0,
 						}}
 					>
-						<InputNumber disabled={isDisable} />
+						<InputNumber
+							disabled={isDisable}
+							min={0}
+							max={100}
+							formatter={(value) => `${value}%`}
+							parser={(value) => value.replace('%', '')}
+						/>
 					</Form.Item>
 				) : (
 					children

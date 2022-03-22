@@ -7,7 +7,9 @@ import SpinnerContext from 'store/context/SpinnerContext'
 
 const PotentialImpact = () => {
 	const { setAssetsParams } = useContext(ParamsContext)
-	const { assets, getAssetsData } = useContext(ProjectsContext)
+	const { assets, assetsDependencies, getAssetsData } = useContext(
+		ProjectsContext
+	)
 	const { activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
 
@@ -20,7 +22,10 @@ const PotentialImpact = () => {
 
 	return (
 		<div className='potential-impact-table'>
-			<TablePotentialImpactComputation assets={assets} />
+			<TablePotentialImpactComputation
+				assetsDependencies={assetsDependencies}
+				assets={assets}
+			/>
 		</div>
 	)
 }
