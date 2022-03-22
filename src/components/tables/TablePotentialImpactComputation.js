@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { Collapse, Table, Form, Spin } from 'antd'
 
-import { DATA_ASSETS_VALUE } from 'constants/constants'
+import {
+	DATA_ASSETS_VALUE,
+	matrizImpacto,
+	matrizRiesgo,
+} from 'constants/constants'
 import SpinnerContext from 'store/context/SpinnerContext'
 
 const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
@@ -467,20 +471,6 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		}
 	}, [assets, assetsDependencies])
 
-	const matrizImpacto = [
-		['M', 'B', 'MB', 'MB', 'MB'],
-		['A', 'M', 'B', 'MB', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-	]
-
-	const matrizRiesgo = [
-		['A', 'M', 'B', 'MB', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-		['MA', 'A', 'M', 'B', 'MB'],
-		['MA', 'MA', 'A', 'M', 'B'],
-		['MA', 'MA', 'A', 'M', 'B'],
-	]
-
 	// Impacto Repercutido Potencial
 	const calculoImpacto = (valorActivo, valorDegradacion) => {
 		// valorActivo = 5  10 7 4 1 0
@@ -627,79 +617,6 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 	}
 
 	// RESIDUAL
-
-	// Impacto Residual Repercutido sacar => Valorar Amenazas implementando salvaguardas
-	const calculoImpactoResidualRepercutido = (
-		valorActivo,
-		valorDegradacionResidual
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
-			valorX = 2
-		} else if (
-			valorDegradacionResidual >= 30 &&
-			valorDegradacionResidual <= 79
-		) {
-			valorX = 1
-		} else if (
-			valorDegradacionResidual >= 0 &&
-			valorDegradacionResidual <= 29
-		) {
-			valorX = 0
-		}
-
-		if (valorActivo === 10) {
-			valorY = 0
-		} else if (valorActivo >= 7 && valorActivo <= 9.9) {
-			valorY = 1
-		} else if (valorActivo >= 4 && valorActivo <= 6.9) {
-			valorY = 2
-		} else if (valorActivo >= 1 && valorActivo <= 3.9) {
-			valorY = 3
-		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
-			valorY = 4
-		}
-		const result = matrizImpacto[valorX][valorY]
-		return result
-	}
-	// Impacto Residual Acumulado
-	const calculoImpactoResidualAcumulado = (
-		valorActivoAcumulado,
-		valorDegradacionResidual
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valorDegradacionResidual >= 80 && valorDegradacionResidual <= 100) {
-			valorX = 2
-		} else if (
-			valorDegradacionResidual >= 30 &&
-			valorDegradacionResidual <= 79
-		) {
-			valorX = 1
-		} else if (
-			valorDegradacionResidual >= 0 &&
-			valorDegradacionResidual <= 29
-		) {
-			valorX = 0
-		}
-
-		if (valorActivoAcumulado === 10) {
-			valorY = 0
-		} else if (valorActivoAcumulado >= 7 && valorActivoAcumulado <= 9.9) {
-			valorY = 1
-		} else if (valorActivoAcumulado >= 4 && valorActivoAcumulado <= 6.9) {
-			valorY = 2
-		} else if (valorActivoAcumulado >= 1 && valorActivoAcumulado <= 3.9) {
-			valorY = 3
-		} else if (valorActivoAcumulado >= 0 && valorActivoAcumulado <= 0.9) {
-			valorY = 4
-		}
-		const result = matrizImpacto[valorX][valorY]
-		return result
-	}
 
 	// Riesgo Repercutido Residual
 	// valoProbabilidadResidual ==> sacar de [P] Probabilidad de Valorar Amenazas implementando salvaguardas
