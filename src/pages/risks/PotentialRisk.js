@@ -7,18 +7,16 @@ import SpinnerContext from 'store/context/SpinnerContext'
 
 const PotentialRisk = () => {
 	const { setAssetsParams } = useContext(ParamsContext)
-	const {
-		assets,
-		getSafeguardsWithThreatRisk,
-		safeguardsWithThreatRisk,
-	} = useContext(ProjectsContext)
+	const { assets, getAssetsData, assetsDependencies } = useContext(
+		ProjectsContext
+	)
 	const { activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
 
 	useEffect(async () => {
 		activeSpinner(true)
 		setAssetsParams(id)
-		await getSafeguardsWithThreatRisk(id)
+		await getAssetsData(id)
 		activeSpinner(false)
 	}, [id])
 
@@ -26,7 +24,7 @@ const PotentialRisk = () => {
 		<div className='residual-impact-table'>
 			<TablePotentialRisk
 				assets={assets}
-				safeguardsWithThreatRisk={safeguardsWithThreatRisk}
+				assetsDependencies={assetsDependencies}
 			/>
 		</div>
 	)

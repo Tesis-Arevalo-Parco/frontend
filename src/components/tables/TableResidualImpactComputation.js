@@ -837,7 +837,7 @@ const TableResidualImpactComputation = ({
 	}
 
 	const getPanel = () => {
-		return finalData.map((data, key) => {
+		return finalData?.map((data, key) => {
 			return (
 				<Panel
 					header={`${data?.name} / ${data?.model} / ${data?.identification}`}

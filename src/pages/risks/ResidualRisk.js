@@ -9,8 +9,10 @@ const ResidualRisk = () => {
 	const { setAssetsParams } = useContext(ParamsContext)
 	const {
 		assets,
-		getSafeguardsWithThreatRisk,
-		safeguardsWithThreatRisk,
+		getAssetsData,
+		assetsDependencies,
+		safeguardsWithThreat,
+		getSafeguardsWithThreat,
 	} = useContext(ProjectsContext)
 	const { activeSpinner } = useContext(SpinnerContext)
 	const { id } = useParams()
@@ -18,7 +20,8 @@ const ResidualRisk = () => {
 	useEffect(async () => {
 		activeSpinner(true)
 		setAssetsParams(id)
-		await getSafeguardsWithThreatRisk(id)
+		await getAssetsData(id)
+		await getSafeguardsWithThreat(id)
 		activeSpinner(false)
 	}, [id])
 
@@ -26,7 +29,8 @@ const ResidualRisk = () => {
 		<div className='residual-impact-table'>
 			<TableResidualRisk
 				assets={assets}
-				safeguardsWithThreatRisk={safeguardsWithThreatRisk}
+				assetsDependencies={assetsDependencies}
+				safeguardsWithThreat={safeguardsWithThreat}
 			/>
 		</div>
 	)
