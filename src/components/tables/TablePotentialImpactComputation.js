@@ -506,6 +506,9 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
 			valorY = 4
 		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
+		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
 	}
@@ -547,186 +550,10 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		} else if (valorAcumuladoActivo >= 0 && valorAcumuladoActivo <= 0.9) {
 			valorY = 4
 		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
+		}
 		const result = matrizImpacto[valorX][valorY]
-		return result
-	}
-
-	// eslint-disable-next-line no-unused-vars
-	// Riesgo repercutido Potencial
-	const calculoRiesgo = (valoProbabilidad, valorImpacto) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valoProbabilidad === 'MB') {
-			valorX = 0
-		} else if (valoProbabilidad === 'B') {
-			valorX = 1
-		} else if (valoProbabilidad === 'M') {
-			valorX = 2
-		} else if (valoProbabilidad === 'A') {
-			valorX = 3
-		} else if (valoProbabilidad === 'MA') {
-			valorX = 4
-		}
-
-		if (valorImpacto === 'MA') {
-			valorY = 0
-		} else if (valorImpacto === 'A') {
-			valorY = 1
-		} else if (valorImpacto === 'M') {
-			valorY = 2
-		} else if (valorImpacto === 'B') {
-			valorY = 3
-		} else if (valorImpacto === 'MB') {
-			valorY = 4
-		}
-		const result = matrizRiesgo[valorX][valorY]
-		return result
-	}
-
-	// Riesgo cumulado Potencial
-	const calculoRiesgoAcumulado = (valoProbabilidad, valorImpactoAcumualado) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valoProbabilidad === 'MB') {
-			valorX = 0
-		} else if (valoProbabilidad === 'B') {
-			valorX = 1
-		} else if (valoProbabilidad === 'M') {
-			valorX = 2
-		} else if (valoProbabilidad === 'A') {
-			valorX = 3
-		} else if (valoProbabilidad === 'MA') {
-			valorX = 4
-		}
-
-		if (valorImpactoAcumualado === 'MA') {
-			valorY = 0
-		} else if (valorImpactoAcumualado === 'A') {
-			valorY = 1
-		} else if (valorImpactoAcumualado === 'M') {
-			valorY = 2
-		} else if (valorImpactoAcumualado === 'B') {
-			valorY = 3
-		} else if (valorImpactoAcumualado === 'MB') {
-			valorY = 4
-		}
-		const result = matrizRiesgo[valorX][valorY]
-		return result
-	}
-
-	// RESIDUAL
-
-	// Riesgo Repercutido Residual
-	// valoProbabilidadResidual ==> sacar de [P] Probabilidad de Valorar Amenazas implementando salvaguardas
-	// valorImpacto => sacar de calculoImpactoResidualRepercutido()
-	const calculoRiesgoRepercutidoResidual = (
-		valoProbabilidadResidual,
-		valorImpactoResidualRepercutido
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valoProbabilidadResidual === 'MB') {
-			valorX = 0
-		} else if (valoProbabilidadResidual === 'B') {
-			valorX = 1
-		} else if (valoProbabilidadResidual === 'M') {
-			valorX = 2
-		} else if (valoProbabilidadResidual === 'A') {
-			valorX = 3
-		} else if (valoProbabilidadResidual === 'MA') {
-			valorX = 4
-		}
-
-		if (valorImpactoResidualRepercutido === 'MA') {
-			valorY = 0
-		} else if (valorImpactoResidualRepercutido === 'A') {
-			valorY = 1
-		} else if (valorImpactoResidualRepercutido === 'M') {
-			valorY = 2
-		} else if (valorImpactoResidualRepercutido === 'B') {
-			valorY = 3
-		} else if (valorImpactoResidualRepercutido === 'MB') {
-			valorY = 4
-		}
-		const result = matrizRiesgo[valorX][valorY]
-		return result
-	}
-
-	// riesgo residual
-	// Riesgo repercutido Residual
-	// valoProbabilidadResidual => [P] Probabilidad
-	// valorImpactoRepercutidoResidual => calculoImpactoResidualRepercutido()
-	const calculoRiesgoResidualRepercutido = (
-		valoProbabilidadResidual,
-		valorImpactoResidualRepercutido
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valoProbabilidadResidual === 'MB') {
-			valorX = 0
-		} else if (valoProbabilidadResidual === 'B') {
-			valorX = 1
-		} else if (valoProbabilidadResidual === 'M') {
-			valorX = 2
-		} else if (valoProbabilidadResidual === 'A') {
-			valorX = 3
-		} else if (valoProbabilidadResidual === 'MA') {
-			valorX = 4
-		}
-
-		if (valorImpactoResidualRepercutido === 'MA') {
-			valorY = 0
-		} else if (valorImpactoResidualRepercutido === 'A') {
-			valorY = 1
-		} else if (valorImpactoResidualRepercutido === 'M') {
-			valorY = 2
-		} else if (valorImpactoResidualRepercutido === 'B') {
-			valorY = 3
-		} else if (valorImpactoResidualRepercutido === 'MB') {
-			valorY = 4
-		}
-		const result = matrizRiesgo[valorX][valorY]
-		return result
-	}
-
-	// Riesgo Acumulado Residual
-	// valoProbabilidadResidual => [P] Probabilidad
-	// valorImpactoAcumualadoResidual => calculoImpactoResidualAcumulado()
-	const calculoRiesgoAcumuladoResidual = (
-		valoProbabilidadResidual,
-		valorImpactoAcumualadoResidual
-	) => {
-		let valorX = -1
-		let valorY = -1
-
-		if (valoProbabilidadResidual === 'MB') {
-			valorX = 0
-		} else if (valoProbabilidadResidual === 'B') {
-			valorX = 1
-		} else if (valoProbabilidadResidual === 'M') {
-			valorX = 2
-		} else if (valoProbabilidadResidual === 'A') {
-			valorX = 3
-		} else if (valoProbabilidadResidual === 'MA') {
-			valorX = 4
-		}
-
-		if (valorImpactoAcumualadoResidual === 'MA') {
-			valorY = 0
-		} else if (valorImpactoAcumualadoResidual === 'A') {
-			valorY = 1
-		} else if (valorImpactoAcumualadoResidual === 'M') {
-			valorY = 2
-		} else if (valorImpactoAcumualadoResidual === 'B') {
-			valorY = 3
-		} else if (valorImpactoAcumualadoResidual === 'MB') {
-			valorY = 4
-		}
-		const result = matrizRiesgo[valorX][valorY]
 		return result
 	}
 
