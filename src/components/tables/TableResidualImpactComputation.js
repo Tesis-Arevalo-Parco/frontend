@@ -597,6 +597,9 @@ const TableResidualImpactComputation = ({
 		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
 			valorY = 4
 		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
+		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
 	}
@@ -633,6 +636,9 @@ const TableResidualImpactComputation = ({
 			valorY = 3
 		} else if (valorActivoAcumulado >= 0 && valorActivoAcumulado <= 0.9) {
 			valorY = 4
+		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
 		}
 		const result = matrizImpacto[valorX][valorY]
 		return result

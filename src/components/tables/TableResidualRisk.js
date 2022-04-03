@@ -513,6 +513,9 @@ const TableResidualRisk = ({
 		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
 			valorY = 4
 		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
+		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
 	}
@@ -549,6 +552,9 @@ const TableResidualRisk = ({
 			valorY = 3
 		} else if (valorActivoAcumulado >= 0 && valorActivoAcumulado <= 0.9) {
 			valorY = 4
+		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
 		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
@@ -658,19 +664,19 @@ const TableResidualRisk = ({
 			valorX = 4
 		} else if (
 			valoProbabilidadResidual >= 10 &&
-			valoProbabilidadResidual <= 99
+			valoProbabilidadResidual < 100
 		) {
 			valorX = 3
-		} else if (valoProbabilidadResidual >= 1 && valoProbabilidadResidual <= 9) {
+		} else if (valoProbabilidadResidual >= 1 && valoProbabilidadResidual < 10) {
 			valorX = 2
 		} else if (
 			valoProbabilidadResidual >= 0.1 &&
-			valoProbabilidadResidual <= 0.9
+			valoProbabilidadResidual < 1
 		) {
 			valorX = 1
 		} else if (
 			valoProbabilidadResidual >= 0.01 &&
-			valoProbabilidadResidual <= 0.09
+			valoProbabilidadResidual < 0.1
 		) {
 			valorX = 0
 		}
@@ -707,19 +713,19 @@ const TableResidualRisk = ({
 			valorX = 4
 		} else if (
 			valoProbabilidadResidual >= 10 &&
-			valoProbabilidadResidual <= 99
+			valoProbabilidadResidual < 100
 		) {
 			valorX = 3
-		} else if (valoProbabilidadResidual >= 1 && valoProbabilidadResidual <= 9) {
+		} else if (valoProbabilidadResidual >= 1 && valoProbabilidadResidual < 10) {
 			valorX = 2
 		} else if (
 			valoProbabilidadResidual >= 0.1 &&
-			valoProbabilidadResidual <= 0.9
+			valoProbabilidadResidual < 1
 		) {
 			valorX = 1
 		} else if (
 			valoProbabilidadResidual >= 0.01 &&
-			valoProbabilidadResidual <= 0.09
+			valoProbabilidadResidual < 0.1
 		) {
 			valorX = 0
 		}
@@ -735,6 +741,7 @@ const TableResidualRisk = ({
 		} else if (valorImpactoAcumualadoResidual === 'MB') {
 			valorY = 4
 		}
+
 		if (valorX === -1 || valorY === -1) {
 			return ''
 		}
@@ -871,6 +878,11 @@ const TableResidualRisk = ({
 				+assetValueC,
 				+threatDataF
 			)
+			const test = calculoRiesgoAcumuladoResidual(
+				+threatValue?.probability,
+				residualAcumulado
+			)
+			console.log(threatValue?.probability, residualAcumulado, test)
 			return calculoRiesgoAcumuladoResidual(
 				+threatValue?.probability,
 				residualAcumulado

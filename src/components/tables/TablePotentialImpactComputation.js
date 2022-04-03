@@ -506,6 +506,9 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 		} else if (valorActivo >= 0 && valorActivo <= 0.9) {
 			valorY = 4
 		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
+		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
 	}
@@ -546,6 +549,9 @@ const TablePotentialImpactComputation = ({ assets, assetsDependencies }) => {
 			valorY = 3
 		} else if (valorAcumuladoActivo >= 0 && valorAcumuladoActivo <= 0.9) {
 			valorY = 4
+		}
+		if (valorX === -1 || valorY === -1) {
+			return ''
 		}
 		const result = matrizImpacto[valorX][valorY]
 		return result
