@@ -363,10 +363,7 @@ const TableThreatsValue = ({ assets }) => {
 
 	const getPanel = () => {
 		return assets.map((data, key) => (
-			<Panel
-				header={`${data?.name} / ${data?.model} / ${data?.identification}`}
-				key={key}
-			>
+			<Panel header={`${data?.name} / ${data?.identification}`} key={key}>
 				{buildThreatTable(data?.threat)}
 			</Panel>
 		))

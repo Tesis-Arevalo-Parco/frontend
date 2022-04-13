@@ -1032,10 +1032,7 @@ const TableResidualRisk = ({
 	const getPanel = () => {
 		return finalData?.map((data, key) => {
 			return (
-				<Panel
-					header={`${data?.name} / ${data?.model} / ${data?.identification}`}
-					key={key}
-				>
+				<Panel header={`${data?.name} / ${data?.identification}`} key={key}>
 					{buildThreatTable(data)}
 				</Panel>
 			)
