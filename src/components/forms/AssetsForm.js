@@ -124,6 +124,7 @@ const AssetsForm = () => {
 			.filter((parent) => parent !== undefined)
 		const uniqueParentValues = [...new Set(checkedParentValues)]
 		const threats = getThreats(uniqueParentValues)
+		console.log({ threats })
 		setThreatValues(threats || [])
 		setParentValueData(uniqueParentValues)
 		setValueData(checkedValues)

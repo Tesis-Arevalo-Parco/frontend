@@ -68,7 +68,7 @@ const TableSafeguardThreatsValue = ({ safeguardsWithThreat }) => {
 	const getPanel = () => {
 		return safeguardsWithThreat.map((safeguard, key) => (
 			<Panel
-				header={`${safeguard?.name} / ${safeguard?.model} / ${safeguard?.identification}`}
+				header={`${safeguard?.name} / ${safeguard?.identification}`}
 				key={key}
 			>
 				{buildThreatTable(safeguard?.data)}

@@ -301,6 +301,7 @@ const TableThreatsValue = ({ assets }) => {
 	}
 
 	const buildThreatTable = (threat) => {
+		console.log(threat)
 		const filterData = threat?.threats?.map((threatData) => ({
 			key: threatData?.key,
 			name: threatData?.title,
