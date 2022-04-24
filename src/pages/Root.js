@@ -100,35 +100,6 @@ const Root = () => {
 							<Link to={paths.THREAT_IDENTIFICATION}>Riesgo Residual</Link>
 						</Card>
 					</div>
-					<div className='row-3-col-2'>
-						<Card style={{ width: 300, height: 280 }}>
-							<Meta
-								avatar={
-									<Avatar
-										style={{ backgroundColor: '#0d0998' }}
-										icon={<RadarChartOutlined />}
-									/>
-								}
-								title='Informe de Riesgo'
-							/>
-							<Divider />
-							<Link to={paths.THREAT_IDENTIFICATION}>
-								Grafico Impacto Potencial
-							</Link>
-							<p></p>
-							<Link to={paths.THREAT_IDENTIFICATION}>
-								Grafico Impacto Residual
-							</Link>
-							<p></p>
-							<Link to={paths.THREAT_IDENTIFICATION}>
-								Grafico Riesgo Potencial
-							</Link>
-							<p></p>
-							<Link to={paths.THREAT_IDENTIFICATION}>
-								Grafico Riesgo Residual
-							</Link>
-						</Card>
-					</div>
 				</div>
 			</div>
 		</>
